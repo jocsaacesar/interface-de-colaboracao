@@ -115,6 +115,8 @@ Abra o Claude Code nessa pasta e digite:
 
 Nenhuma configuração prévia. Nenhuma instalação. As skills já estão na pasta do projeto e o Claude Code as descobre sozinho. Você clona, abre e usa.
 
+> **O comando não foi reconhecido?** Em algumas máquinas, a auto-descoberta de skills pode não funcionar na primeira abertura. Veja [PRIMEIRO-USO.md](PRIMEIRO-USO.md) para resolver em 1 minuto.
+
 > **Importante:** Tudo fica dentro da pasta do projeto. Nada é instalado globalmente. Sua configuração existente do Claude Code não é afetada. Veja [Segurança e Escopo](#segurança-e-escopo) para detalhes.
 
 ---
@@ -268,6 +270,7 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 ## Indo mais fundo
 
 - **[Glossário de Skills](GLOSSARIO_DE_SKILLS.md)** — Cada skill explicada em detalhe: o que faz, o que esperar, o que nunca fará.
+- **[Primeiro uso](PRIMEIRO-USO.md)** — Se as skills não funcionarem na primeira abertura.
 - **[Instalação em projeto existente](guias/instalacao-projeto-existente.md)** — O que copiar, o que ignorar, como evitar conflitos.
 - **[Marketplace](https://github.com/jocsaacesar/interface-colaboracao-skills)** — Skills opcionais criadas pela comunidade.
 - **[Guias](guias/)** — Como criar um CLAUDE.md, projetar skills, usar o sistema de memória.
