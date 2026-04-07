@@ -1,10 +1,10 @@
 # Código de Conduta
 
-## Nosso Padrão
+## Nosso padrão
 
 Este projeto existe para ajudar criadores a construir colaborações melhores com IA. Esperamos que todos que participem contribuam para essa missão com respeito e boa-fé.
 
-## Comportamento Esperado
+## Comportamento esperado
 
 - **Seja construtivo.** Critique ideias, não pessoas. Se algo não funciona, explique por quê e sugira uma alternativa.
 - **Seja claro.** Escreva como se o leitor não tivesse contexto. O que é óbvio pra você pode não ser pra outros.
@@ -12,7 +12,7 @@ Este projeto existe para ajudar criadores a construir colaborações melhores co
 - **Seja honesto.** Se não sabe algo, diga. Se usou IA para ajudar a escrever, diga.
 - **Compartilhe conhecimento com generosidade.** O objetivo deste projeto é ajudar os outros. Guardar conhecimento derrota o propósito.
 
-## Comportamento Inaceitável
+## Comportamento inaceitável
 
 - Ataques pessoais, assédio ou linguagem discriminatória.
 - Publicar informações pessoais de outros sem consentimento.

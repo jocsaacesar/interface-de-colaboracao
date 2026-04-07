@@ -4,7 +4,7 @@ Uma referência prática para cada skill disponível na Interface de Colaboraç�
 
 ---
 
-## Como as Skills Funcionam
+## Como as skills funcionam
 
 Skills são comandos personalizados. Você digita `/<nome-da-skill>` em uma conversa no Claude Code, e ela executa um fluxo de trabalho com múltiplas etapas, definido em `.claude/skills/<nome-da-skill>/SKILL.md`.
 
@@ -195,7 +195,7 @@ Encerra a sessão de forma limpa: audita o que mudou, atualiza o `CLAUDE.md` par
 
 ---
 
-## Resumo do Ciclo de Vida das Skills
+## Resumo do ciclo de vida das skills
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -222,7 +222,7 @@ Encerra a sessão de forma limpa: audita o que mudou, atualiza o `CLAUDE.md` par
 
 ---
 
-## Criando Suas Próprias Skills
+## Criando suas próprias skills
 
 Quando estiver confortável com as skills embutidas, você pode criar as suas. Veja:
 

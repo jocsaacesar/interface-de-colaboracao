@@ -1,10 +1,10 @@
-# Criando e Organizando Skills
+# Criando e organizando skills
 
 Skills são comandos personalizados que automatizam fluxos de trabalho com múltiplas etapas no Claude Code. Elas ficam em `.claude/skills/` e são acionadas digitando `/<nome-da-skill>` na conversa.
 
 **Como funciona a descoberta:** O Claude Code auto-descobre skills da pasta `.claude/skills/` quando abre um projeto. Você não precisa registrar nem instalar nada — coloque a pasta da skill lá e ela fica disponível. A skill `/iniciar` as recarrega no início da sessão para um contexto fresco, mas skills funcionam mesmo sem `/iniciar` (é assim que o `/comece-por-aqui` funciona como primeiro comando em um clone recém-feito).
 
-## Por Que Skills Importam
+## Por que skills importam
 
 Sem skills, você repete as mesmas instruções toda sessão:
 - "Carregue minhas memórias"
@@ -13,7 +13,7 @@ Sem skills, você repete as mesmas instruções toda sessão:
 
 Skills transformam processos repetidos em comandos de uma palavra.
 
-## Anatomia de uma Skill
+## Anatomia de uma skill
 
 Cada skill vive em sua própria pasta com um arquivo `SKILL.md`:
 
@@ -53,7 +53,7 @@ Mais passos.
 - Restrições rígidas que a IA deve seguir durante a execução.
 ```
 
-## Princípios de Design
+## Princípios de design
 
 ### 1. Uma skill, um fluxo de trabalho
 
@@ -78,7 +78,7 @@ Divida skills complexas em fases numeradas. Isso torna o processo previsível e 
 
 Termine toda skill com regras explícitas. Elas impedem a IA de "melhorar" o processo de formas que você não pediu.
 
-## Padrões Comuns de Skills
+## Padrões comuns de skills
 
 | Skill | Propósito |
 |-------|-----------|

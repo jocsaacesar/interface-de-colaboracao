@@ -2,13 +2,13 @@
 
 Obrigado pelo interesse em melhorar a Interface de Colaboração com Claude. Este projeto existe para ajudar criadores a construir colaborações mais profundas e intencionais com IA — e contribuições que sirvam a essa missão são bem-vindas.
 
-## Antes de Contribuir
+## Antes de contribuir
 
 1. **Leia o [README](README.md)** para entender o que este projeto é e o que não é.
 2. **Leia os [guias](guias/)** para entender os conceitos centrais (CLAUDE.md, memória, skills).
 3. **Verifique as [issues existentes](../../issues)** para ver se sua ideia ou bug já foi discutido.
 
-## O Que Aceitamos
+## O que aceitamos
 
 ### Sim
 
@@ -25,16 +25,16 @@ Obrigado pelo interesse em melhorar a Interface de Colaboração com Claude. Est
 - **Configurações de outras ferramentas** — Este projeto é sobre Claude Code. Configurações de outras ferramentas pertencem a outro lugar.
 - **Arquivos de memória pessoais** — Nunca inclua arquivos de memória reais com informações pessoais.
 
-## Como Contribuir
+## Como contribuir
 
-### Reportando Problemas
+### Reportando problemas
 
 Use o template de issue apropriado:
 - **Relatório de bug** — Algo nos guias ou modelos está errado.
 - **Sugestão de funcionalidade** — Uma ideia para um novo guia, modelo ou melhoria.
 - **Pergunta** — Precisa de esclarecimento sobre um conceito ou abordagem.
 
-### Enviando Alterações
+### Enviando alterações
 
 1. **Faça um fork** do repositório.
 2. **Crie uma branch** com nome descritivo: `adicionar-guia-padroes-equipe`, `corrigir-digitacao-modelo`.

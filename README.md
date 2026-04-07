@@ -12,7 +12,7 @@ Você configura uma vez. A partir daí, ela te conhece.
 
 ---
 
-## Como Funciona — Em 5 Minutos
+## Como funciona — em 5 minutos
 
 Quando você clona este repositório e abre o Claude Code, todas as skills já estão disponíveis automaticamente — o Claude Code descobre elas sozinho na pasta `.claude/skills/`. Não precisa instalar nada, não precisa rodar nada antes. É como plugar um instrumento e ele já estar afinado.
 
@@ -58,7 +58,7 @@ Não é um questionário. É uma conversa. A IA reage às suas respostas, faz fo
 
 ---
 
-## O Que Muda Na Prática
+## O que muda na prática
 
 Existe uma diferença enorme entre uma ferramenta que obedece e uma que colabora. A primeira espera comandos. A segunda lembra contexto, respeita preferências e evolui com você.
 
@@ -72,7 +72,7 @@ Existe uma diferença enorme entre uma ferramenta que obedece e uma que colabora
 
 ---
 
-## Os Quatro Pilares
+## Os quatro pilares
 
 Todo relacionamento funcional tem estrutura. Este framework se apoia em quatro:
 
@@ -94,13 +94,13 @@ Comandos que automatizam fluxos de trabalho inteiros. Em vez de digitar 15 instr
 
 Pense em skills como rituais produtivos. Você faz a mesma coisa toda vez, do mesmo jeito, e por isso funciona.
 
-### Troca de Arquivos
+### Troca de arquivos
 
 Um protocolo simples de pastas. Coloque arquivos na `entrada/` para a IA processar. Ela entrega resultados na `saida/`. Sem copiar, sem colar, sem perder contexto no meio do caminho.
 
 ---
 
-## Início Rápido
+## Início rápido
 
 ```bash
 git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
@@ -119,7 +119,7 @@ Nenhuma configuração prévia. Nenhuma instalação. As skills já estão na pa
 
 ---
 
-## O Ritmo de Uma Sessão
+## O ritmo de uma sessão
 
 Uma vez configurado, cada sessão de trabalho segue um ritmo natural — como abrir e fechar um caderno:
 
@@ -146,7 +146,7 @@ Uma vez configurado, cada sessão de trabalho segue um ritmo natural — como ab
 
 ---
 
-## Segurança e Escopo
+## Segurança e escopo
 
 Quando alguém te pede para clonar um repositório e rodar comandos, é justo perguntar: *"o que isso faz na minha máquina?"*
 
@@ -176,7 +176,7 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 
 ---
 
-## Indo Mais Fundo
+## Indo mais fundo
 
 - **[Glossário de Skills](GLOSSARIO_DE_SKILLS.md)** — Cada skill explicada em detalhe: o que faz, o que esperar, o que nunca fará.
 - **[Guias](guias/)** — Como criar um CLAUDE.md, projetar skills, usar o sistema de memória.
@@ -186,7 +186,7 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 - **[Contribuindo](CONTRIBUTING.md)** — Como contribuir para este projeto.
 
 <details>
-<summary>Estrutura do Projeto (clique para expandir)</summary>
+<summary>Estrutura do projeto (clique para expandir)</summary>
 
 ```
 ├── CLAUDE.md                           # Sua identidade (gerado pelo /comece-por-aqui)
@@ -210,7 +210,7 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 
 ---
 
-## A História Por Trás
+## A história por trás
 
 Este framework nasceu por acidente. **Joc** estava construindo o Jiim Hawkins — um projeto ambicioso de agente de IA pessoal. E no processo de preparar o ambiente de trabalho com o Claude Code, percebeu algo: *a preparação era o produto*.
 

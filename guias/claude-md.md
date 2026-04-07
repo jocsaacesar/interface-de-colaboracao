@@ -4,13 +4,13 @@ O arquivo `CLAUDE.md` é a **constituição** da sua colaboração com IA. Ele d
 
 > **Nota:** Neste framework, o `CLAUDE.md` é o arquivo de identidade da **sua** IA — gerado pelo `/comece-por-aqui`. A documentação do framework vive separada em `CLAUDE-IC.md`.
 
-## Por Que Isso Importa
+## Por que isso importa
 
 Sem um CLAUDE.md, toda conversa começa do zero. A IA não tem identidade, não lembra suas preferências e não entende as convenções do seu projeto. Você vai gastar os primeiros 10 minutos de cada sessão se explicando de novo.
 
 Com um CLAUDE.md bem feito, a IA chega **pronta** — com personalidade, regras e contexto já carregados.
 
-## Seções Principais
+## Seções principais
 
 ### 1. Identidade
 
