@@ -1,12 +1,13 @@
 # === Dados pessoais — nunca commitar ===
 
 # Arquivos de memória (contêm informações pessoais do usuário)
-memoria/
-memory/
+# Barra inicial garante que só ignora na raiz, não em subpastas como exemplos/leland/memoria/
+/memoria/
+/memory/
 
 # Troca de arquivos (arquivos de trabalho pessoais)
-troca/
-exchange/
+/troca/
+/exchange/
 
 # Configurações locais do Claude Code
 .claude/settings.local.json

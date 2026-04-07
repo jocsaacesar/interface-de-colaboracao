@@ -1,0 +1,3 @@
+- [Convenção de idioma](feedback_idioma.md) — Arquivos em português, termos técnicos em inglês quando necessário
+- [Perfil do usuário](perfil_usuario.md) — Exemplo de perfil mostrando como capturar papel e preferências
+- [Bootstrap da sessão](feedback_bootstrap_sessao.md) — Memórias vivem na pasta do projeto para total transparência
