@@ -130,19 +130,31 @@ Uma vez configurado, cada sessão de trabalho segue um ritmo natural — como ab
 [ seu trabalho ]            Você trabalha normalmente. A IA se comporta
     │                       como vocês combinaram.
     ▼
-/tornar-publico (opcional)  Quer compartilhar? Esta skill separa o pessoal
-    │                       do público e sanitiza antes de publicar.
-    ▼
 /ate-a-proxima              Fechamento — IA salva o estado, atualiza a
                             memória, se despede. Amanhã retoma daqui.
 ```
+
+### Skills incluídas
 
 | Comando | Quando | O que faz |
 |---------|--------|-----------|
 | `/comece-por-aqui` | Uma vez, após clonar | Te entrevista e constrói sua IA personalizada. |
 | `/iniciar` | Início de cada sessão | Carrega tudo. A IA chega pronta. |
-| `/tornar-publico` | Quando tiver algo pra compartilhar | Sanitiza dados pessoais antes de publicar. |
 | `/ate-a-proxima` | Final de cada sessão | Salva o estado e encerra de forma limpa. |
+| `/criar-skill` | Quando quiser criar uma nova skill | Entrevista guiada que gera o SKILL.md completo. |
+
+### Marketplace — skills opcionais
+
+Além das skills incluídas, o repositório tem um [marketplace](marketplace/) com skills extras que você instala se quiser:
+
+| Skill | O que faz | Como instalar |
+|-------|-----------|---------------|
+| `/tornar-publico` | Sanitiza dados pessoais antes de publicar trabalho | `cp -r marketplace/tornar-publico .claude/skills/` |
+| `/revisar-texto` | Revisão ortográfica e de convenções nos .md do projeto | `cp -r marketplace/revisar-texto .claude/skills/` |
+
+Uma linha. Copie a pasta, o Claude Code descobre sozinho. Quer remover? Delete a pasta. Sem efeitos colaterais.
+
+O marketplace está aberto para contribuições — se você criar uma skill útil, [mande um PR](marketplace/).
 
 ---
 
@@ -179,6 +191,7 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 ## Indo mais fundo
 
 - **[Glossário de Skills](GLOSSARIO_DE_SKILLS.md)** — Cada skill explicada em detalhe: o que faz, o que esperar, o que nunca fará.
+- **[Marketplace](marketplace/)** — Skills opcionais para instalar no seu projeto.
 - **[Guias](guias/)** — Como criar um CLAUDE.md, projetar skills, usar o sistema de memória.
 - **[Modelos](modelos/)** — Arquivos iniciais para montar do zero.
 - **[Exemplos](exemplos/leland/)** — Uma implementação real, sanitizada, como referência.
@@ -201,7 +214,8 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 ├── guias/                              # Como usar cada componente
 ├── modelos/                            # Arquivos iniciais para seu projeto
 ├── exemplos/                           # Implementação de referência
-├── .claude/skills/                     # Skills (locais ao projeto)
+├── .claude/skills/                     # Skills core (locais ao projeto)
+├── marketplace/                        # Skills opcionais para instalar
 ├── memoria/                            # Seus arquivos de memória (no gitignore)
 └── troca/                              # Troca de arquivos (no gitignore)
 ```

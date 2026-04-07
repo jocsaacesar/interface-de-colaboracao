@@ -1,6 +1,8 @@
-# Glossário de Skills
+# Glossário de skills
 
 Uma referência prática para cada skill disponível na Interface de Colaboração com Claude. Cada entrada explica o que a skill faz, quando usar, o que esperar e o que ela nunca fará.
+
+**Skills core** vêm incluídas e funcionam imediatamente. **Skills do marketplace** são opcionais — você instala copiando a pasta para `.claude/skills/`.
 
 ---
 
@@ -195,6 +197,71 @@ Encerra a sessão de forma limpa: audita o que mudou, atualiza o `CLAUDE.md` par
 
 ---
 
+## /criar-skill
+
+> **Crie novas skills sem escrever o SKILL.md na mão.**
+
+### Propósito
+
+Meta-skill que cria outras skills por meio de entrevista guiada. Lê os padrões das skills existentes do projeto, faz perguntas uma a uma, sugere regras e melhorias, e gera o SKILL.md completo.
+
+### Quando usar
+
+- Quando quiser criar uma nova skill para o projeto.
+- **Apenas por comando manual** — digite `/criar-skill` explicitamente.
+
+### O que acontece
+
+1. **Lê padrões** — Analisa todas as skills existentes para entender nomes, formato, complexidade e tom do projeto.
+2. **Entrevista** — Faz 5 perguntas, uma por vez:
+   - O que a skill faz?
+   - Como quer chamar? (sugere nomes baseados nos padrões)
+   - Quando deve disparar? Quando NÃO deve?
+   - Qual o passo a passo?
+   - Que regras deve seguir? (sugere proativamente baseado no propósito)
+3. **Gera** — Cria o SKILL.md completo seguindo o formato do projeto.
+4. **Mostra** — Apresenta o resultado para aprovação antes de salvar.
+5. **Salva** — Cria a pasta em `.claude/skills/` e confirma.
+
+### O que ela nunca fará
+
+- Despejar todas as perguntas de uma vez. Uma por vez, sempre.
+- Salvar sem aprovação. Mostra o resultado completo antes.
+- Inflar a skill. Se você descreveu algo simples com 2 fases, não transforma em 6.
+- Adicionar regras que você não pediu sem perguntar primeiro.
+
+---
+
+## Skills do marketplace
+
+As skills abaixo não vêm instaladas por padrão. Estão disponíveis no [marketplace](marketplace/) — para instalar, copie a pasta para `.claude/skills/`.
+
+---
+
+## /tornar-publico *(marketplace)*
+
+> **Publique seu trabalho. Disponível no [marketplace](marketplace/tornar-publico/).**
+
+*(Para instalar: `cp -r marketplace/tornar-publico .claude/skills/`)*
+
+Pega o trabalho da sessão, separa pessoal de público, sanitiza conteúdo sensível e prepara tudo para o repositório público. Nada é commitado sem sua aprovação.
+
+Veja a [documentação completa](marketplace/tornar-publico/SKILL.md).
+
+---
+
+## /revisar-texto *(marketplace)*
+
+> **Revisão ortográfica e de convenções. Disponível no [marketplace](marketplace/revisar-texto/).**
+
+*(Para instalar: `cp -r marketplace/revisar-texto .claude/skills/`)*
+
+Percorre todos os arquivos Markdown do projeto, identifica erros ortográficos, inconsistências de convenção e problemas de formatação. Correções ambíguas pedem aprovação individual. Relatório consolidado no final.
+
+Veja a [documentação completa](marketplace/revisar-texto/SKILL.md).
+
+---
+
 ## Resumo do ciclo de vida das skills
 
 ```
@@ -210,10 +277,6 @@ Encerra a sessão de forma limpa: audita o que mudou, atualiza o `CLAUDE.md` par
 │                  [ seu trabalho ]                            │
 │                       │                                     │
 │                       ▼                                     │
-│                  /tornar-publico  (opcional)                 │
-│                  (auditoria → sanitizar → publicar → ok)    │
-│                       │                                     │
-│                       ▼                                     │
 │                  /ate-a-proxima                              │
 │                  (auditoria → CLAUDE.md → sinc → tchau)     │
 │                                                             │
@@ -224,7 +287,9 @@ Encerra a sessão de forma limpa: audita o que mudou, atualiza o `CLAUDE.md` par
 
 ## Criando suas próprias skills
 
-Quando estiver confortável com as skills embutidas, você pode criar as suas. Veja:
+O jeito mais rápido: digite `/criar-skill` e a IA te guia por uma entrevista que gera o SKILL.md completo.
+
+Se preferir criar na mão:
 
 - **[guias/skills.md](guias/skills.md)** — Guia completo sobre design de skills.
 - **[modelos/skill-modelo/SKILL.md](modelos/skill-modelo/SKILL.md)** — Modelo inicial.

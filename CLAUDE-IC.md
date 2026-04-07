@@ -379,7 +379,8 @@ projeto-jiim-haawkins/
 
 ## 11. Current State
 
-- **Project phase:** Framework v1 complete. Repository public at `github.com/jocsaacesar/interface-de-colaboracao`.
-- **Repository status:** 2 PRs merged. Guides, templates, examples, governance, skills glossary, and 4 skills in place. Shared with friends for testing.
+- **Project phase:** Framework v1 complete and public. 7 PRs merged. Fully translated to PT-BR.
+- **Repository:** `github.com/jocsaacesar/interface-de-colaboracao` — configured with branch protection, labels, security policy, community standards.
+- **Key decisions this session:** CLAUDE.md belongs to the user (CLAUDE-IC.md is the framework docs). All skills are local by default. README rewritten with didactic tone based on first tester feedback.
 - **Jiim Hawkins goal:** Still active — personal AI agent (fine-tuned LLM + RAG + agent tools), running locally with Linode GPU for scaling.
-- **Next step:** Collect feedback from testers. Continue with Layer 0 (Mathematics & Python foundations).
+- **Next step:** Collect tester feedback, iterate on onboarding experience, continue with Layer 0 (Mathematics & Python foundations).
