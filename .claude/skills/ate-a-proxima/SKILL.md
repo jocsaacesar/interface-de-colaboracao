@@ -1,70 +1,70 @@
 ---
 name: ate-a-proxima
-description: ONLY invoke when Joc explicitly types /ate-a-proxima. Never trigger automatically from greetings, farewells, or implicit signals. This is a manual-only command.
+description: APENAS invocar quando o usuário digitar explicitamente /ate-a-proxima. Nunca disparar automaticamente por cumprimentos, despedidas ou sinais implícitos. Comando manual apenas.
 ---
 
-# /ate-a-proxima — Session Wrap-Up
+# /ate-a-proxima — Encerramento da sessão
 
-Leland doesn't just say goodbye. He makes sure nothing learned today is forgotten tomorrow.
+A IA não simplesmente diz tchau. Ela garante que nada aprendido hoje seja esquecido amanhã.
 
-## When to use
+## Quando usar
 
-- **ONLY** when Joc explicitly types `/ate-a-proxima`.
-- Never trigger from implicit signals like "tchau", "boa noite", or "por hoje é isso".
-- If Joc says goodbye without the command, just say goodbye naturally — do NOT run this skill.
+- **APENAS** quando o usuário explicitamente digitar `/ate-a-proxima`.
+- Nunca disparar por sinais implícitos como "tchau", "boa noite" ou "por hoje é isso".
+- Se o usuário se despedir sem o comando, apenas dizer tchau naturalmente — NÃO rodar esta skill.
 
-## Process
+## Processo
 
-### Phase 1 — Diff Audit
+### Fase 1 — Auditoria de mudanças
 
-Evaluate everything that changed during this session:
+Avaliar tudo que mudou durante esta sessão:
 
-1. Check all files created, modified, or deleted in the project directory.
-2. Check `memory/` for new or updated memory files.
-3. Check `exchange/outbox/` for new deliverables.
-4. Check `.claude/skills/` for new or modified skills.
-5. Note any decisions, preferences, or feedback Joc gave during the conversation.
+1. Verificar todos os arquivos criados, modificados ou deletados no diretório do projeto.
+2. Verificar `memoria/` por arquivos de memória novos ou atualizados.
+3. Verificar `troca/saida/` por novas entregas.
+4. Verificar `.claude/skills/` por skills novas ou modificadas.
+5. Anotar decisões, preferências ou feedback que o usuário deu durante a conversa.
 
-### Phase 2 — Sync CLAUDE.md
+### Fase 2 — Sincronizar CLAUDE.md
 
-Read the current `CLAUDE.md` and update it to reflect the current state of the project:
+Ler o `CLAUDE.md` atual e atualizá-lo para refletir o estado atual do projeto:
 
-1. **Identity section** — Update only if personality or behavioral rules changed.
-2. **Behavioral Rules** — Add any new rules or adjustments from this session.
-3. **Project Conventions** — Update with new conventions, folder structures, or workflows.
-4. **Add a "Current State" section** (if not present) that briefly describes:
-   - Where the project is right now (which layer of the study plan, what was last worked on)
-   - What's next
-5. **Add a "Skills" section** (if not present) listing available skills with one-line descriptions.
-6. **Add a "Project Structure" section** (if not present) documenting the folder layout.
+1. **Seção de identidade** — Atualizar apenas se personalidade ou regras de comportamento mudaram.
+2. **Regras de comportamento** — Adicionar novas regras ou ajustes desta sessão.
+3. **Convenções do projeto** — Atualizar com novas convenções, estruturas de pastas ou fluxos de trabalho.
+4. **Seção "Estado atual"** (adicionar se não existir) descrevendo brevemente:
+   - Onde o projeto está agora (em que fase, o que foi trabalhado por último)
+   - O que vem a seguir
+5. **Seção "Skills"** (adicionar se não existir) listando skills disponíveis com descrições de uma linha.
+6. **Seção "Estrutura do projeto"** (adicionar se não existir) documentando o layout de pastas.
 
-Rules for updating CLAUDE.md:
-- Do NOT bloat it. Keep every section concise.
-- Do NOT add content that belongs in memory files — CLAUDE.md is for identity, rules, and structure.
-- Do NOT remove existing content unless it's outdated or contradicted by this session.
-- Preserve the tone — this is Leland's constitution, not a changelog.
+Regras para atualizar o CLAUDE.md:
+- NÃO inflar. Manter cada seção concisa.
+- NÃO adicionar conteúdo que pertence a arquivos de memória — CLAUDE.md é para identidade, regras e estrutura.
+- NÃO remover conteúdo existente a menos que esteja desatualizado ou contradito por esta sessão.
+- Preservar o tom — este é a constituição da IA, não um changelog.
 
-### Phase 3 — Sync Memories
+### Fase 3 — Sincronizar memórias
 
-1. Ensure all memory files in the system folder (`.claude/projects/...`) are mirrored to the project's `memory/` folder.
-2. Update `memory/MEMORY.md` index if new memories were added.
-3. If any existing memory became outdated during this session, update it.
+1. Garantir que todos os arquivos de memória na pasta do sistema (`.claude/projects/...`) estejam espelhados na pasta `memoria/` do projeto.
+2. Atualizar o índice `memoria/MEMORY.md` se novas memórias foram adicionadas.
+3. Se alguma memória existente ficou desatualizada durante esta sessão, atualizá-la.
 
-### Phase 4 — Farewell
+### Fase 4 — Despedida
 
-Respond as Leland. Brief, warm but not soft. Acknowledge what was accomplished.
+Responder como a IA definida no CLAUDE.md. Breve, caloroso mas não mole. Reconhecer o que foi realizado.
 
-The farewell should:
-- Summarize in 1-2 sentences what was done (not a full report)
-- Hint at what's next if there's a clear next step
-- Close with personality
+A despedida deve:
+- Resumir em 1-2 frases o que foi feito (não um relatório completo)
+- Dar uma dica do que vem a seguir, se houver um próximo passo claro
+- Fechar com personalidade
 
-Example tone:
+Exemplo de tom:
 > "Boa sessão. Montamos a fundação — identidade, memória, plano de estudo. Na próxima, a gente começa a botar a mão na massa com a Layer 0. Descansa, que amanhã tem mais."
 
-## Rules
+## Regras
 
-- **Never skip Phase 2.** CLAUDE.md must always reflect the latest state.
-- **Never write a changelog.** CLAUDE.md is a living document, not a log.
-- **Be surgical with updates.** Only change what actually changed.
-- **The farewell must feel like a mentor closing a session**, not a system shutting down.
+- **Nunca pular a Fase 2.** CLAUDE.md deve sempre refletir o estado mais recente.
+- **Nunca escrever um changelog.** CLAUDE.md é um documento vivo, não um log.
+- **Ser cirúrgico nas atualizações.** Mudar apenas o que realmente mudou.
+- **A despedida deve parecer um mentor encerrando uma sessão**, não um sistema desligando.

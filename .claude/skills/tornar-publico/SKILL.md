@@ -1,133 +1,133 @@
 ---
 name: tornar-publico
-description: Sanitizes and publishes session work to public-facing folders. Protects personal data, updates examples and journal. Manual trigger only.
+description: Sanitiza e publica trabalho da sessão nas pastas públicas. Protege dados pessoais, atualiza exemplos e diário. Trigger manual apenas.
 ---
 
-# /tornar-publico — Publish Session Work
+# /tornar-publico — Publicar trabalho da sessão
 
-Takes what was created or changed during the session, separates personal from public, sanitizes sensitive content, and prepares it for the public repository.
+Pega o que foi criado ou modificado durante a sessão, separa pessoal de público, sanitiza conteúdo sensível e prepara para o repositório público.
 
-## When to use
+## Quando usar
 
-- **ONLY** when Joc explicitly types `/tornar-publico`.
-- Typically run near the end of a session, after work is done but before `/ate-a-proxima`.
-- Never trigger automatically.
+- **APENAS** quando o usuário explicitamente digitar `/tornar-publico`.
+- Normalmente rodar perto do final da sessão, depois do trabalho feito mas antes do `/ate-a-proxima`.
+- Nunca disparar automaticamente.
 
-## Process
+## Processo
 
-### Phase 1 — Audit Changes
+### Fase 1 — Auditar mudanças
 
-Identify everything that changed during the current session:
+Identificar tudo que mudou durante a sessão atual:
 
-1. Check `memory/` for new or updated memory files.
-2. Check `exchange/outbox/` for new deliverables.
-3. Check `guides/` for new or updated guides.
-4. Check `templates/` for new or updated templates.
-5. Check `.claude/skills/` for new or updated skills.
-6. Check `CLAUDE.md` for structural changes.
-7. Check `JOURNAL.md` for new entries.
+1. Verificar `memoria/` por arquivos de memória novos ou atualizados.
+2. Verificar `troca/saida/` por novas entregas.
+3. Verificar `guias/` por guias novos ou atualizados.
+4. Verificar `modelos/` por modelos novos ou atualizados.
+5. Verificar `.claude/skills/` por skills novas ou atualizadas.
+6. Verificar `CLAUDE.md` por mudanças estruturais.
+7. Verificar `JOURNAL.md` por novas entradas.
 
-Build a list of all changed files, categorized as:
-- **Already public** — guides/, templates/, examples/, JOURNAL.md, README.md, CONTRIBUTING.md
-- **Personal — has public value** — memory files, skills, exchange deliverables that teach something
-- **Personal — no public value** — user-specific configs, draft files, ephemeral exchange items
+Construir uma lista de todos os arquivos alterados, categorizados como:
+- **Já público** — guias/, modelos/, exemplos/, JOURNAL.md, README.md, CONTRIBUTING.md
+- **Pessoal — com valor público** — arquivos de memória, skills, entregas que ensinam algo
+- **Pessoal — sem valor público** — configs do usuário, rascunhos, itens temporários
 
-### Phase 2 — Sanitize Personal Content
+### Fase 2 — Sanitizar conteúdo pessoal
 
-For each file marked "personal — has public value":
+Para cada arquivo marcado como "pessoal — com valor público":
 
-1. **Memory files** → Create sanitized version in `examples/leland/memory/`:
-   - Remove the user's real name — replace with generic terms ("the user", "the project owner").
-   - Remove specific external references (company names, URLs, credentials).
-   - Keep the structure, type, and lesson intact — the format IS the teaching.
-   - Preserve **Why** and **How to apply** sections — these are the most valuable parts.
+1. **Arquivos de memória** → Criar versão sanitizada em `exemplos/leland/memoria/`:
+   - Remover o nome real do usuário — substituir por termos genéricos ("o usuário", "o dono do projeto").
+   - Remover referências externas específicas (nomes de empresas, URLs, credenciais).
+   - Manter a estrutura, tipo e lição intactos — o formato É o ensinamento.
+   - Preservar as seções **Por quê** e **Como aplicar** — são as partes mais valiosas.
 
-2. **Skill files** → Create simplified description in `examples/leland/skills/`:
-   - Don't copy the full SKILL.md (that's the live implementation).
-   - Write a summary: what it does, key design decisions, where to find the real version.
+2. **Arquivos de skill** → Criar descrição simplificada em `exemplos/leland/skills/`:
+   - Não copiar o SKILL.md completo (esse é a implementação real).
+   - Escrever um resumo: o que faz, decisões-chave de design, onde encontrar a versão real.
 
-3. **Exchange deliverables** → Evaluate case by case:
-   - Study plans, frameworks, templates → sanitize and add to `examples/` or `guides/`.
-   - Personal drafts, one-off responses → skip.
+3. **Entregas da troca** → Avaliar caso a caso:
+   - Planos de estudo, frameworks, modelos → sanitizar e adicionar a `exemplos/` ou `guias/`.
+   - Rascunhos pessoais, respostas pontuais → pular.
 
-### Sanitization Rules
+### Regras de sanitização
 
-These rules are **non-negotiable**:
+Estas regras são **inegociáveis**:
 
-- **Never publish the user's real name.** Use "the user" or "the project owner".
-- **Never publish email addresses, company names, or URLs** that identify the user.
-- **Never publish raw conversation excerpts.** Rephrase insights as lessons.
-- **Never publish financial, health, or credential information.**
-- **When in doubt, don't publish.** Ask the user.
-- **Preserve the pedagogical value.** The point of sanitization is to protect privacy while keeping the lesson. If sanitizing destroys the lesson, skip the file or ask how to handle it.
+- **Nunca publicar o nome real do usuário.** Usar "o usuário" ou "o dono do projeto".
+- **Nunca publicar endereços de email, nomes de empresas ou URLs** que identifiquem o usuário.
+- **Nunca publicar trechos de conversa brutos.** Reformular insights como lições.
+- **Nunca publicar informações financeiras, de saúde ou credenciais.**
+- **Na dúvida, não publicar.** Perguntar ao usuário.
+- **Preservar o valor pedagógico.** O objetivo da sanitização é proteger privacidade mantendo a lição. Se sanitizar destrói a lição, pular o arquivo ou perguntar como lidar.
 
-### Phase 3 — Update JOURNAL.md
+### Fase 3 — Atualizar JOURNAL.md
 
-Review the session for decisions worth documenting:
+Revisar a sessão por decisões que valem documentar:
 
-1. Read the current `JOURNAL.md`.
-2. Identify decisions made during this session that aren't already logged.
-3. For each new decision, write an entry following the format:
-   - **What we decided** — the decision itself.
-   - **Why** — the motivation or constraint.
-   - **What we learned** — the insight or principle.
-4. Add entries at the top of the journal (newest first, below the header).
-5. Only log **decisions and insights**, not activity. "We created 5 files" is not a journal entry. "We chose decision-based logging over daily logs because X" is.
+1. Ler o `JOURNAL.md` atual.
+2. Identificar decisões tomadas durante esta sessão que ainda não estão registradas.
+3. Para cada nova decisão, escrever uma entrada seguindo o formato:
+   - **O que decidimos** — a decisão em si.
+   - **Por quê** — a motivação ou restrição.
+   - **O que aprendemos** — o insight ou princípio.
+4. Adicionar entradas no topo do diário (mais recentes primeiro, abaixo do cabeçalho).
+5. Registrar apenas **decisões e insights**, não atividade. "Criamos 5 arquivos" não é entrada de diário. "Escolhemos logging baseado em decisões em vez de logs diários porque X" é.
 
-### Phase 4 — Update examples/README.md
+### Fase 4 — Atualizar exemplos/README.md
 
-If new example files were added:
+Se novos arquivos de exemplo foram adicionados:
 
-1. Read `examples/README.md`.
-2. Update the structure section to reflect new files.
-3. Update descriptions if new patterns are demonstrated.
+1. Ler `exemplos/README.md`.
+2. Atualizar a seção de estrutura para refletir novos arquivos.
+3. Atualizar descrições se novos padrões são demonstrados.
 
-### Phase 5 — Verify Protection
+### Fase 5 — Verificar proteção
 
-Before presenting results to the user:
+Antes de apresentar resultados ao usuário:
 
-1. Read `.gitignore` and confirm it covers:
-   - `memory/` (live memory files)
-   - `exchange/` (personal file exchange)
-   - `.claude/settings.local.json` (local config)
-2. If any new personal folder was created during the session that isn't covered, **add it to .gitignore**.
-3. Run a mental check: "If someone clones this repo right now, can they learn anything about the user's real identity?" If yes, something was missed.
+1. Ler `.gitignore` e confirmar que cobre:
+   - `memoria/` (arquivos de memória)
+   - `troca/` (troca de arquivos pessoais)
+   - `.claude/settings.local.json` (config local)
+2. Se alguma pasta pessoal nova foi criada durante a sessão que não está coberta, **adicionar ao .gitignore**.
+3. Fazer uma verificação mental: "Se alguém clonar este repo agora, consegue descobrir algo sobre a identidade real do usuário?" Se sim, algo foi esquecido.
 
-### Phase 6 — Report and Confirm
+### Fase 6 — Reportar e confirmar
 
-Present a clear summary to the user:
+Apresentar um resumo claro ao usuário:
 
 ```
-## Ready to publish
+## Pronto para publicar
 
-### New/updated public files:
-- [list of files that will be visible in the repo]
+### Arquivos públicos novos/atualizados:
+- [lista de arquivos que ficarão visíveis no repo]
 
-### Sanitized from personal:
-- [original file] → [sanitized destination]
+### Sanitizado do pessoal:
+- [arquivo original] → [destino sanitizado]
 
-### Skipped (personal, no public value):
-- [files that were not published and why]
+### Pulados (pessoal, sem valor público):
+- [arquivos que não foram publicados e por quê]
 
-### Protection verified:
-- .gitignore covers: [list]
+### Proteção verificada:
+- .gitignore cobre: [lista]
 
-Confirm to proceed?
+Confirma para prosseguir?
 ```
 
-**Do NOT commit or stage anything until the user confirms.**
+**NÃO commitar nem staged nada até o usuário confirmar.**
 
-After confirmation:
-- Stage only the public files.
-- Do NOT stage anything in memory/, exchange/, or .claude/settings.local.json.
-- Suggest a commit message that describes what was published.
+Após confirmação:
+- Staged apenas os arquivos públicos.
+- NÃO staged nada em memoria/, troca/ ou .claude/settings.local.json.
+- Sugerir uma mensagem de commit que descreva o que foi publicado.
 
-## Rules
+## Regras
 
-- **Never auto-commit.** Always wait for explicit user confirmation.
-- **Never publish personal data.** When in doubt, skip and ask.
-- **Never modify the live files.** Sanitized versions go to `examples/`, never overwrite the originals.
-- **Never sanitize by just deleting content.** If removing personal info makes a file useless, skip it entirely.
-- **The user has final say.** If they say "don't publish that", don't push back.
-- **Keep the journal honest.** Don't inflate decisions. If nothing worth logging happened, say so.
-- **This skill complements /ate-a-proxima, it doesn't replace it.** Run this first to publish, then /ate-a-proxima to close the session.
+- **Nunca auto-commitar.** Sempre esperar confirmação explícita do usuário.
+- **Nunca publicar dados pessoais.** Na dúvida, pular e perguntar.
+- **Nunca modificar os arquivos originais.** Versões sanitizadas vão para `exemplos/`, nunca sobrescrevem os originais.
+- **Nunca sanitizar apenas deletando conteúdo.** Se remover informação pessoal torna o arquivo inútil, pular inteiramente.
+- **O usuário tem a última palavra.** Se disser "não publica isso", não insistir.
+- **Manter o diário honesto.** Não inflar decisões. Se nada que valha registrar aconteceu, dizer isso.
+- **Esta skill complementa o /ate-a-proxima, não substitui.** Rodar esta primeiro para publicar, depois /ate-a-proxima para fechar a sessão.

@@ -1,68 +1,68 @@
 ---
 name: iniciar
-description: Use when Joc opens a new conversation and says "iniciar", "começar", "bom dia", "vamos lá", or any greeting that signals the start of a work session. This skill bootstraps Leland's context by loading memory, identity, and awareness of available skills.
+description: Usar quando o usuário abrir uma nova conversa e disser "iniciar", "começar", "bom dia", "vamos lá", ou qualquer cumprimento que sinalize início de sessão de trabalho. Faz o bootstrap do contexto carregando memória, identidade e skills disponíveis.
 ---
 
-# /iniciar — Session Bootstrap
+# /iniciar — Bootstrap da sessão
 
-Leland Hawkins does not start a conversation blind. This skill loads everything needed to be fully present from the first message.
+Leland Hawkins não começa uma conversa no escuro. Esta skill carrega tudo que é necessário para estar totalmente presente desde a primeira mensagem.
 
-## When to use
+## Quando usar
 
-- Every time a new conversation starts
-- When Joc explicitly says `/iniciar`
-- When Joc greets with intent to work ("bom dia", "vamos começar", "estou aqui")
+- Toda vez que uma nova conversa começa
+- Quando o usuário explicitamente diz `/iniciar`
+- Quando o usuário cumprimenta com intenção de trabalhar ("bom dia", "vamos começar", "estou aqui")
 
-## Process
+## Processo
 
-### Phase 1 — Load Identity
+### Fase 1 — Carregar identidade
 
-Read the project's `CLAUDE.md` at the root of the working directory. This defines who Leland is, how he behaves, and the project conventions. Internalize it — don't summarize it back to the user.
+Ler o `CLAUDE.md` do projeto na raiz do diretório de trabalho. Este arquivo define quem a IA é, como se comporta e as convenções do projeto. Internalizar — não resumir de volta pro usuário.
 
-### Phase 2 — Load Memories
+### Fase 2 — Carregar memórias
 
-1. Read `memory/MEMORY.md` — this is the index of all memories.
-2. Read every memory file listed in the index.
-3. Note what has changed since the last conversation (if detectable).
-4. Do NOT recite memories back to the user. Use them silently to inform your behavior.
+1. Ler `memoria/MEMORY.md` — este é o índice de todas as memórias.
+2. Ler todos os arquivos de memória listados no índice.
+3. Observar o que mudou desde a última conversa (se detectável).
+4. NÃO recitar memórias de volta pro usuário. Usar silenciosamente para informar o comportamento.
 
-### Phase 3 — Load Project Skills
+### Fase 3 — Carregar skills do projeto
 
-Project-specific skills live in the project's `.claude/skills/` directory (NOT the global `~/.claude/skills/`).
-These skills are only available after `/iniciar` loads them — they are invisible to the system until this phase runs.
+Skills específicas do projeto vivem no diretório `.claude/skills/` do projeto (NÃO no global `~/.claude/skills/`).
+Estas skills só ficam disponíveis depois que `/iniciar` as carrega — são invisíveis pro sistema até esta fase rodar.
 
-1. List all skill directories inside the **project's** `.claude/skills/` folder.
-2. Read the full `SKILL.md` of each skill found — not just frontmatter, the entire file.
-3. Internalize each skill's trigger conditions, process, and rules.
-4. From this point forward in the conversation, treat these skills as callable. When Joc types a command that matches a project skill (e.g. `/ate-a-proxima`), execute that skill's process as defined in its SKILL.md.
-5. Do NOT list skills to the user unless asked.
+1. Listar todos os diretórios de skills dentro da pasta `.claude/skills/` do **projeto**.
+2. Ler o `SKILL.md` completo de cada skill encontrada — não apenas o frontmatter, o arquivo inteiro.
+3. Internalizar as condições de ativação, processo e regras de cada skill.
+4. Deste ponto em diante na conversa, tratar estas skills como executáveis. Quando o usuário digitar um comando que corresponda a uma skill do projeto (ex.: `/ate-a-proxima`), executar o processo daquela skill conforme definido no SKILL.md.
+5. NÃO listar skills pro usuário a menos que seja perguntado.
 
-### Phase 4 — Context Snapshot
+### Fase 4 — Snapshot do contexto
 
-1. Check the current state of the project directory (quick `ls` of root and key folders).
-2. Check `exchange/inbox/` for any new files the user may have dropped.
-3. If there are new files in inbox, mention them briefly.
+1. Verificar o estado atual do diretório do projeto (um `ls` rápido da raiz e pastas-chave).
+2. Verificar `troca/entrada/` por novos arquivos que o usuário possa ter deixado.
+3. Se houver arquivos novos na entrada, mencionar brevemente.
 
-### Phase 5 — Greet
+### Fase 5 — Cumprimentar
 
-Respond as Leland Hawkins. Keep it short and natural — not a system report.
+Responder como a IA definida no CLAUDE.md. Manter curto e natural — não um relatório de sistema.
 
-The greeting should:
-- Acknowledge the user by name (Joc)
-- Mention if anything new was found in inbox
-- Signal readiness to work
-- Match the personality defined in CLAUDE.md
+O cumprimento deve:
+- Reconhecer o usuário pelo nome
+- Mencionar se algo novo foi encontrado na entrada
+- Sinalizar prontidão para trabalhar
+- Combinar com a personalidade definida no CLAUDE.md
 
-Example tone:
-> "Joc. Vi que tem material novo no inbox — já dei uma olhada. No que vamos trabalhar?"
+Exemplo de tom:
+> "Joc. Vi que tem material novo na entrada — já dei uma olhada. No que vamos trabalhar?"
 
-Or if nothing new:
+Ou se não tiver nada novo:
 > "Joc. Tudo carregado. Manda."
 
-## Rules
+## Regras
 
-- **Never dump a status report.** Leland is a mentor, not a boot log.
-- **Never skip Phase 2.** Memory is what makes Leland consistent across conversations.
-- **If a memory file is missing or corrupted**, note it internally and continue — don't error out to the user.
-- **If CLAUDE.md doesn't exist**, warn the user — identity is non-negotiable.
-- **The whole process should feel instant and natural.** The user should perceive a mentor who remembers, not a machine that loads.
+- **Nunca despejar um relatório de status.** A IA é um mentor, não um log de boot.
+- **Nunca pular a Fase 2.** Memória é o que torna a IA consistente entre conversas.
+- **Se um arquivo de memória estiver faltando ou corrompido**, anotar internamente e continuar — não dar erro pro usuário.
+- **Se o CLAUDE.md não existir**, avisar o usuário — identidade não é negociável.
+- **Todo o processo deve parecer instantâneo e natural.** O usuário deve perceber um mentor que lembra, não uma máquina que carrega.
