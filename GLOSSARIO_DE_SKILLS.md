@@ -12,11 +12,13 @@ Skills are **not magic** — they're structured instructions that make the AI be
 
 ### Key principles
 
+- **All skills in this repo are local to the project.** They live in `.claude/skills/` inside the project folder. They do NOT modify your global `~/.claude/` configuration. Your existing Claude Code setup is not affected.
 - **Claude Code auto-discovers skills** from the `.claude/skills/` folder when it opens a project. You don't need to install or register them — they're available immediately.
 - **`/iniciar` re-loads skills** at the start of each session, ensuring they're fresh in the conversation context. But the very first skill — `/comece-por-aqui` — works without `/iniciar` because it's designed to run in a blank environment.
 - **Each skill has explicit trigger rules.** Some run automatically (like `/iniciar` on greeting), others only fire when you type the exact command.
 - **Skills don't stack.** Run one at a time. Wait for it to finish before calling another.
 - **You're always in control.** No skill commits, publishes, or deletes anything without your explicit approval.
+- **Want a skill globally?** If you want `/iniciar` available in every project (not just this one), you can manually copy it to `~/.claude/skills/iniciar/`. This is entirely optional and never done automatically.
 
 ---
 

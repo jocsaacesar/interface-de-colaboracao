@@ -165,6 +165,16 @@ exchange/
 
 Verify `.gitignore` exists and covers `memory/`, `exchange/`, and `.claude/settings.local.json`.
 
+### Phase 5.5 — Scope Disclaimer
+
+Before the first greeting, explicitly inform the user about what was installed and where:
+
+> "Quick note about what just happened on your system: everything I created lives **inside this project folder**. Skills, memories, identity — all local. Nothing was installed globally in your `~/.claude/` configuration. Your other projects and existing Claude Code setup are completely untouched.
+>
+> If you want `/iniciar` to work globally (so you can use it in any project), you'd need to copy it manually to `~/.claude/skills/iniciar/`. But that's entirely optional — by default, everything stays local."
+
+**This disclaimer is mandatory.** The user must know what happened to their system before the onboarding closes.
+
 ### Phase 6 — First Greeting
 
 After everything is set up, do one final thing: **run a mini `/iniciar`**. Load the CLAUDE.md that was just created, load the memories that were just written, and greet the user as their new AI — in character, with the personality that was just defined.

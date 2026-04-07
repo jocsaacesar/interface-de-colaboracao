@@ -9,6 +9,26 @@ Each entry answers three questions:
 
 ---
 
+## 2026-04-07 — First external feedback: README must sell, not describe
+
+**What we decided:** Rewrote README completely. Replaced project structure as the centerpiece with a visual onboarding flow, a before/after table, and a "What This Changes on Your System" safety section. Moved file tree into a collapsible `<details>` block.
+
+**Why:** First tester (Rafael Fidelis) gave clear feedback: "I don't care about the project structure. I want to read the README and know what this IS." He also flagged that global vs local skills were unclear and raised legitimate concerns about skills modifying the system.
+
+**What we learned:** A README for a public repo has one job: make a stranger understand the value in 30 seconds. Project structure is for contributors, not visitors. Safety disclaimers are not optional when you're asking someone to run commands on their machine. And the first external feedback is always humbling — what's obvious to the builder is invisible to the reader.
+
+---
+
+## 2026-04-07 — All skills are local by default, global is opt-in
+
+**What we decided:** Explicitly document that all skills shipped in this repo are local to the project folder. Nothing touches `~/.claude/` globally. If the user wants a skill globally, they copy it manually. The `/comece-por-aqui` onboarding now includes a mandatory scope disclaimer before closing.
+
+**Why:** External feedback raised fear about global skills ("It's like putting something in the BIOS"). Legitimate concern — a user cloning a repo shouldn't worry about their system being modified. Default-local, opt-in-global is the only safe design.
+
+**What we learned:** When distributing skills, the default must always be the safest option. Power users will figure out how to go global. New users need to feel safe first.
+
+---
+
 ## 2026-04-07 — Bootstrap problem: skills need to work before /iniciar
 
 **What we decided:** Document explicitly that `/comece-por-aqui` is the only skill that runs without `/iniciar`. Claude Code auto-discovers skills from `.claude/skills/`, so no bootstrap step is needed. Clarified this across CLAUDE.md, glossary, guides, and README.
