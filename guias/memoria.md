@@ -1,8 +1,8 @@
-# Usando o Sistema de Memória
+# Usando o sistema de memória
 
 O Claude Code tem um sistema de memória integrado que persiste informações entre conversas. Este guia explica como usá-lo de forma intencional — não apenas deixar acumular.
 
-## Como a Memória Funciona
+## Como a memória funciona
 
 Arquivos de memória vivem em dois lugares:
 - **Pasta do sistema** (`~/.claude/projects/<projeto>/memory/`) — carregados automaticamente pelo Claude Code.
@@ -21,7 +21,7 @@ O arquivo `MEMORY.md` é um **índice**, não uma memória em si. Cada linha apo
 
 Mantenha entradas com menos de 150 caracteres. Linhas após a 200ª serão truncadas.
 
-## Tipos de Memória
+## Tipos de memória
 
 | Tipo | Propósito | Quando Salvar |
 |------|-----------|--------------|
@@ -30,7 +30,7 @@ Mantenha entradas com menos de 150 caracteres. Linhas após a 200ª serão trunc
 | **project** | Contexto do trabalho — objetivos, prazos, decisões | Quando aprender quem/o quê/por quê/quando sobre o projeto |
 | **reference** | Apontadores para recursos externos | Quando descobrir onde informações vivem fora do projeto |
 
-## Formato do Arquivo de Memória
+## Formato do arquivo de memória
 
 ```markdown
 ---
@@ -46,7 +46,7 @@ Conteúdo da memória.
 **Como aplicar:** Quando e como usar essa informação.
 ```
 
-## O Que Salvar
+## O que salvar
 
 - Preferências do usuário que afetam como a IA deve trabalhar
 - Decisões que não são óbvias a partir do código
@@ -54,7 +54,7 @@ Conteúdo da memória.
 - Validações — abordagens que funcionaram e devem continuar
 - Apontadores para sistemas externos (boards do Linear, canais do Slack, dashboards)
 
-## O Que NÃO Salvar
+## O que NÃO salvar
 
 - Padrões de código (leia o código em vez disso)
 - Histórico do git (use `git log`)
