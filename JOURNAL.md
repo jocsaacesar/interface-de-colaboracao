@@ -1,98 +1,98 @@
-# Journal
+# Diário
 
-Decisions, learnings, and insights from building a collaboration interface with Claude Code.
+Decisões, aprendizados e insights da construção de uma interface de colaboração com o Claude Code.
 
-Each entry answers three questions:
-- **What we decided**
-- **Why**
-- **What we learned**
-
----
-
-## 2026-04-07 — First external feedback: README must sell, not describe
-
-**What we decided:** Rewrote README completely. Replaced project structure as the centerpiece with a visual onboarding flow, a before/after table, and a "What This Changes on Your System" safety section. Moved file tree into a collapsible `<details>` block.
-
-**Why:** First tester (Rafael Fidelis) gave clear feedback: "I don't care about the project structure. I want to read the README and know what this IS." He also flagged that global vs local skills were unclear and raised legitimate concerns about skills modifying the system.
-
-**What we learned:** A README for a public repo has one job: make a stranger understand the value in 30 seconds. Project structure is for contributors, not visitors. Safety disclaimers are not optional when you're asking someone to run commands on their machine. And the first external feedback is always humbling — what's obvious to the builder is invisible to the reader.
+Cada entrada responde três perguntas:
+- **O que decidimos**
+- **Por quê**
+- **O que aprendemos**
 
 ---
 
-## 2026-04-07 — All skills are local by default, global is opt-in
+## 07/04/2026 — Tradução completa para português brasileiro
 
-**What we decided:** Explicitly document that all skills shipped in this repo are local to the project folder. Nothing touches `~/.claude/` globally. If the user wants a skill globally, they copy it manually. The `/comece-por-aqui` onboarding now includes a mandatory scope disclaimer before closing.
+**O que decidimos:** Traduzir todo o repositório para português, incluindo nomes de pastas (`guias/`, `modelos/`, `exemplos/`, `memoria/`, `troca/`). Inglês permanece apenas onde é tecnicamente necessário (nomes do sistema como `.claude/skills/`, `CLAUDE.md`, `SKILL.md`).
 
-**Why:** External feedback raised fear about global skills ("It's like putting something in the BIOS"). Legitimate concern — a user cloning a repo shouldn't worry about their system being modified. Default-local, opt-in-global is the only safe design.
+**Por quê:** O público-alvo principal são criadores brasileiros. A convenção anterior (arquivos em inglês, conversa em português) fazia sentido pra alcance global, mas o feedback real mostrou que a clareza para o leitor brasileiro importa mais do que alcance teórico.
 
-**What we learned:** When distributing skills, the default must always be the safest option. Power users will figure out how to go global. New users need to feel safe first.
-
----
-
-## 2026-04-07 — Bootstrap problem: skills need to work before /iniciar
-
-**What we decided:** Document explicitly that `/comece-por-aqui` is the only skill that runs without `/iniciar`. Claude Code auto-discovers skills from `.claude/skills/`, so no bootstrap step is needed. Clarified this across CLAUDE.md, glossary, guides, and README.
-
-**Why:** A new user reads that `/iniciar` loads skills and assumes they need it first. But `/comece-por-aqui` must run in a blank environment — before CLAUDE.md or memories exist. The documentation created a chicken-and-egg problem that would confuse the first-time user.
-
-**What we learned:** When you design a system with a "load everything" step, you must explicitly address what happens *before* that step exists. The bootstrap case is always special and always needs documentation.
+**O que aprendemos:** Convenções de idioma não são permanentes. Quando o público real se revela diferente do público imaginado, a convenção precisa mudar. Melhor servir bem quem realmente está lendo do que servir mal todo mundo.
 
 ---
 
-## 2026-04-07 — /comece-por-aqui: onboarding as a conversation, not a manual
+## 07/04/2026 — Primeiro feedback externo: o README precisa vender, não descrever
 
-**What we decided:** Create an onboarding skill that interviews new users one question at a time — who they are, what they're building, how they work, what to avoid, and what to call their AI — then builds a complete personalized setup from the answers.
+**O que decidimos:** Reescrevemos o README completamente. Substituímos a estrutura do projeto como peça central por um fluxo visual de onboarding, uma tabela antes/depois e uma seção "O Que Muda no Seu Sistema". A árvore de arquivos foi para um bloco `<details>` colapsável.
 
-**Why:** A repo with great documentation still fails if the user doesn't know where to start. Templates require reading instructions and filling blanks. An interview requires only answering questions. The difference: the user thinks about *themselves* instead of thinking about *the system*.
+**Por quê:** O primeiro testador (Rafael Fidelis) deu um feedback claro: "Não me importo com a estrutura do projeto. Quero ler o README e saber o que é isso." Também apontou que skills globais vs locais não estavam claras e levantou preocupações legítimas sobre skills modificando o sistema.
 
-**What we learned:** The entry point to a framework shouldn't teach the framework — it should ask the right questions. Understanding comes later, through use. The onboarding skill doesn't explain memory types or skill anatomy. It just asks "who are you?" and builds from there.
-
----
-
-## 2026-04-07 — /tornar-publico skill: automating the private-to-public bridge
-
-**What we decided:** Create a dedicated skill that audits session work, sanitizes personal data, and publishes pedagogically valuable content to the public folders — with mandatory user confirmation before any commit.
-
-**Why:** Manually separating personal from public every session is tedious and error-prone. But full automation without oversight is dangerous with personal data. The skill sits in the middle: it does the work, but the human approves the result.
-
-**What we learned:** The session lifecycle now has three beats: `/iniciar` (open), `/tornar-publico` (publish), `/ate-a-proxima` (close). The publish step is distinct from the close step because publishing requires conscious review — it's not something you do on autopilot while saying goodbye.
+**O que aprendemos:** Um README de repositório público tem uma função: fazer um estranho entender o valor em 30 segundos. Estrutura de projeto é pra contribuidores, não visitantes. Disclaimers de segurança não são opcionais quando você pede para alguém rodar comandos na máquina. E o primeiro feedback externo é sempre humilhante — o que é óbvio pra quem construiu é invisível pra quem lê.
 
 ---
 
-## 2026-04-07 — Project restructured for public sharing
+## 07/04/2026 — Todas as skills são locais por padrão, global é opcional
 
-**What we decided:** Transform the private Jiim Hawkins workspace into a public repository documenting the collaboration interface framework. Added guides, templates, and a journal alongside the living project.
+**O que decidimos:** Documentar explicitamente que todas as skills deste repositório são locais à pasta do projeto. Nada toca o `~/.claude/` globalmente. Se o usuário quiser uma skill global, copia manualmente. O `/comece-por-aqui` agora inclui um disclaimer obrigatório de escopo antes de encerrar.
 
-**Why:** The process of building identity, memory, and skills for Claude Code turned out to be valuable on its own — not just for us, but for any creator who wants deeper AI collaboration. Keeping it private would waste that.
+**Por quê:** Feedback externo levantou medo de skills globais ("É tipo colocar algo na BIOS"). Preocupação legítima — um usuário clonando um repositório não deveria se preocupar com o sistema sendo modificado. Local por padrão, global por escolha é o único design seguro.
 
-**What we learned:** The best documentation is a working example. Instead of writing abstract guides, we kept the live project (Leland, memories, skills) as the reference implementation. Theory and practice in the same repo.
-
----
-
-## 2026-04-07 — Journal over daily log
-
-**What we decided:** Use a decision-based journal instead of a chronological daily log (HISTORY.md).
-
-**Why:** Daily logs become noise fast — thousands of lines nobody reads. Decision entries stay useful because they capture *why* something was chosen, not just *what* happened on a given day.
-
-**What we learned:** The unit of documentation for a collaboration process is the **decision**, not the **day**.
+**O que aprendemos:** Ao distribuir skills, o padrão deve ser sempre a opção mais segura. Usuários avançados vão descobrir como ir pro global. Usuários novos precisam se sentir seguros primeiro.
 
 ---
 
-## 2026-04-07 — Memory lives in the project, not hidden in the system
+## 07/04/2026 — Problema de bootstrap: skills precisam funcionar antes do /iniciar
 
-**What we decided:** All memory files live in the project's `memory/` folder, visible and editable by the human. Mirrored to `.claude/projects/` for system auto-load.
+**O que decidimos:** Documentar explicitamente que `/comece-por-aqui` é a única skill que roda sem `/iniciar`. O Claude Code auto-descobre skills da pasta `.claude/skills/`, então nenhum passo de bootstrap é necessário. Esclarecemos isso no CLAUDE.md, glossário, guias e README.
 
-**Why:** The creator needs full visibility and control over what the AI remembers. Hidden state breaks trust. If you can't see it, you can't fix it.
+**Por quê:** Um usuário novo lê que o `/iniciar` carrega skills e assume que precisa dele primeiro. Mas o `/comece-por-aqui` precisa rodar em um ambiente zerado — antes do CLAUDE.md ou memórias existirem. A documentação criava um problema do ovo e da galinha que confundiria o usuário de primeira viagem.
 
-**What we learned:** Transparency is a design principle, not a feature. A collaboration interface where one side has hidden memory is not a collaboration — it's a black box.
+**O que aprendemos:** Quando você projeta um sistema com um passo de "carregar tudo", precisa documentar explicitamente o que acontece *antes* desse passo existir. O caso de bootstrap é sempre especial e sempre precisa de documentação.
 
 ---
 
-## 2026-04-07 — Conversations in Portuguese, artifacts in English
+## 07/04/2026 — /comece-por-aqui: onboarding como conversa, não como manual
 
-**What we decided:** All files, code, comments, and documentation are written in English. All conversation with the user stays in Portuguese (BR).
+**O que decidimos:** Criar uma skill de onboarding que entrevista novos usuários uma pergunta por vez — quem são, o que estão construindo, como trabalham, o que evitar e como chamar a IA — e então constrói uma configuração personalizada completa a partir das respostas.
 
-**Why:** English maximizes reach and keeps technical content accessible to the global community. Portuguese keeps the working conversation comfortable and natural for the creator.
+**Por quê:** Um repositório com ótima documentação ainda falha se o usuário não sabe por onde começar. Templates exigem ler instruções e preencher campos. Uma entrevista exige apenas responder perguntas. A diferença: o usuário pensa sobre *si mesmo* em vez de pensar sobre *o sistema*.
 
-**What we learned:** Language convention is one of the first decisions to make — it touches everything. Define it early, enforce it always.
+**O que aprendemos:** O ponto de entrada de um framework não deveria ensinar o framework — deveria fazer as perguntas certas. Compreensão vem depois, com o uso. A skill de onboarding não explica tipos de memória ou anatomia de skills. Apenas pergunta "quem é você?" e constrói a partir daí.
+
+---
+
+## 07/04/2026 — Skill /tornar-publico: automatizando a ponte entre privado e público
+
+**O que decidimos:** Criar uma skill dedicada que audita o trabalho da sessão, sanitiza dados pessoais e publica conteúdo com valor pedagógico nas pastas públicas — com confirmação obrigatória do usuário antes de qualquer commit.
+
+**Por quê:** Separar manualmente o pessoal do público a cada sessão é tedioso e propenso a erros. Mas automação completa sem supervisão é perigosa com dados pessoais. A skill fica no meio: faz o trabalho, mas o humano aprova o resultado.
+
+**O que aprendemos:** O ciclo de vida da sessão agora tem três tempos: `/iniciar` (abrir), `/tornar-publico` (publicar), `/ate-a-proxima` (fechar). O passo de publicação é distinto do passo de encerramento porque publicar exige revisão consciente — não é algo que se faz no automático enquanto diz tchau.
+
+---
+
+## 07/04/2026 — Projeto reestruturado para compartilhamento público
+
+**O que decidimos:** Transformar o workspace privado do Jiim Hawkins em um repositório público documentando o framework de interface de colaboração. Adicionamos guias, modelos e um diário junto ao projeto vivo.
+
+**Por quê:** O processo de construir identidade, memória e skills para o Claude Code se revelou valioso por si só — não apenas para nós, mas para qualquer criador que queira uma colaboração mais profunda com IA. Manter privado seria desperdiçar isso.
+
+**O que aprendemos:** A melhor documentação é um exemplo funcionando. Em vez de escrever guias abstratos, mantivemos o projeto vivo (Leland, memórias, skills) como implementação de referência. Teoria e prática no mesmo repositório.
+
+---
+
+## 07/04/2026 — Diário em vez de log diário
+
+**O que decidimos:** Usar um diário baseado em decisões em vez de um log cronológico diário (HISTORY.md).
+
+**Por quê:** Logs diários viram ruído rápido — milhares de linhas que ninguém lê. Entradas de decisão continuam úteis porque capturam o *porquê* algo foi escolhido, não apenas *o que* aconteceu em determinado dia.
+
+**O que aprendemos:** A unidade de documentação para um processo de colaboração é a **decisão**, não o **dia**.
+
+---
+
+## 07/04/2026 — Memória vive no projeto, não escondida no sistema
+
+**O que decidimos:** Todos os arquivos de memória vivem na pasta `memoria/` do projeto, visíveis e editáveis pelo humano. Espelhados em `.claude/projects/` para carregamento automático.
+
+**Por quê:** O criador precisa de visibilidade total e controle sobre o que a IA lembra. Estado oculto quebra confiança. Se você não consegue ver, não consegue consertar.
+
+**O que aprendemos:** Transparência é um princípio de design, não uma funcionalidade. Uma interface de colaboração onde um lado tem memória oculta não é uma colaboração — é uma caixa-preta.

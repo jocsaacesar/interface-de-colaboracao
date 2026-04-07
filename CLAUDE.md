@@ -326,6 +326,7 @@ projeto-jiim-haawkins/
 ├── CLAUDE.md                          ← This file — identity, rules, and guide
 ├── README.md                          ← Public project description
 ├── JOURNAL.md                         ← Decisions and learnings
+├── GLOSSARIO_DE_SKILLS.md             ← User guide for all skills
 ├── LICENSE                            ← MIT
 ├── CONTRIBUTING.md                    ← Contribution rules
 ├── CODE_OF_CONDUCT.md                 ← Community standards
@@ -374,7 +375,7 @@ projeto-jiim-haawkins/
 
 ## 11. Current State
 
-- **Project phase:** Collaboration interface framework — structured, documented, ready for GitHub.
-- **Repository status:** All public files created. Guides, templates, examples, governance, and skills in place.
+- **Project phase:** Framework v1 complete. Repository public at `github.com/jocsaacesar/interface-de-colaboracao`.
+- **Repository status:** 2 PRs merged. Guides, templates, examples, governance, skills glossary, and 4 skills in place. Shared with friends for testing.
 - **Jiim Hawkins goal:** Still active — personal AI agent (fine-tuned LLM + RAG + agent tools), running locally with Linode GPU for scaling.
-- **Next step:** Create GitHub repository and push. Then continue with Layer 0 (Mathematics & Python foundations).
+- **Next step:** Collect feedback from testers. Continue with Layer 0 (Mathematics & Python foundations).

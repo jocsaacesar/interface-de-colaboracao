@@ -1,209 +1,209 @@
-# Claude Collaboration Interface
+# Interface de Colaboração com Claude
 
-**Make Claude Code remember who you are.**
+**Faça o Claude Code lembrar quem você é.**
 
-Every time you open Claude Code, it starts from zero. It doesn't know your name, your project, how you like to work, or what you discussed yesterday. You re-explain yourself. Every. Single. Time.
+Toda vez que você abre o Claude Code, ele começa do zero. Não sabe seu nome, seu projeto, como você gosta de trabalhar, nem o que vocês conversaram ontem. Você se explica de novo. Toda. Santa. Vez.
 
-This framework fixes that. You set it up once, and from then on, your AI knows who you are, what you're building, and how to work with you — across every conversation.
+Este framework resolve isso. Você configura uma vez, e a partir daí, sua IA sabe quem você é, o que está construindo e como trabalhar com você — em todas as conversas.
 
 ---
 
-## What Happens When You Use This
+## O Que Acontece Quando Você Usa
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  You clone the repo and type /comece-por-aqui                   │
+│  Você clona o repositório e digita /comece-por-aqui             │
 │                          │                                      │
 │                          ▼                                      │
 │               ┌─────────────────────┐                           │
-│               │  The AI interviews  │                           │
-│               │  you (5 questions)  │                           │
+│               │  A IA te entrevista  │                           │
+│               │   (5 perguntas)      │                           │
 │               └─────────┬───────────┘                           │
 │                          │                                      │
-│           "Who are you? What are you building?                  │
-│            How do you work? What annoys you?                    │
-│            What should I call myself?"                          │
+│           "Quem é você? O que está construindo?                 │
+│            Como você trabalha? O que te irrita?                 │
+│            Como devo me chamar?"                                │
 │                          │                                      │
 │                          ▼                                      │
 │               ┌─────────────────────┐                           │
-│               │  It builds your     │                           │
-│               │  personalized AI    │                           │
+│               │  Ela constrói sua   │                           │
+│               │  IA personalizada   │                           │
 │               └─────────┬───────────┘                           │
 │                          │                                      │
-│            Identity, personality, memory,                       │
-│            behavioral rules — all from                          │
-│            your answers.                                        │
+│            Identidade, personalidade, memória,                  │
+│            regras de comportamento — tudo a                     │
+│            partir das suas respostas.                           │
 │                          │                                      │
 │                          ▼                                      │
 │               ┌─────────────────────┐                           │
-│               │  Done. Your AI      │                           │
-│               │  remembers you now. │                           │
+│               │  Pronto. Sua IA     │                           │
+│               │  te conhece agora.  │                           │
 │               └─────────────────────┘                           │
 │                                                                 │
-│  Next time, just type /iniciar and it's all there.              │
+│  Na próxima vez, digite /iniciar e tudo estará lá.              │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Before and After
+## Antes e Depois
 
-| Without this framework | With this framework |
-|----------------------|-------------------|
-| "I'm a backend developer working on..." (every session) | AI already knows your role and background |
-| "Please don't add comments to code I didn't change" (again) | AI remembers your preferences from day one |
-| "Where were we yesterday?" | AI picks up exactly where you left off |
-| Generic, one-size-fits-all responses | Personality and behavior tailored to you |
-| Every conversation is a blank slate | Every conversation builds on the last |
+| Sem este framework | Com este framework |
+|---|---|
+| "Sou um desenvolvedor backend trabalhando em..." (toda sessão) | A IA já sabe seu papel e sua experiência |
+| "Por favor, não adicione comentários em código que eu não alterei" (de novo) | A IA lembra suas preferências desde o primeiro dia |
+| "Onde paramos ontem?" | A IA retoma exatamente de onde parou |
+| Respostas genéricas, iguais pra todo mundo | Personalidade e comportamento sob medida pra você |
+| Toda conversa é uma folha em branco | Toda conversa constrói sobre a anterior |
 
-## How It Works
+## Como Funciona
 
-The framework has four components:
+O framework tem quatro componentes:
 
-**Identity (CLAUDE.md)** — A file that defines your AI's name, personality, and rules. Think of it as a constitution: "When reviewing code, be blunt. When teaching, use analogies. Never add features I didn't ask for." Claude Code reads this automatically.
+**Identidade (CLAUDE.md)** — Um arquivo que define o nome, a personalidade e as regras da sua IA. Pense nisso como uma constituição: "Ao revisar código, seja direto. Ao ensinar, use analogias. Nunca adicione funcionalidades que eu não pedi." O Claude Code lê esse arquivo automaticamente.
 
-**Memory** — Files that persist across conversations. Your role, preferences, project context, and decisions. The AI reads them silently at session start — no need to repeat yourself.
+**Memória** — Arquivos que persistem entre conversas. Seu papel, preferências, contexto do projeto e decisões. A IA lê tudo silenciosamente no início da sessão — sem precisar se repetir.
 
-**Skills** — Custom slash commands for repeatable workflows. Type `/iniciar` to start a session (AI loads everything and greets you). Type `/ate-a-proxima` to close it (AI saves state and says goodbye). You can create your own for any workflow you repeat.
+**Skills** — Comandos personalizados para fluxos de trabalho repetíveis. Digite `/iniciar` para começar uma sessão (a IA carrega tudo e te cumprimenta). Digite `/ate-a-proxima` para encerrar (a IA salva o estado e se despede). Você pode criar os seus próprios para qualquer fluxo que repita.
 
-**Exchange** — A simple folder protocol. Drop files in `inbox/` for the AI to process. It delivers results to `outbox/`. No copy-pasting.
+**Troca de Arquivos** — Um protocolo simples de pastas. Coloque arquivos na `entrada/` para a IA processar. Ela entrega os resultados na `saida/`. Sem copiar e colar.
 
 ---
 
-## Quick Start
+## Início Rápido
 
 ```bash
 git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
 cd interface-de-colaboracao
 ```
 
-Open Claude Code in that folder and type:
+Abra o Claude Code nessa pasta e digite:
 
 ```
 /comece-por-aqui
 ```
 
-No prior setup needed. The AI will guide you through everything.
+Nenhuma configuração prévia necessária. A IA vai te guiar por tudo.
 
-> **What this does to your system:** Everything stays inside your project folder. Skills, memories, and identity files are all local to this directory. Nothing is installed globally. Your existing Claude Code setup is not affected. See [What This Changes](#what-this-changes-on-your-system) for details.
-
----
-
-## The Session Lifecycle
-
-Once set up, every work session follows this flow:
-
-```
-/iniciar                    Start — AI loads identity, memory, skills.
-    │                       Greets you in character. Ready to work.
-    ▼
-[ your work ]               You work normally. The AI behaves according
-    │                       to the personality and rules you defined.
-    ▼
-/tornar-publico (optional)  If you want to share your work publicly,
-    │                       this sanitizes personal data first.
-    ▼
-/ate-a-proxima              Close — AI saves state, updates memory,
-                            says goodbye. Next session picks up here.
-```
-
-| Command | When | What it does |
-|---------|------|-------------|
-| `/comece-por-aqui` | Once, after cloning | Interviews you and builds your personalized AI. |
-| `/iniciar` | Start of every session | Loads everything. AI arrives ready. |
-| `/tornar-publico` | When you have work to share | Sanitizes personal data before publishing. |
-| `/ate-a-proxima` | End of every session | Saves state and closes cleanly. |
+> **O que isso faz no seu sistema:** Tudo fica dentro da pasta do projeto. Skills, memórias e arquivos de identidade são todos locais. Nada é instalado globalmente. Sua configuração existente do Claude Code não é afetada. Veja [O Que Muda no Seu Sistema](#o-que-muda-no-seu-sistema) para detalhes.
 
 ---
 
-## What This Changes on Your System
+## Ciclo de Vida da Sessão
 
-**This is important.** We want you to feel safe using this framework.
+Uma vez configurado, cada sessão de trabalho segue este fluxo:
 
-### Everything is local
+```
+/iniciar                    Início — IA carrega identidade, memória, skills.
+    │                       Te cumprimenta no personagem. Pronta pra trabalhar.
+    ▼
+[ seu trabalho ]            Você trabalha normalmente. A IA se comporta de
+    │                       acordo com a personalidade e regras que você definiu.
+    ▼
+/tornar-publico (opcional)  Se quiser compartilhar seu trabalho publicamente,
+    │                       isso sanitiza dados pessoais antes.
+    ▼
+/ate-a-proxima              Encerramento — IA salva o estado, atualiza memória,
+                            se despede. Próxima sessão retoma daqui.
+```
 
-- All files (identity, memories, skills) live **inside your project folder**.
-- Nothing is installed in your global Claude Code configuration.
-- Nothing modifies `~/.claude/` unless you explicitly choose to sync memories there (the `/comece-por-aqui` onboarding asks before doing this).
-- Your existing Claude Code workflows, other projects, and global settings are **not affected**.
+| Comando | Quando | O que faz |
+|---------|--------|-----------|
+| `/comece-por-aqui` | Uma vez, após clonar | Te entrevista e constrói sua IA personalizada. |
+| `/iniciar` | Início de cada sessão | Carrega tudo. A IA chega pronta. |
+| `/tornar-publico` | Quando tiver trabalho pra compartilhar | Sanitiza dados pessoais antes de publicar. |
+| `/ate-a-proxima` | Final de cada sessão | Salva o estado e encerra de forma limpa. |
 
-### No conflicts with existing setups
+---
 
-- If you already have a `CLAUDE.md` in your project, the onboarding will **show you the new one and ask for approval** before overwriting.
-- Skills only activate inside this project's folder. They don't exist outside it.
-- Memory files are project-scoped. They don't leak into other projects.
+## O Que Muda no Seu Sistema
 
-### How to remove
+**Isso é importante.** Queremos que você se sinta seguro usando este framework.
 
-Want to stop using it? Delete the project folder. That's it. There's nothing to uninstall, no global state to clean up, no lingering configuration.
+### Tudo é local
 
-If you synced memories to `~/.claude/projects/`, delete that specific project folder too:
+- Todos os arquivos (identidade, memórias, skills) ficam **dentro da pasta do seu projeto**.
+- Nada é instalado na sua configuração global do Claude Code.
+- Nada modifica `~/.claude/` a menos que você escolha explicitamente sincronizar memórias lá (o `/comece-por-aqui` pergunta antes de fazer isso).
+- Seus fluxos de trabalho existentes no Claude Code, outros projetos e configurações globais **não são afetados**.
+
+### Sem conflitos com configurações existentes
+
+- Se você já tem um `CLAUDE.md` no seu projeto, o onboarding vai **mostrar o novo e pedir aprovação** antes de sobrescrever.
+- Skills só funcionam dentro da pasta deste projeto. Não existem fora dela.
+- Arquivos de memória são limitados ao projeto. Não vazam para outros projetos.
+
+### Como remover
+
+Quer parar de usar? Delete a pasta do projeto. Pronto. Não tem nada pra desinstalar, nenhum estado global pra limpar, nenhuma configuração residual.
+
+Se você sincronizou memórias para `~/.claude/projects/`, delete essa pasta específica também:
 ```bash
-rm -rf ~/.claude/projects/<your-project-folder>/memory/
+rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 ```
 
 ---
 
-## Going Deeper
+## Indo Mais Fundo
 
-- **[Skills Glossary](GLOSSARIO_DE_SKILLS.md)** — Detailed guide for every skill: what it does, what to expect, what it will never do.
-- **[Guides](guides/)** — How to design a CLAUDE.md, create skills, use the memory system.
-- **[Templates](templates/)** — Starter files to build your own setup from scratch.
-- **[Examples](examples/leland/)** — A real, working implementation (sanitized) as reference.
-- **[Contributing](CONTRIBUTING.md)** — How to contribute to this project.
+- **[Glossário de Skills](GLOSSARIO_DE_SKILLS.md)** — Guia detalhado de cada skill: o que faz, o que esperar, o que nunca fará.
+- **[Guias](guias/)** — Como criar um CLAUDE.md, criar skills, usar o sistema de memória.
+- **[Modelos](modelos/)** — Arquivos iniciais para montar sua própria configuração do zero.
+- **[Exemplos](exemplos/leland/)** — Uma implementação real e funcional (sanitizada) como referência.
+- **[Contribuindo](CONTRIBUTING.md)** — Como contribuir para este projeto.
 
-## Project Structure
+## Estrutura do Projeto
 
 <details>
-<summary>Click to expand file tree</summary>
+<summary>Clique para expandir a árvore de arquivos</summary>
 
 ```
-├── CLAUDE.md                     # Identity file (the AI's constitution)
-├── README.md                     # You are here
-├── JOURNAL.md                    # Decisions and learnings
-├── GLOSSARIO_DE_SKILLS.md        # User guide for all skills
-├── SECURITY.md                   # Security policy
-├── LICENSE                       # MIT License
-├── CONTRIBUTING.md               # How to contribute
-├── CODE_OF_CONDUCT.md            # Community standards
-├── guides/
-│   ├── claude-md.md              # How to design an effective CLAUDE.md
-│   ├── skills.md                 # How to create and organize custom skills
-│   └── memory.md                 # How to use the memory system
-├── templates/
-│   ├── CLAUDE.md                 # Starter identity template
-│   ├── skill-template/SKILL.md   # Starter skill template
-│   └── memory-template.md        # Starter memory template
-├── examples/
-│   └── leland/                   # Sanitized reference implementation
-├── .github/                      # Issue and PR templates
-├── .claude/skills/               # Skill definitions (local to project)
-├── memory/                       # Personal memory files (gitignored)
-└── exchange/                     # File exchange protocol (gitignored)
+├── CLAUDE.md                           # Arquivo de identidade (a constituição da IA)
+├── README.md                           # Você está aqui
+├── JOURNAL.md                          # Decisões e aprendizados
+├── GLOSSARIO_DE_SKILLS.md              # Guia do usuário para todas as skills
+├── SECURITY.md                         # Política de segurança
+├── LICENSE                             # Licença MIT
+├── CONTRIBUTING.md                     # Como contribuir
+├── CODE_OF_CONDUCT.md                  # Código de conduta
+├── guias/
+│   ├── claude-md.md                    # Como criar um CLAUDE.md eficaz
+│   ├── skills.md                       # Como criar e organizar skills
+│   └── memoria.md                      # Como usar o sistema de memória
+├── modelos/
+│   ├── CLAUDE.md                       # Modelo inicial de identidade
+│   ├── skill-modelo/SKILL.md           # Modelo inicial de skill
+│   └── modelo-de-memoria.md            # Modelo inicial de memória
+├── exemplos/
+│   └── leland/                         # Implementação de referência sanitizada
+├── .github/                            # Templates de issues e PRs
+├── .claude/skills/                     # Definições de skills (locais ao projeto)
+├── memoria/                            # Arquivos de memória pessoal (no gitignore)
+└── troca/                              # Protocolo de troca de arquivos (no gitignore)
 ```
 
 </details>
 
-## The Living Example
+## O Exemplo Vivo
 
-This repository is both the framework *and* a working implementation. The `CLAUDE.md` at the root defines **Leland Hawkins** — a mentor-personality AI with three contextual voices (pragmatist, provocateur, didact). The skills, guides, and journal are all actively used.
+Este repositório é o framework *e* uma implementação funcional ao mesmo tempo. O `CLAUDE.md` na raiz define **Leland Hawkins** — uma IA com personalidade de mentor e três vozes contextuais (pragmático, provocador, didático). As skills, guias e o diário são todos usados ativamente.
 
-The personal stuff (memories, exchange files) is gitignored. Sanitized versions live in [examples/leland/](examples/leland/) so you can see how it works without anyone's data being exposed.
+O conteúdo pessoal (memórias, arquivos de troca) está no gitignore. Versões sanitizadas ficam em [exemplos/leland/](exemplos/leland/) para que você veja como funciona sem que os dados de ninguém sejam expostos.
 
-## Origin
+## Origem
 
-Built by **Joc** during the development of Jiim Hawkins — a personal AI agent project. The collaboration interface emerged as a valuable artifact of its own.
+Criado por **Joc** durante o desenvolvimento do Jiim Hawkins — um projeto de agente de IA pessoal. A interface de colaboração surgiu como um artefato valioso por si só.
 
-**Repository:** [github.com/jocsaacesar/interface-de-colaboracao](https://github.com/jocsaacesar/interface-de-colaboracao)
+**Repositório:** [github.com/jocsaacesar/interface-de-colaboracao](https://github.com/jocsaacesar/interface-de-colaboracao)
 
-## Contributing
+## Contribuindo
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a PR. This project follows a [Code of Conduct](CODE_OF_CONDUCT.md).
+Contribuições são bem-vindas. Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes de enviar um PR. Este projeto segue um [Código de Conduta](CODE_OF_CONDUCT.md).
 
-## License
+## Licença
 
 [MIT](LICENSE)
 
 ---
 
-> "A tool is only as good as the hand that shapes it — and the intention behind the shaping."
+> "Uma ferramenta é tão boa quanto a mão que a molda — e a intenção por trás da moldagem."

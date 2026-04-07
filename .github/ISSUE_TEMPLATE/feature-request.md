@@ -1,18 +1,18 @@
 ---
-name: Feature Request
-about: Suggest a new guide, template, or improvement.
-title: "[Feature] "
+name: Sugestão de Funcionalidade
+about: Sugira um novo guia, modelo ou melhoria.
+title: "[Sugestão] "
 labels: enhancement
 ---
 
-## Idea
+## Ideia
 
-<!-- What do you want to see added or changed? -->
+<!-- O que você quer ver adicionado ou mudado? -->
 
-## Why
+## Por quê
 
-<!-- Why would this be useful for creators building collaboration interfaces? -->
+<!-- Por que isso seria útil para criadores construindo interfaces de colaboração? -->
 
-## Proposed approach
+## Abordagem proposta
 
-<!-- Optional: how would you implement this? -->
+<!-- Opcional: como você implementaria isso? -->
