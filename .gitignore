@@ -1,15 +1,17 @@
-# === Personal data — never commit ===
+# === Dados pessoais — nunca commitar ===
 
-# Live memory files (contain personal info about the user)
+# Arquivos de memória (contêm informações pessoais do usuário)
+memoria/
 memory/
 
-# File exchange (personal working files)
+# Troca de arquivos (arquivos de trabalho pessoais)
+troca/
 exchange/
 
-# Local Claude Code settings
+# Configurações locais do Claude Code
 .claude/settings.local.json
 
-# === OS and editor junk ===
+# === Lixo de sistema e editor ===
 .DS_Store
 Thumbs.db
 Desktop.ini

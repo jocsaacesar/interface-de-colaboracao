@@ -1,18 +1,18 @@
 ---
-name: Question
-about: Need clarification on a concept or approach.
-title: "[Question] "
+name: Pergunta
+about: Precisa de esclarecimento sobre um conceito ou abordagem.
+title: "[Pergunta] "
 labels: question
 ---
 
-## Question
+## Pergunta
 
-<!-- What do you want to understand? -->
+<!-- O que você quer entender? -->
 
-## Context
+## Contexto
 
-<!-- What are you trying to accomplish? This helps us give a better answer. -->
+<!-- O que você está tentando fazer? Isso nos ajuda a dar uma resposta melhor. -->
 
-## What I've tried
+## O que já tentei
 
-<!-- Optional: what have you already looked at or attempted? -->
+<!-- Opcional: o que você já procurou ou tentou? -->

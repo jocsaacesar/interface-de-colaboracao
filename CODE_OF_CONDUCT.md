@@ -1,41 +1,41 @@
-# Code of Conduct
+# Código de Conduta
 
-## Our Standard
+## Nosso Padrão
 
-This project exists to help creators build better collaboration with AI. We expect everyone who participates to contribute to that mission with respect and good faith.
+Este projeto existe para ajudar criadores a construir colaborações melhores com IA. Esperamos que todos que participem contribuam para essa missão com respeito e boa-fé.
 
-## Expected Behavior
+## Comportamento Esperado
 
-- **Be constructive.** Critique ideas, not people. If something doesn't work, explain why and suggest an alternative.
-- **Be clear.** Write as if the reader has no context. What's obvious to you may not be obvious to others.
-- **Be respectful.** Disagreement is fine. Condescension, insults, and dismissiveness are not.
-- **Be honest.** If you don't know something, say so. If you used AI to help write, say so.
-- **Share knowledge generously.** The point of this project is to help others. Gatekeeping defeats the purpose.
+- **Seja construtivo.** Critique ideias, não pessoas. Se algo não funciona, explique por quê e sugira uma alternativa.
+- **Seja claro.** Escreva como se o leitor não tivesse contexto. O que é óbvio pra você pode não ser pra outros.
+- **Seja respeitoso.** Discordância é natural. Condescendência, insultos e desdém não são.
+- **Seja honesto.** Se não sabe algo, diga. Se usou IA para ajudar a escrever, diga.
+- **Compartilhe conhecimento com generosidade.** O objetivo deste projeto é ajudar os outros. Guardar conhecimento derrota o propósito.
 
-## Unacceptable Behavior
+## Comportamento Inaceitável
 
-- Personal attacks, harassment, or discriminatory language.
-- Publishing others' personal information without consent.
-- Spamming, trolling, or deliberately derailing discussions.
-- Submitting AI-generated content without review or disclosure.
-- Promoting commercial products or services disguised as contributions.
+- Ataques pessoais, assédio ou linguagem discriminatória.
+- Publicar informações pessoais de outros sem consentimento.
+- Spam, provocações destrutivas ou desviar discussões deliberadamente.
+- Enviar conteúdo gerado por IA sem revisão ou sem declarar.
+- Promover produtos ou serviços comerciais disfarçados de contribuições.
 
-## Enforcement
+## Aplicação
 
-Violations will be addressed by the project maintainers. Responses may include:
+Violações serão tratadas pelos mantenedores do projeto. As respostas podem incluir:
 
-1. **Warning** — A private message explaining the issue.
-2. **Temporary ban** — Removal from participation for a defined period.
-3. **Permanent ban** — Permanent removal from the project.
+1. **Aviso** — Uma mensagem privada explicando o problema.
+2. **Suspensão temporária** — Remoção da participação por um período definido.
+3. **Banimento permanente** — Remoção permanente do projeto.
 
-## Reporting
+## Denúncias
 
-If you experience or witness unacceptable behavior, open an issue or contact the maintainers directly. Reports will be handled confidentially.
+Se você presenciar ou for alvo de comportamento inaceitável, abra uma issue ou entre em contato diretamente com os mantenedores. Denúncias serão tratadas com confidencialidade.
 
-## Scope
+## Escopo
 
-This code of conduct applies to all project spaces — issues, pull requests, discussions, and any other channels associated with this project.
+Este código de conduta se aplica a todos os espaços do projeto — issues, pull requests, discussões e quaisquer outros canais associados a este projeto.
 
 ---
 
-Adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1.
+Adaptado do [Contributor Covenant](https://www.contributor-covenant.org/), versão 2.1.

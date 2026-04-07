@@ -1,37 +1,37 @@
-# Security Policy
+# Política de Segurança
 
-## Scope
+## Escopo
 
-This project is a documentation framework — it contains no executable code, no dependencies, and no deployed services. The primary security concern is **accidental exposure of personal data** through memory files, exchange files, or misconfigured `.gitignore`.
+Este projeto é um framework de documentação — não contém código executável, dependências ou serviços em produção. A principal preocupação de segurança é a **exposição acidental de dados pessoais** por meio de arquivos de memória, arquivos de troca ou `.gitignore` mal configurado.
 
-## Reporting a Vulnerability
+## Reportando uma Vulnerabilidade
 
-If you discover a security issue — such as personal data exposed in a public file, a gap in `.gitignore` coverage, or a skill that could leak sensitive information — please report it privately:
+Se você descobrir um problema de segurança — como dados pessoais expostos em um arquivo público, uma falha na cobertura do `.gitignore`, ou uma skill que possa vazar informações sensíveis — reporte de forma privada:
 
-1. Go to the **Security** tab of this repository.
-2. Click **Report a vulnerability**.
-3. Describe what you found and where.
+1. Vá até a aba **Security** deste repositório.
+2. Clique em **Report a vulnerability**.
+3. Descreva o que encontrou e onde.
 
-We will respond within 48 hours and address the issue as quickly as possible.
+Responderemos em até 48 horas e resolveremos o problema o mais rápido possível.
 
-## What Counts as a Security Issue
+## O Que Conta Como Problema de Segurança
 
-- Personal data (names, emails, credentials) visible in any public file.
-- A `.gitignore` rule that fails to protect `memory/`, `exchange/`, or local settings.
-- A skill definition that could inadvertently publish private content without user confirmation.
-- Any file in `examples/` that contains identifiable personal information.
+- Dados pessoais (nomes, emails, credenciais) visíveis em qualquer arquivo público.
+- Uma regra do `.gitignore` que falha em proteger `memoria/`, `troca/` ou configurações locais.
+- Uma definição de skill que possa publicar conteúdo privado sem confirmação do usuário.
+- Qualquer arquivo em `exemplos/` que contenha informações pessoais identificáveis.
 
-## What Does NOT Count
+## O Que NÃO Conta
 
-- Typos, formatting issues, or broken links — use a [Bug Report](../../issues/new?template=bug-report.md) instead.
-- Feature suggestions — use a [Feature Request](../../issues/new?template=feature-request.md) instead.
+- Erros de digitação, formatação ou links quebrados — use um [Relatório de Bug](../../issues/new?template=bug-report.md).
+- Sugestões de funcionalidades — use uma [Sugestão de Funcionalidade](../../issues/new?template=feature-request.md).
 
-## Design Principles
+## Princípios de Design
 
-This project follows a strict public/private separation:
+Este projeto segue uma separação estrita entre público e privado:
 
-- **Public:** guides, templates, examples, skills, CLAUDE.md, JOURNAL.md
-- **Private (gitignored):** memory/, exchange/, .claude/settings.local.json
-- **Sanitization:** The `/tornar-publico` skill verifies protection before every publish and never commits without explicit user approval.
+- **Público:** guias, modelos, exemplos, skills, CLAUDE.md, JOURNAL.md
+- **Privado (no gitignore):** memoria/, troca/, .claude/settings.local.json
+- **Sanitização:** A skill `/tornar-publico` verifica a proteção antes de cada publicação e nunca faz commit sem aprovação explícita do usuário.
 
-If you believe any of these boundaries can be bypassed, that's a security issue worth reporting.
+Se você acredita que alguma dessas fronteiras pode ser contornada, isso é um problema de segurança que vale reportar.

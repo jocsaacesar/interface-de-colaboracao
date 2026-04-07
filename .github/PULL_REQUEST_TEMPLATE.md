@@ -1,22 +1,22 @@
-## What this PR does
+## O que este PR faz
 
-<!-- Describe the change in 1-3 sentences. -->
+<!-- Descreva a mudança em 1-3 frases. -->
 
-## Why
+## Por quê
 
-<!-- Why is this change needed? Link to an issue if applicable. -->
+<!-- Por que essa mudança é necessária? Linke uma issue se aplicável. -->
 
-## Type of change
+## Tipo de mudança
 
-- [ ] New guide or documentation
-- [ ] Template improvement
-- [ ] Correction or fix
-- [ ] New example
-- [ ] Other (describe below)
+- [ ] Novo guia ou documentação
+- [ ] Melhoria em modelo
+- [ ] Correção
+- [ ] Novo exemplo
+- [ ] Outro (descreva abaixo)
 
 ## Checklist
 
-- [ ] I've read [CONTRIBUTING.md](CONTRIBUTING.md)
-- [ ] All content is in English
-- [ ] No personal data is included (memory files, personal configs)
-- [ ] If AI-assisted, I've reviewed and edited the content thoroughly
+- [ ] Li o [CONTRIBUTING.md](CONTRIBUTING.md)
+- [ ] Todo conteúdo está em português (BR)
+- [ ] Nenhum dado pessoal incluído (arquivos de memória, configs pessoais)
+- [ ] Se usei IA para ajudar, revisei e editei o conteúdo cuidadosamente

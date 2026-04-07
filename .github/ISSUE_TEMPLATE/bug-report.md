@@ -1,22 +1,22 @@
 ---
-name: Bug Report
-about: Something in the guides or templates is incorrect or misleading.
+name: Relatório de Bug
+about: Algo nos guias ou modelos está incorreto ou confuso.
 title: "[Bug] "
 labels: bug
 ---
 
-## What's wrong
+## O que está errado
 
-<!-- Describe the error or misleading information. -->
+<!-- Descreva o erro ou informação confusa. -->
 
-## Where
+## Onde
 
-<!-- Link to the file and section (e.g., guides/memory.md, "Memory Types" section). -->
+<!-- Link para o arquivo e seção (ex.: guias/memoria.md, seção "Tipos de Memória"). -->
 
-## Expected
+## Esperado
 
-<!-- What should it say or do instead? -->
+<!-- O que deveria dizer ou fazer? -->
 
-## Additional context
+## Contexto adicional
 
-<!-- Any extra context that helps understand the issue. -->
+<!-- Qualquer contexto extra que ajude a entender o problema. -->

@@ -1,238 +1,238 @@
-# Skills Glossary
+# Glossário de Skills
 
-A practical reference for every skill available in the Claude Collaboration Interface. Each entry explains what the skill does, when to use it, what to expect, and what it will never do.
+Uma referência prática para cada skill disponível na Interface de Colaboração com Claude. Cada entrada explica o que a skill faz, quando usar, o que esperar e o que ela nunca fará.
 
 ---
 
-## How Skills Work
+## Como as Skills Funcionam
 
-Skills are custom slash commands. You type `/<skill-name>` in a Claude Code conversation, and it executes a multi-step workflow defined in `.claude/skills/<skill-name>/SKILL.md`.
+Skills são comandos personalizados. Você digita `/<nome-da-skill>` em uma conversa no Claude Code, e ela executa um fluxo de trabalho com múltiplas etapas, definido em `.claude/skills/<nome-da-skill>/SKILL.md`.
 
-Skills are **not magic** — they're structured instructions that make the AI behave consistently. Think of them as recipes: same ingredients, same steps, same result every time.
+Skills **não são mágica** — são instruções estruturadas que fazem a IA se comportar de forma consistente. Pense nelas como receitas: mesmos ingredientes, mesmos passos, mesmo resultado toda vez.
 
-### Key principles
+### Princípios-chave
 
-- **All skills in this repo are local to the project.** They live in `.claude/skills/` inside the project folder. They do NOT modify your global `~/.claude/` configuration. Your existing Claude Code setup is not affected.
-- **Claude Code auto-discovers skills** from the `.claude/skills/` folder when it opens a project. You don't need to install or register them — they're available immediately.
-- **`/iniciar` re-loads skills** at the start of each session, ensuring they're fresh in the conversation context. But the very first skill — `/comece-por-aqui` — works without `/iniciar` because it's designed to run in a blank environment.
-- **Each skill has explicit trigger rules.** Some run automatically (like `/iniciar` on greeting), others only fire when you type the exact command.
-- **Skills don't stack.** Run one at a time. Wait for it to finish before calling another.
-- **You're always in control.** No skill commits, publishes, or deletes anything without your explicit approval.
-- **Want a skill globally?** If you want `/iniciar` available in every project (not just this one), you can manually copy it to `~/.claude/skills/iniciar/`. This is entirely optional and never done automatically.
+- **Todas as skills deste repositório são locais ao projeto.** Elas ficam em `.claude/skills/` dentro da pasta do projeto. NÃO modificam sua configuração global `~/.claude/`. Sua configuração existente do Claude Code não é afetada.
+- **O Claude Code auto-descobre skills** da pasta `.claude/skills/` quando abre um projeto. Você não precisa instalar nem registrar nada — elas ficam disponíveis imediatamente.
+- **`/iniciar` recarrega as skills** no início de cada sessão, garantindo que estejam frescas no contexto da conversa. Mas a primeira skill — `/comece-por-aqui` — funciona sem `/iniciar` porque foi projetada para rodar em um ambiente zerado.
+- **Cada skill tem regras explícitas de ativação.** Algumas rodam automaticamente (como `/iniciar` ao cumprimentar), outras só disparam quando você digita o comando exato.
+- **Skills não acumulam.** Rode uma de cada vez. Espere terminar antes de chamar outra.
+- **Você está sempre no controle.** Nenhuma skill faz commit, publica ou deleta nada sem sua aprovação explícita.
+- **Quer uma skill global?** Se quiser o `/iniciar` disponível em qualquer projeto (não apenas neste), copie manualmente para `~/.claude/skills/iniciar/`. Isso é totalmente opcional e nunca é feito automaticamente.
 
 ---
 
 ## /comece-por-aqui
 
-> **Your first command. Run once after cloning the repository. No prior setup needed.**
+> **Seu primeiro comando. Rode uma vez após clonar o repositório. Nenhuma configuração prévia necessária.**
 
-### Purpose
+### Propósito
 
-Builds your entire personalized collaboration interface from scratch — identity, memories, workspace — through a guided conversation.
+Constrói toda a sua interface de colaboração personalizada do zero — identidade, memórias, workspace — por meio de uma conversa guiada.
 
-### When to use
+### Quando usar
 
-- Right after cloning the repository for the first time.
-- If you want to redo your setup from scratch.
+- Logo após clonar o repositório pela primeira vez.
+- Se quiser refazer sua configuração do zero.
 
-### Bootstrap note
+### Nota sobre bootstrap
 
-This is the **only skill that runs without `/iniciar`**. It's designed to work in a completely blank environment — no CLAUDE.md, no memories, no prior context. Claude Code auto-discovers it from the `.claude/skills/` folder. You clone, open Claude Code, type `/comece-por-aqui`, and it just works.
+Esta é a **única skill que roda sem `/iniciar`**. Ela foi projetada para funcionar em um ambiente completamente vazio — sem CLAUDE.md, sem memórias, sem contexto prévio. O Claude Code a descobre automaticamente da pasta `.claude/skills/`. Você clona, abre o Claude Code, digita `/comece-por-aqui`, e funciona.
 
-### What happens
+### O que acontece
 
-1. The AI greets you and explains what's about to happen (~5 minutes).
-2. It asks **five questions**, one at a time:
-   - **Who are you?** Your role, background, what you do.
-   - **What are you building?** Your project, goals, motivation.
-   - **How do you like to work?** Your collaboration style preference.
-   - **What should the AI avoid?** Things that annoy you about AI interactions.
-   - **Name and language?** What to call your AI, and what language for conversations.
-3. Based on your answers, it generates a custom `CLAUDE.md` and **shows it to you for approval**.
-4. After you approve, it creates your initial memory files and workspace folders.
-5. It greets you for the first time **in character** — as your newly created AI.
+1. A IA te cumprimenta e explica o que vai acontecer (~5 minutos).
+2. Ela faz **cinco perguntas**, uma de cada vez:
+   - **Quem é você?** Seu papel, experiência, o que faz.
+   - **O que está construindo?** Seu projeto, objetivos, motivação.
+   - **Como gosta de trabalhar?** Seu estilo de colaboração preferido.
+   - **O que a IA deve evitar?** Coisas que te irritam em interações com IA.
+   - **Nome e idioma?** Como chamar sua IA e qual idioma para conversas.
+3. Com base nas respostas, ela gera um `CLAUDE.md` personalizado e **mostra pra você aprovar**.
+4. Após aprovação, cria seus arquivos de memória iniciais e pastas do workspace.
+5. Te cumprimenta pela primeira vez **no personagem** — como sua IA recém-criada.
 
-### What it will never do
+### O que ela nunca fará
 
-- Dump all questions at once. It's a conversation, one question at a time.
-- Write files without showing you first. You approve the CLAUDE.md before it's saved.
-- Force a specific personality model. Your AI is shaped by your answers, not by a template.
+- Despejar todas as perguntas de uma vez. É uma conversa, uma pergunta por vez.
+- Gravar arquivos sem mostrar antes. Você aprova o CLAUDE.md antes de ele ser salvo.
+- Forçar um modelo de personalidade específico. Sua IA é moldada pelas suas respostas, não por um template.
 
-### After it's done
+### Depois que terminar
 
-You're set up. From now on, start every session with `/iniciar`.
+Você está configurado. A partir de agora, comece cada sessão com `/iniciar`.
 
 ---
 
 ## /iniciar
 
-> **Start of every session. The first thing you type.**
+> **Início de cada sessão. A primeira coisa que você digita.**
 
-### Purpose
+### Propósito
 
-Loads everything the AI needs to be fully present: identity, memories, skills, and inbox. The AI arrives ready to work, not blank.
+Carrega tudo que a IA precisa para estar totalmente presente: identidade, memórias, skills e caixa de entrada. A IA chega pronta pra trabalhar, não em branco.
 
-### When to use
+### Quando usar
 
-- Every time you open a new conversation.
-- You can also just say "bom dia", "let's go", or any greeting — the AI recognizes the intent.
+- Toda vez que abrir uma nova conversa.
+- Você também pode simplesmente dizer "bom dia", "vamos lá" ou qualquer cumprimento — a IA reconhece a intenção.
 
-### What happens
+### O que acontece
 
-1. **Loads identity** — Reads `CLAUDE.md`. Internalizes personality, rules, and conventions.
-2. **Loads memories** — Reads every memory file from the index. Applies them silently.
-3. **Loads skills** — Discovers and internalizes all available skills for the session.
-4. **Checks inbox** — Looks in `exchange/inbox/` for files you may have dropped. Mentions them if found.
-5. **Greets you** — A short, natural greeting in character. Not a system report.
+1. **Carrega identidade** — Lê o `CLAUDE.md`. Internaliza personalidade, regras e convenções.
+2. **Carrega memórias** — Lê todos os arquivos de memória do índice. Aplica silenciosamente.
+3. **Carrega skills** — Descobre e internaliza todas as skills disponíveis para a sessão.
+4. **Verifica entrada** — Procura na `troca/entrada/` por arquivos que você possa ter deixado. Menciona se encontrar.
+5. **Te cumprimenta** — Um cumprimento curto e natural, no personagem. Não um relatório de sistema.
 
-### What it will never do
+### O que ela nunca fará
 
-- Recite your memories back to you. It uses them silently.
-- List all loaded skills. It knows them — you don't need a boot log.
-- Skip loading. Even if you just want a quick question, `/iniciar` ensures consistency.
+- Recitar suas memórias de volta. Ela as usa silenciosamente.
+- Listar todas as skills carregadas. Ela as conhece — você não precisa de um log de inicialização.
+- Pular o carregamento. Mesmo pra uma pergunta rápida, `/iniciar` garante consistência.
 
-### What it looks like
+### Como é na prática
 
-> "Joc. Inbox empty, everything loaded. What are we working on?"
+> "Joc. Caixa de entrada vazia, tudo carregado. No que vamos trabalhar?"
 
-Or if there's something new:
+Ou se tiver algo novo:
 
-> "Joc. I see you dropped a file in the inbox — already looked at it. Where do we start?"
+> "Joc. Vi que você deixou um arquivo na entrada — já dei uma olhada. Por onde começamos?"
 
 ---
 
 ## /tornar-publico
 
-> **Publish your work. Run when you have something worth sharing.**
+> **Publique seu trabalho. Rode quando tiver algo que valha compartilhar.**
 
-### Purpose
+### Propósito
 
-Takes session work, separates personal from public, sanitizes sensitive content, and prepares everything for the public repository. Nothing gets committed without your approval.
+Pega o trabalho da sessão, separa pessoal de público, sanitiza conteúdo sensível e prepara tudo para o repositório público. Nada é commitado sem sua aprovação.
 
-### When to use
+### Quando usar
 
-- When you've created or modified content during a session that has value for other users.
-- Typically run near the end of a session, before `/ate-a-proxima`.
-- **Manual trigger only** — type `/tornar-publico` explicitly.
+- Quando você criou ou modificou conteúdo durante uma sessão que tem valor para outros usuários.
+- Normalmente rodada perto do final da sessão, antes do `/ate-a-proxima`.
+- **Apenas por comando manual** — digite `/tornar-publico` explicitamente.
 
-### What happens
+### O que acontece
 
-1. **Audits** — Identifies every file created or modified during the session.
-2. **Classifies** — Puts each file in one of three buckets:
-   - *Already public* — guides, templates, README, JOURNAL.
-   - *Personal, has public value* — memories, skills, deliverables that teach something.
-   - *Personal, no public value* — drafts, configs, ephemeral items.
-3. **Sanitizes** — Creates clean versions of valuable personal content:
-   - Real names → "the user" or "the project owner".
-   - Emails, company names, identifying URLs → removed.
-   - Structure, lessons, and format → preserved.
-4. **Updates JOURNAL.md** — Adds new decision entries for the session.
-5. **Verifies** — Checks that `.gitignore` covers all personal folders. Asks: "If someone clones this repo, can they identify the user?"
-6. **Reports** — Shows you exactly what will be published, what was sanitized, and what was skipped.
-7. **Waits** — Does nothing until you say "go ahead."
+1. **Audita** — Identifica cada arquivo criado ou modificado durante a sessão.
+2. **Classifica** — Coloca cada arquivo em uma de três categorias:
+   - *Já público* — guias, modelos, README, JOURNAL.
+   - *Pessoal, com valor público* — memórias, skills, entregas que ensinam algo.
+   - *Pessoal, sem valor público* — rascunhos, configurações, itens temporários.
+3. **Sanitiza** — Cria versões limpas do conteúdo pessoal valioso:
+   - Nomes reais → "o usuário" ou "o dono do projeto".
+   - Emails, nomes de empresas, URLs identificáveis → removidos.
+   - Estrutura, lições e formato → preservados.
+4. **Atualiza o JOURNAL.md** — Adiciona novas entradas de decisão da sessão.
+5. **Verifica** — Checa se o `.gitignore` cobre todas as pastas pessoais. Pergunta: "Se alguém clonar este repo, consegue identificar o usuário?"
+6. **Reporta** — Mostra exatamente o que será publicado, o que foi sanitizado e o que foi pulado.
+7. **Espera** — Não faz nada até você dizer "manda."
 
-### What it will never do
+### O que ela nunca fará
 
-- Commit without your approval. It always shows and waits.
-- Publish personal data. When in doubt, it skips and asks you.
-- Overwrite your original files. Sanitized versions go to `examples/`, originals stay untouched.
-- Sanitize in a way that destroys the lesson. If cleaning a file makes it useless, it skips entirely.
+- Commitar sem sua aprovação. Sempre mostra e espera.
+- Publicar dados pessoais. Na dúvida, pula e pergunta.
+- Sobrescrever seus arquivos originais. Versões sanitizadas vão para `exemplos/`, originais ficam intocados.
+- Sanitizar de um jeito que destrua a lição. Se limpar um arquivo o torna inútil, pula inteiramente.
 
-### What it looks like
+### Como é na prática
 
 ```
-## Ready to publish
+## Pronto para publicar
 
-### New/updated public files:
-- guides/new-guide.md
-- JOURNAL.md (2 new entries)
+### Arquivos públicos novos/atualizados:
+- guias/novo-guia.md
+- JOURNAL.md (2 novas entradas)
 
-### Sanitized from personal:
-- memory/project_goals.md → examples/leland/memory/project_goals.md
+### Sanitizado do pessoal:
+- memoria/objetivos_projeto.md → exemplos/leland/memoria/objetivos_projeto.md
 
-### Skipped (personal, no public value):
-- exchange/outbox/drafts/rough-notes.md (draft, not ready)
+### Pulados (pessoal, sem valor público):
+- troca/saida/rascunhos/notas-brutas.md (rascunho, não está pronto)
 
-### Protection verified:
-- .gitignore covers: memory/, exchange/, .claude/settings.local.json
+### Proteção verificada:
+- .gitignore cobre: memoria/, troca/, .claude/settings.local.json
 
-Confirm to proceed?
+Confirma para prosseguir?
 ```
 
 ---
 
 ## /ate-a-proxima
 
-> **End of session. The last thing you type.**
+> **Fim da sessão. A última coisa que você digita.**
 
-### Purpose
+### Propósito
 
-Closes the session cleanly: audits what changed, updates `CLAUDE.md` to reflect the current state, syncs all memories, and says goodbye like a mentor — not like a machine shutting down.
+Encerra a sessão de forma limpa: audita o que mudou, atualiza o `CLAUDE.md` para refletir o estado atual, sincroniza todas as memórias e se despede como um mentor — não como uma máquina desligando.
 
-### When to use
+### Quando usar
 
-- At the end of a work session.
-- **Manual trigger only** — type `/ate-a-proxima` explicitly.
-- Never fires from implicit signals. If you say "bye" or "that's all for today", the AI just says goodbye naturally without running the full wrap-up.
+- No final de uma sessão de trabalho.
+- **Apenas por comando manual** — digite `/ate-a-proxima` explicitamente.
+- Nunca dispara por sinais implícitos. Se você disser "tchau" ou "por hoje é isso", a IA apenas se despede naturalmente sem rodar o encerramento completo.
 
-### What happens
+### O que acontece
 
-1. **Audits** — Reviews all files created, modified, or deleted during the session.
-2. **Updates CLAUDE.md** — Syncs the identity file with the current project state. Only changes what actually changed — surgical, not wholesale.
-3. **Syncs memories** — Ensures all memory files are up to date and mirrored between the project folder and the system folder.
-4. **Farewell** — A brief, warm closing that acknowledges what was accomplished and hints at what's next.
+1. **Audita** — Revisa todos os arquivos criados, modificados ou deletados durante a sessão.
+2. **Atualiza o CLAUDE.md** — Sincroniza o arquivo de identidade com o estado atual do projeto. Muda apenas o que realmente mudou — cirúrgico, não por atacado.
+3. **Sincroniza memórias** — Garante que todos os arquivos de memória estejam atualizados e espelhados entre a pasta do projeto e a pasta do sistema.
+4. **Despedida** — Um encerramento breve e caloroso que reconhece o que foi realizado e dá uma dica do que vem a seguir.
 
-### What it will never do
+### O que ela nunca fará
 
-- Fire automatically. You must type the command.
-- Write a changelog. CLAUDE.md is a living document, not a log.
-- Bloat CLAUDE.md. Only updates what actually changed in this session.
-- Give a cold, robotic goodbye. The farewell comes from the AI's personality.
+- Disparar automaticamente. Você precisa digitar o comando.
+- Escrever um changelog. CLAUDE.md é um documento vivo, não um log.
+- Inflar o CLAUDE.md. Só atualiza o que realmente mudou nesta sessão.
+- Dar um tchau frio e robótico. A despedida vem da personalidade da IA.
 
-### What it looks like
+### Como é na prática
 
-> "Good session. We built the skill glossary and tightened the onboarding flow. Next time, we push to GitHub. Rest up."
+> "Boa sessão. Montamos o glossário de skills e ajustamos o fluxo de onboarding. Na próxima, subimos pro GitHub. Descansa."
 
 ---
 
-## Skill Lifecycle Summary
+## Resumo do Ciclo de Vida das Skills
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│   First time:    /comece-por-aqui                           │
-│                  (interview → identity → memories → done)   │
+│   Primeira vez:  /comece-por-aqui                           │
+│                  (entrevista → identidade → memórias → ok)  │
 │                                                             │
-│   Every session: /iniciar                                   │
-│                  (load identity → memories → skills → greet)│
+│   Cada sessão:   /iniciar                                   │
+│                  (identidade → memórias → skills → saudação)│
 │                       │                                     │
 │                       ▼                                     │
-│                  [  your work  ]                             │
+│                  [ seu trabalho ]                            │
 │                       │                                     │
 │                       ▼                                     │
-│                  /tornar-publico  (optional)                 │
-│                  (audit → sanitize → publish → confirm)     │
+│                  /tornar-publico  (opcional)                 │
+│                  (auditoria → sanitizar → publicar → ok)    │
 │                       │                                     │
 │                       ▼                                     │
 │                  /ate-a-proxima                              │
-│                  (audit → update CLAUDE.md → sync → bye)    │
+│                  (auditoria → CLAUDE.md → sinc → tchau)     │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Creating Your Own Skills
+## Criando Suas Próprias Skills
 
-Once you're comfortable with the built-in skills, you can create your own. See:
+Quando estiver confortável com as skills embutidas, você pode criar as suas. Veja:
 
-- **[guides/skills.md](guides/skills.md)** — Full guide on skill design.
-- **[templates/skill-template/SKILL.md](templates/skill-template/SKILL.md)** — Starter template.
+- **[guias/skills.md](guias/skills.md)** — Guia completo sobre design de skills.
+- **[modelos/skill-modelo/SKILL.md](modelos/skill-modelo/SKILL.md)** — Modelo inicial.
 
-Good candidates for new skills:
-- Code review with specific criteria for your project.
-- Planning workflows (break a task into steps before executing).
-- Deployment checklists.
-- Any multi-step process you repeat and want to be consistent.
+Boas candidatas para novas skills:
+- Revisão de código com critérios específicos do seu projeto.
+- Fluxos de planejamento (dividir uma tarefa em etapas antes de executar).
+- Checklists de deploy.
+- Qualquer processo de múltiplas etapas que você repita e queira que seja consistente.
 
-The rule of thumb: **if you've explained the same process to the AI three times, it's a skill.**
+A regra de ouro: **se você explicou o mesmo processo pra IA três vezes, é uma skill.**

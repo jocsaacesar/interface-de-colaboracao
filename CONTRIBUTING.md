@@ -1,58 +1,58 @@
-# Contributing
+# Contribuindo
 
-Thank you for your interest in improving the Claude Collaboration Interface. This project exists to help creators build deeper, more intentional AI collaborations — and contributions that serve that mission are welcome.
+Obrigado pelo interesse em melhorar a Interface de Colaboração com Claude. Este projeto existe para ajudar criadores a construir colaborações mais profundas e intencionais com IA — e contribuições que sirvam a essa missão são bem-vindas.
 
-## Before You Contribute
+## Antes de Contribuir
 
-1. **Read the [README](README.md)** to understand what this project is and isn't.
-2. **Read the [guides](guides/)** to understand the core concepts (CLAUDE.md, memory, skills).
-3. **Check existing [issues](../../issues)** to see if your idea or bug has already been discussed.
+1. **Leia o [README](README.md)** para entender o que este projeto é e o que não é.
+2. **Leia os [guias](guias/)** para entender os conceitos centrais (CLAUDE.md, memória, skills).
+3. **Verifique as [issues existentes](../../issues)** para ver se sua ideia ou bug já foi discutido.
 
-## What We Accept
+## O Que Aceitamos
 
-### Yes
+### Sim
 
-- **New guides** — Practical guides on topics not yet covered (e.g., multi-project setups, team collaboration patterns).
-- **Template improvements** — Making starter templates clearer or more useful.
-- **Corrections** — Fixing errors, typos, or misleading information.
-- **Examples** — Real-world examples of collaboration interfaces (sanitized — no personal data).
-- **Translations** — Translating guides into other languages (open an issue first to coordinate).
+- **Novos guias** — Guias práticos sobre temas ainda não cobertos (ex.: configurações multi-projeto, padrões de colaboração em equipe).
+- **Melhorias nos modelos** — Tornar os modelos iniciais mais claros ou úteis.
+- **Correções** — Corrigir erros, digitação ou informações enganosas.
+- **Exemplos** — Exemplos reais de interfaces de colaboração (sanitizados — sem dados pessoais).
+- **Traduções** — Traduzir guias para outros idiomas (abra uma issue antes para coordenar).
 
-### No
+### Não
 
-- **Prompt dumps** — Lists of "useful prompts" without structure or explanation.
-- **AI-generated filler** — Content that reads like it was generated without human review.
-- **Tool-specific configs** — This project is about Claude Code. Configs for other tools belong elsewhere.
-- **Personal memory files** — Never include real memory files with personal information.
+- **Listas de prompts** — Listas de "prompts úteis" sem estrutura ou explicação.
+- **Conteúdo gerado por IA sem revisão** — Conteúdo que parece ter sido gerado sem revisão humana.
+- **Configurações de outras ferramentas** — Este projeto é sobre Claude Code. Configurações de outras ferramentas pertencem a outro lugar.
+- **Arquivos de memória pessoais** — Nunca inclua arquivos de memória reais com informações pessoais.
 
-## How to Contribute
+## Como Contribuir
 
-### Reporting Issues
+### Reportando Problemas
 
-Use the appropriate issue template:
-- **Bug report** — Something in the guides or templates is wrong.
-- **Feature request** — An idea for a new guide, template, or improvement.
-- **Question** — Need clarification on a concept or approach.
+Use o template de issue apropriado:
+- **Relatório de bug** — Algo nos guias ou modelos está errado.
+- **Sugestão de funcionalidade** — Uma ideia para um novo guia, modelo ou melhoria.
+- **Pergunta** — Precisa de esclarecimento sobre um conceito ou abordagem.
 
-### Submitting Changes
+### Enviando Alterações
 
-1. **Fork** the repository.
-2. **Create a branch** with a descriptive name: `add-guide-team-patterns`, `fix-template-typo`.
-3. **Make your changes** following the conventions below.
-4. **Open a Pull Request** using the PR template. Explain *what* and *why*.
+1. **Faça um fork** do repositório.
+2. **Crie uma branch** com nome descritivo: `adicionar-guia-padroes-equipe`, `corrigir-digitacao-modelo`.
+3. **Faça suas alterações** seguindo as convenções abaixo.
+4. **Abra um Pull Request** usando o template de PR. Explique *o que* e *por quê*.
 
-### Conventions
+### Convenções
 
-- **Language:** All files, code, and documentation in **English**.
-- **File format:** Markdown, following existing structure and heading styles.
-- **Naming:** Lowercase, hyphens for spaces (`my-new-guide.md`, not `MyNewGuide.md`).
-- **Commits:** Short, descriptive messages. One logical change per commit.
-- **No generated content:** If you use AI to help write, review and edit it thoroughly. The bar is human-quality writing that teaches effectively.
+- **Idioma:** Todos os arquivos e documentação em **português (BR)**. Termos técnicos em inglês são aceitos quando não há tradução natural (ex.: skill, Claude Code, CLAUDE.md).
+- **Formato:** Markdown, seguindo a estrutura e estilos de cabeçalho existentes.
+- **Nomes de arquivo:** Minúsculas, hífens para espaços (`meu-novo-guia.md`, não `MeuNovoGuia.md`).
+- **Commits:** Mensagens curtas e descritivas. Uma mudança lógica por commit.
+- **Sem conteúdo gerado por IA:** Se usar IA para ajudar a escrever, revise e edite cuidadosamente. O padrão é escrita de qualidade humana que ensine de forma eficaz.
 
-## Code of Conduct
+## Código de Conduta
 
-By participating in this project, you agree to abide by the [Code of Conduct](CODE_OF_CONDUCT.md). Be respectful, constructive, and focused on helping creators.
+Ao participar deste projeto, você concorda em seguir o [Código de Conduta](CODE_OF_CONDUCT.md). Seja respeitoso, construtivo e focado em ajudar criadores.
 
-## Questions?
+## Dúvidas?
 
-Open an issue with the **Question** template. There are no stupid questions — only unexplored ideas.
+Abra uma issue com o template de **Pergunta**. Não existem perguntas bobas — apenas ideias inexploradas.
