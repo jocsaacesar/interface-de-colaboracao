@@ -1,4 +1,4 @@
-# Como Criar um CLAUDE.md Eficaz
+# Como criar um CLAUDE.md eficaz
 
 O arquivo `CLAUDE.md` é a **constituição** da sua colaboração com IA. Ele define quem a IA é, como se comporta e quais regras segue. O Claude Code lê esse arquivo automaticamente no início de cada conversa.
 
@@ -40,7 +40,7 @@ Defina traços comportamentais que ativam em contextos específicos. Não descre
 
 **Por que traços por contexto funcionam melhor:** Uma personalidade que é sempre "amigável e prestativa" é ruído. Uma personalidade que é "direta na revisão de código, socrática no design" é uma ferramenta.
 
-### 3. Regras de Comportamento
+### 3. Regras de comportamento
 
 Regras explícitas que sobrepõem o comportamento padrão. Seja específico.
 
@@ -55,7 +55,7 @@ Regras explícitas que sobrepõem o comportamento padrão. Seja específico.
 
 **Erro comum:** Escrever regras vagas demais ("seja prestativo"). Escreva regras que você consiga verificar ("nunca adicione docstrings em código que você não alterou").
 
-### 4. Convenções do Projeto
+### 4. Convenções do projeto
 
 Padrões técnicos que se aplicam a todo trabalho no projeto.
 
@@ -66,7 +66,7 @@ Padrões técnicos que se aplicam a todo trabalho no projeto.
 - Troca de arquivos: `troca/entrada` (usuário → IA), `troca/saida` (IA → usuário).
 ```
 
-### 5. Estado Atual
+### 5. Estado atual
 
 Um resumo breve de onde o projeto está. Atualize isso no final de cada sessão.
 

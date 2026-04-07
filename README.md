@@ -119,6 +119,28 @@ Nenhuma configuração prévia. Nenhuma instalação. As skills já estão na pa
 
 ---
 
+## Já tem um projeto rodando?
+
+Se você não está começando do zero — se já tem um repositório com código, `.gitignore`, `README.md` e tudo mais — **não clone este repositório por cima**.
+
+O framework foi pensado pra coexistir com projetos existentes, mas precisa de um cuidado que um `git clone` direto não dá: separar o que é do framework do que é do seu projeto.
+
+Na prática, você só precisa de **duas coisas**:
+1. A pasta `.claude/skills/` (as skills)
+2. Algumas linhas no seu `.gitignore` (pra proteger dados pessoais)
+
+Todo o resto — README, LICENSE, guias, exemplos — é documentação do framework e não vai pro seu projeto.
+
+**[Guia completo de instalação em projeto existente →](guias/instalacao-projeto-existente.md)**
+
+O guia cobre:
+- Exatamente o que copiar e o que ignorar
+- Como fazer merge no `.gitignore` sem sobrescrever
+- O que fazer se você já tem um `CLAUDE.md`
+- Como desinstalar sem deixar resíduo
+
+---
+
 ## O ritmo de uma sessão
 
 Uma vez configurado, cada sessão de trabalho segue um ritmo natural — como abrir e fechar um caderno:
@@ -225,11 +247,12 @@ A resposta aqui é simples.
 - Nada modifica outros projetos, outros workflows, outras configurações.
 - O Claude Code descobre as skills automaticamente quando abre a pasta. Não há instalação.
 
-### Sem conflitos
+### Convivência com projetos existentes
 
 - O repositório envia um `CLAUDE.md` placeholder — o `/comece-por-aqui` o substitui com o seu.
 - A documentação do framework vive em `CLAUDE-IC.md`, separada da sua identidade.
 - Skills só existem dentro desta pasta. Fora dela, é como se não existissem.
+- Se você já tem um projeto com `.gitignore`, `README.md` ou `CLAUDE.md`, **não clone por cima** — use o [guia de instalação em projeto existente](guias/instalacao-projeto-existente.md).
 
 ### Como desinstalar
 
@@ -245,6 +268,7 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 ## Indo mais fundo
 
 - **[Glossário de Skills](GLOSSARIO_DE_SKILLS.md)** — Cada skill explicada em detalhe: o que faz, o que esperar, o que nunca fará.
+- **[Instalação em projeto existente](guias/instalacao-projeto-existente.md)** — O que copiar, o que ignorar, como evitar conflitos.
 - **[Marketplace](https://github.com/jocsaacesar/interface-colaboracao-skills)** — Skills opcionais criadas pela comunidade.
 - **[Guias](guias/)** — Como criar um CLAUDE.md, projetar skills, usar o sistema de memória.
 - **[Modelos](modelos/)** — Arquivos iniciais para montar do zero.

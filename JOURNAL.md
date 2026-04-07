@@ -9,6 +9,26 @@ Cada entrada responde três perguntas:
 
 ---
 
+## 07/04/2026 — Documentar antes de automatizar: guia de instalação em projeto existente
+
+**O que decidimos:** Criar um guia escrito (`guias/instalacao-projeto-existente.md`) explicando como instalar o framework em um projeto que já existe, em vez de construir imediatamente uma skill `/instalar` automatizada. Também adicionamos uma seção no README apontando para o guia.
+
+**Por quê:** O problema apareceu quando tentamos instalar o framework no projeto UniBGR — `.gitignore`, `CLAUDE.md`, `README.md` e `.github/` conflitariam. Antes de automatizar, precisávamos entender e documentar exatamente o que conflita, o que copiar e o que ignorar. Automatizar um processo que você ainda não documentou é receita para bugs silenciosos.
+
+**O que aprendemos:** Nem todo problema precisa de uma skill. Às vezes a melhor ferramenta é um documento claro. O guia serve tanto como referência para o usuário quanto como especificação futura para quando a automação fizer sentido.
+
+---
+
+## 07/04/2026 — CLAUDE-IC.md traduzido para português
+
+**O que decidimos:** Traduzir o CLAUDE-IC.md integralmente para português brasileiro. Era o último arquivo grande que ainda estava em inglês, e continha referências desatualizadas (pastas em inglês como `memory/`, `exchange/`, `guides/`).
+
+**Por quê:** A decisão de traduzir tudo para português foi tomada antes, mas o CLAUDE-IC.md ficou para trás por ser grande e não ser lido automaticamente pelo Claude Code. A revisão ortográfica desta sessão revelou que ele estava cheio de inconsistências — era o momento certo de resolver.
+
+**O que aprendemos:** Arquivos que "ninguém lê automaticamente" acumulam dívida técnica silenciosamente. Se está no repositório público, precisa estar no mesmo padrão do resto.
+
+---
+
 ## 07/04/2026 — CLAUDE.md é do usuário, CLAUDE-IC.md é do framework
 
 **O que decidimos:** Separar a documentação do framework (CLAUDE-IC.md) da identidade da IA do usuário (CLAUDE.md). O repositório envia um placeholder no CLAUDE.md que o `/comece-por-aqui` substitui com a identidade personalizada.

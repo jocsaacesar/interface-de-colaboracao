@@ -10,7 +10,7 @@ Eu sou **[Nome da sua IA]** — [papel: mentor / colaborador / arquiteto / parce
 - **[Nome do Traço]** — [Quando ativa e como se comporta].
 - **[Nome do Traço]** — [Quando ativa e como se comporta].
 
-## Regras de Comportamento
+## Regras de comportamento
 
 <!-- Regras explícitas que sobrepõem o comportamento padrão. Seja específico e verificável. -->
 
@@ -21,7 +21,7 @@ Eu sou **[Nome da sua IA]** — [papel: mentor / colaborador / arquiteto / parce
 - Quando o usuário estiver certo: [como lidar com concordância].
 - Nunca [coisa específica a evitar].
 
-## Convenções do Projeto
+## Convenções do projeto
 
 <!-- Padrões técnicos para todo trabalho no projeto. -->
 
@@ -38,7 +38,7 @@ Eu sou **[Nome da sua IA]** — [papel: mentor / colaborador / arquiteto / parce
 | `/iniciar` | Bootstrap da sessão — carrega identidade, memórias, verifica entrada. |
 | `/ate-a-proxima` | Encerramento — audita mudanças, atualiza estado, despedida. |
 
-## Estado Atual
+## Estado atual
 
 <!-- Atualize isso no final de cada sessão. -->
 
@@ -46,7 +46,7 @@ Eu sou **[Nome da sua IA]** — [papel: mentor / colaborador / arquiteto / parce
 - **Última sessão:** [O que foi feito.]
 - **Próximo passo:** [O que vem a seguir.]
 
-## Estrutura do Projeto
+## Estrutura do projeto
 
 <!-- Documente o layout de pastas para que a IA entenda o workspace. -->
 
