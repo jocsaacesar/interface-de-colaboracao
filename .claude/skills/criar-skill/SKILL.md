@@ -88,42 +88,66 @@ Se o usuário aceitar as sugestões, incorporar. Se não tiver regras próprias 
 
 ### Fase 3 — Gerar o SKILL.md
 
-Com base nas respostas, gerar o arquivo completo seguindo esta estrutura:
+Com base nas respostas, gerar o arquivo completo seguindo o **padrão mínimo do marketplace**:
 
 ```markdown
 ---
 name: nome-da-skill
-description: Descrição em uma linha — quando aciona e o que faz.
+description: Uma frase que responde "quando aciona e o que faz". Suficiente pra decidir se quer instalar sem ler o resto.
 ---
 
-# /nome-da-skill — Título Legível
+# /nome-da-skill — Título curto e legível
 
-Descrição breve do propósito.
+Descrição de 2-3 frases: o que faz, pra quem é útil, o que esperar. Linguagem acessível — não técnica.
 
 ## Quando usar
 
-- [Condições de ativação]
-- **Nunca** acionar quando [anti-condições].
+- [Condição explícita de ativação]
+- **Nunca** acionar quando [anti-condição — quando NÃO deve disparar].
 
 ## Processo
 
-### Fase 1 — [Nome]
-[Passos]
+### Fase 1 — [Nome descritivo]
 
-### Fase 2 — [Nome]
-[Passos]
+1. [Passo — ação clara que a IA executa]
+2. [Passo — como apresentar ao usuário]
+
+### Fase 2 — [Nome descritivo]
+
+1. [Passo]
+2. [Passo]
+
+### Fase N — Apresentar resultado
+
+[Toda skill termina mostrando algo ao usuário: relatório, arquivo, confirmação. Nunca terminar "no silêncio".]
 
 ## Regras
 
-- [Guardrails]
+- [Regra 1 — algo que NUNCA deve fazer]
+- [Regra 2 — algo que SEMPRE deve fazer]
+- [Regra 3 — como lidar com ambiguidade]
+- [Regra 4 — limites de escopo]
 ```
+
+**Padrão mínimo obrigatório (checklist):**
+- Frontmatter com `name` e `description` — description responde "quando aciona e o que faz" em uma frase
+- Descrição acessível — alguém que nunca usou Claude Code entende o primeiro parágrafo
+- "Quando usar" com ativação E anti-ativação
+- Processo em fases numeradas com nomes descritivos
+- Última fase mostra resultado ao usuário
+- Mínimo 3 regras específicas ("nunca X" > "cuidado com X")
+- Todo conteúdo em português (BR)
+- Sem dados pessoais
+
+**Referência completa:** O padrão detalhado com dicas e exemplos está em `MODELO_DE_SKILL.md` no [repositório do marketplace](https://github.com/jocsaacesar/interface-colaboracao-skills).
 
 **Regras de geração:**
 - Seguir o tom e formato das skills existentes do projeto.
-- Escrever no idioma do projeto (observado na Fase 1).
+- Escrever em português (BR). Termos técnicos em inglês aceitos quando não há tradução natural.
 - Ser específico nas regras — "nunca fazer X" é melhor que "ter cuidado com X".
 - Não adicionar fases ou regras que o usuário não pediu. Perguntar se quiser sugerir algo extra.
-- O frontmatter `description` deve ser uma linha que responda: "quando esta skill aciona e o que ela faz?"
+- O frontmatter `description` deve ser uma frase que responda: "quando esta skill aciona e o que ela faz?"
+- Headings com apenas primeira letra maiúscula (convenção brasileira).
 
 ### Fase 4 — Mostrar e aprovar
 
@@ -142,6 +166,19 @@ Após aprovação:
 3. Confirmar:
 
 > "Skill `/nome-da-skill` criada em `.claude/skills/nome-da-skill/SKILL.md`. Ela já está disponível — o Claude Code descobre automaticamente. Quer testar agora?"
+
+### Fase 6 — Sugerir publicação no marketplace
+
+Após salvar, perguntar:
+
+> "Essa skill pode ser útil pra outras pessoas? Se quiser compartilhar, posso preparar ela pro marketplace — verifico se atende o padrão mínimo e te mostro como submeter."
+
+Se o usuário quiser:
+1. Verificar se a skill atende o checklist do padrão mínimo (frontmatter, descrição, quando usar, processo, resultado, regras).
+2. Se faltar algo, sugerir o que precisa ser adicionado.
+3. Se estiver completa, explicar: "Copia a pasta pro repositório do marketplace e abre um PR. O repositório é github.com/jocsaacesar/interface-colaboracao-skills."
+
+Se não quiser, seguir em frente sem insistir.
 
 ## Regras
 
