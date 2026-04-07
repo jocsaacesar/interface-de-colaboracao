@@ -4,9 +4,9 @@
 
 Pense na melhor conversa que você já teve com alguém. Não precisou explicar quem era, o que fazia, nem por que pensava daquele jeito. A pessoa já sabia. E por isso, a conversa foi *sobre o que importava* — não sobre contexto.
 
-Agora pense em como você usa o Claude Code. Toda vez que abre uma conversa, começa do zero. A IA não sabe seu nome. Não conhece seu projeto. Não lembra que ontem você pediu para ela nunca mais adicionar comentários em código que você não tocou. Você se repete. Ela esquece. Você se repete de novo.
+Agora pense em como você usa o Claude Code. Ele não começa *exatamente* do zero — lê o CLAUDE.md do projeto, tem um sistema básico de memória, entende o contexto dos arquivos. Mas a cada nova conversa, muita coisa se perde. As preferências sutis que você levou sessões pra calibrar. As decisões que vocês tomaram juntos ontem. O tom que finalmente estava do jeito certo. A IA sabe *sobre* o projeto, mas não sabe *sobre você*. E essa diferença é o que separa uma ferramenta útil de uma colaboração real.
 
-Este framework muda essa dinâmica. Não é uma lista de prompts. Não é um truque. É uma **arquitetura de relacionamento** entre você e sua IA — com identidade, memória e comportamento que persistem entre conversas.
+Este framework preenche essa lacuna. Não é uma lista de prompts. Não é um truque. É uma **arquitetura de relacionamento** entre você e sua IA — com identidade, memória estruturada e comportamento que persistem de verdade entre conversas.
 
 Você configura uma vez. A partir daí, ela te conhece.
 
