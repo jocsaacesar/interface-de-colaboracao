@@ -2,6 +2,8 @@
 
 Skills are custom slash commands that automate multi-step workflows in Claude Code. They live in `.claude/skills/` and are triggered by typing `/<skill-name>` in conversation.
 
+**How discovery works:** Claude Code auto-discovers skills from the `.claude/skills/` folder when it opens a project. You don't need to register or install them — drop a skill folder in, and it's available. The `/iniciar` skill re-loads them at session start for a fresh context, but skills are usable even without `/iniciar` (this is how `/comece-por-aqui` works as the very first command on a fresh clone).
+
 ## Why Skills Matter
 
 Without skills, you repeat the same instructions every session:

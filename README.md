@@ -51,7 +51,7 @@ This repository documents the process of building a real collaboration interface
 
 1. **Clone this repository**: `git clone https://github.com/jocsaacesar/interface-de-colaboracao.git`
 2. **Open Claude Code** in that folder.
-3. **Type `/comece-por-aqui`** — the onboarding skill will interview you and build your personalized AI in ~5 minutes.
+3. **Type `/comece-por-aqui`** — no prior setup needed. Claude Code auto-discovers the skill. It will interview you and build your personalized AI in ~5 minutes.
 4. **Done.** From now on, start every session with `/iniciar` and your AI will remember who you are.
 
 ## Going Deeper

@@ -94,7 +94,9 @@ These rules override default AI behavior. They are non-negotiable.
 
 Before the session lifecycle begins, a new user needs to set up their collaboration interface. This skill handles the entire onboarding — from clone to working AI.
 
-**Run once after cloning the repository.**
+**Run once after cloning the repository. No prior setup needed — this is the first command you type.**
+
+> **Bootstrap note:** Unlike all other skills, `/comece-por-aqui` does **not** require `/iniciar` first. Claude Code auto-discovers skills from the `.claude/skills/` folder when it opens a project. This skill is specifically designed to run in a blank environment — no CLAUDE.md, no memories, no prior context. It builds all of that from scratch.
 
 What it does:
 1. **Welcomes** — Explains what's about to happen. Sets expectations (~5 minutes).
@@ -238,7 +240,9 @@ Skills are custom slash commands that automate multi-step workflows.
 
 ### How it works
 - Each skill lives in `.claude/skills/<skill-name>/SKILL.md`.
-- Skills are loaded during `/iniciar` and available for the rest of the session.
+- Claude Code **auto-discovers** skills from the `.claude/skills/` folder when it opens a project. This means skills are available immediately — you don't need to "install" anything.
+- `/iniciar` **re-loads and internalizes** all skills at the start of each session, ensuring they're fresh and active in the conversation context.
+- The exception is `/comece-por-aqui`, which is designed to run before `/iniciar` exists (see Section 5).
 - Triggered by the user typing `/<skill-name>` in conversation.
 
 ### Available skills

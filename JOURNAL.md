@@ -9,6 +9,16 @@ Each entry answers three questions:
 
 ---
 
+## 2026-04-07 — Bootstrap problem: skills need to work before /iniciar
+
+**What we decided:** Document explicitly that `/comece-por-aqui` is the only skill that runs without `/iniciar`. Claude Code auto-discovers skills from `.claude/skills/`, so no bootstrap step is needed. Clarified this across CLAUDE.md, glossary, guides, and README.
+
+**Why:** A new user reads that `/iniciar` loads skills and assumes they need it first. But `/comece-por-aqui` must run in a blank environment — before CLAUDE.md or memories exist. The documentation created a chicken-and-egg problem that would confuse the first-time user.
+
+**What we learned:** When you design a system with a "load everything" step, you must explicitly address what happens *before* that step exists. The bootstrap case is always special and always needs documentation.
+
+---
+
 ## 2026-04-07 — /comece-por-aqui: onboarding as a conversation, not a manual
 
 **What we decided:** Create an onboarding skill that interviews new users one question at a time — who they are, what they're building, how they work, what to avoid, and what to call their AI — then builds a complete personalized setup from the answers.

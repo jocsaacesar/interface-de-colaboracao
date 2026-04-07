@@ -12,7 +12,8 @@ Skills are **not magic** — they're structured instructions that make the AI be
 
 ### Key principles
 
-- **Skills are loaded during `/iniciar`.** If you haven't run `/iniciar` yet, skills may not be available.
+- **Claude Code auto-discovers skills** from the `.claude/skills/` folder when it opens a project. You don't need to install or register them — they're available immediately.
+- **`/iniciar` re-loads skills** at the start of each session, ensuring they're fresh in the conversation context. But the very first skill — `/comece-por-aqui` — works without `/iniciar` because it's designed to run in a blank environment.
 - **Each skill has explicit trigger rules.** Some run automatically (like `/iniciar` on greeting), others only fire when you type the exact command.
 - **Skills don't stack.** Run one at a time. Wait for it to finish before calling another.
 - **You're always in control.** No skill commits, publishes, or deletes anything without your explicit approval.
@@ -21,7 +22,7 @@ Skills are **not magic** — they're structured instructions that make the AI be
 
 ## /comece-por-aqui
 
-> **Your first command. Run once after cloning the repository.**
+> **Your first command. Run once after cloning the repository. No prior setup needed.**
 
 ### Purpose
 
@@ -31,6 +32,10 @@ Builds your entire personalized collaboration interface from scratch — identit
 
 - Right after cloning the repository for the first time.
 - If you want to redo your setup from scratch.
+
+### Bootstrap note
+
+This is the **only skill that runs without `/iniciar`**. It's designed to work in a completely blank environment — no CLAUDE.md, no memories, no prior context. Claude Code auto-discovers it from the `.claude/skills/` folder. You clone, open Claude Code, type `/comece-por-aqui`, and it just works.
 
 ### What happens
 
