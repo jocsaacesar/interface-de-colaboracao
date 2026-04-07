@@ -232,9 +232,39 @@ Meta-skill que cria outras skills por meio de entrevista guiada. Lê os padrões
 
 ---
 
+## /marketplace
+
+> **Descubra skills extras sem sair da conversa.**
+
+### Propósito
+
+Explora a pasta `marketplace/`, descreve cada skill disponível em linguagem acessível, mostra quais já estão ativas, e recomenda as que fazem sentido pro seu perfil e projeto.
+
+### Quando usar
+
+- Quando quiser saber o que tem de disponível além das skills core.
+- **Apenas por comando manual** — digite `/marketplace` explicitamente.
+
+### O que acontece
+
+1. **Inventário** — Lê todas as skills em `marketplace/` e verifica quais já estão ativas em `.claude/skills/`.
+2. **Contexto** — Lê seu CLAUDE.md e memórias para entender seu perfil e projeto.
+3. **Catálogo** — Apresenta cada skill com nome, descrição acessível, quando é útil, e status (✅ ativada / ⬇️ disponível).
+4. **Recomendação** — Sugere no máximo 2 skills com razão concreta baseada no seu contexto. Se nenhuma faz sentido, diz honestamente.
+5. **Ativação** — Se você quiser, copia a skill pra `.claude/skills/` e confirma. Também desativa se pedir.
+
+### O que ela nunca fará
+
+- Ativar sem pedir. Sempre pergunta antes.
+- Desativar skills core (/iniciar, /comece-por-aqui, /ate-a-proxima, /criar-skill).
+- Empurrar skills. Se nada faz sentido, diz.
+- Copiar jargão técnico. Descreve tudo em linguagem que qualquer pessoa entenda.
+
+---
+
 ## Skills do marketplace
 
-As skills abaixo não vêm instaladas por padrão. Estão disponíveis no [marketplace](marketplace/) — para instalar, copie a pasta para `.claude/skills/`.
+As skills abaixo não vêm ativadas por padrão. Estão na pasta [marketplace/](marketplace/) que já vem no clone. Para explorar e ativar, digite `/marketplace` ou copie manualmente:
 
 ---
 

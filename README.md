@@ -142,6 +142,7 @@ Uma vez configurado, cada sessão de trabalho segue um ritmo natural — como ab
 | `/iniciar` | Início de cada sessão | Carrega tudo. A IA chega pronta. |
 | `/ate-a-proxima` | Final de cada sessão | Salva o estado e encerra de forma limpa. |
 | `/criar-skill` | Quando quiser criar uma nova skill | Entrevista guiada que gera o SKILL.md completo. |
+| `/marketplace` | Quando quiser descobrir skills extras | Mostra o catálogo, recomenda e ativa com um comando. |
 
 ### Marketplace — skills opcionais
 
