@@ -4,7 +4,7 @@
 
 Pense na melhor conversa que você já teve com alguém. Não precisou explicar quem era, o que fazia, nem por que pensava daquele jeito. A pessoa já sabia. E por isso, a conversa foi *sobre o que importava* — não sobre contexto.
 
-Agora pense em como você usa o Claude Code. Ele não começa *exatamente* do zero — lê o CLAUDE.md do projeto, tem um sistema básico de memória, entende o contexto dos arquivos. Mas a cada nova conversa, muita coisa se perde. As preferências sutis que você levou sessões pra calibrar. As decisões que vocês tomaram juntos ontem. O tom que finalmente estava do jeito certo. A IA sabe *sobre* o projeto, mas não sabe *sobre você*. E essa diferença é o que separa uma ferramenta útil de uma colaboração real.
+Agora pense em como você usa inteligência artificial. O [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) — o assistente de IA da Anthropic que funciona direto no seu computador — já tem recursos como memória e leitura de arquivos de configuração. Mas a cada nova conversa, muita coisa se perde. As preferências sutis que você levou sessões pra calibrar. As decisões que vocês tomaram juntos ontem. O tom que finalmente estava do jeito certo. A IA sabe *sobre* o projeto, mas não sabe *sobre você*. E essa diferença é o que separa uma ferramenta útil de uma colaboração real.
 
 Este framework preenche essa lacuna. Não é uma lista de prompts. Não é um truque. É uma **arquitetura de relacionamento** entre você e sua IA — com identidade, memória estruturada e comportamento que persistem de verdade entre conversas.
 
@@ -12,16 +12,14 @@ Você configura uma vez. A partir daí, ela te conhece.
 
 ---
 
-## Como funciona — em 5 minutos
+## Como funciona
 
-Quando você clona este repositório e abre o Claude Code, todas as skills já estão disponíveis automaticamente — o Claude Code descobre elas sozinho na pasta `.claude/skills/`. Não precisa instalar nada, não precisa rodar nada antes. É como plugar um instrumento e ele já estar afinado.
-
-Você digita `/comece-por-aqui` e a IA te faz cinco perguntas:
+Quando você abre este projeto no Claude Code, ele te faz cinco perguntas — como numa conversa, não num formulário:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  Você clona o repositório e digita /comece-por-aqui             │
+│  Você abre o projeto e segue as instruções do primeiro uso      │
 │                          │                                      │
 │                          ▼                                      │
 │               ┌─────────────────────┐                           │
@@ -49,12 +47,12 @@ Você digita `/comece-por-aqui` e a IA te faz cinco perguntas:
 │               │  te conhece agora.  │                           │
 │               └─────────────────────┘                           │
 │                                                                 │
-│  Na próxima vez, digite /iniciar e tudo estará lá.              │
+│  Na próxima conversa, digite /iniciar e tudo estará lá.         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-Não é um questionário. É uma conversa. A IA reage às suas respostas, faz follow-up, e no final te mostra o resultado para aprovação antes de salvar qualquer coisa.
+A IA reage às suas respostas, faz follow-up, e no final te mostra o resultado para aprovação antes de salvar qualquer coisa. Você tem controle total.
 
 ---
 
@@ -78,9 +76,9 @@ Todo relacionamento funcional tem estrutura. Este framework se apoia em quatro:
 
 ### Identidade
 
-Um arquivo chamado `CLAUDE.md` que funciona como a **constituição** da sua IA. Nele você define nome, personalidade e regras de comportamento. "Ao revisar código, seja direto. Ao ensinar, use analogias. Nunca adicione funcionalidades que eu não pedi."
+Um arquivo de configuração que funciona como a **constituição** da sua IA. Nele você define nome, personalidade e regras de comportamento. "Ao revisar código, seja direto. Ao ensinar, use analogias. Nunca adicione funcionalidades que eu não pedi."
 
-O Claude Code lê esse arquivo automaticamente. A skill `/comece-por-aqui` cria o seu — personalizado a partir das suas respostas. O repositório nunca sobrescreve um `CLAUDE.md` que já exista.
+O Claude Code lê esse arquivo automaticamente. A configuração inicial cria o seu — personalizado a partir das suas respostas.
 
 ### Memória
 
@@ -96,50 +94,7 @@ Pense em skills como rituais produtivos. Você faz a mesma coisa toda vez, do me
 
 ### Troca de arquivos
 
-Um protocolo simples de pastas. Coloque arquivos na `entrada/` para a IA processar. Ela entrega resultados na `saida/`. Sem copiar, sem colar, sem perder contexto no meio do caminho.
-
----
-
-## Início rápido
-
-```bash
-git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
-cd interface-de-colaboracao
-```
-
-Abra o Claude Code nessa pasta e digite:
-
-```
-/comece-por-aqui
-```
-
-Nenhuma configuração prévia. Nenhuma instalação. As skills já estão na pasta do projeto e o Claude Code as descobre sozinho. Você clona, abre e usa.
-
-> **O comando não foi reconhecido?** Em algumas máquinas, a auto-descoberta de skills pode não funcionar na primeira abertura. Veja [PRIMEIRO-USO.md](PRIMEIRO-USO.md) para resolver em 1 minuto.
-
-> **Importante:** Tudo fica dentro da pasta do projeto. Nada é instalado globalmente. Sua configuração existente do Claude Code não é afetada. Veja [Segurança e Escopo](#segurança-e-escopo) para detalhes.
-
----
-
-## Já tem um projeto rodando?
-
-Se você não está começando do zero — se já tem um repositório com código, `.gitignore`, `README.md` e tudo mais — **não clone este repositório por cima**.
-
-O framework foi pensado pra coexistir com projetos existentes, mas precisa de um cuidado que um `git clone` direto não dá: separar o que é do framework do que é do seu projeto.
-
-Na prática, você só precisa de **duas coisas**:
-1. A pasta `.claude/skills/` (as skills)
-2. Algumas linhas no seu `.gitignore` (pra proteger dados pessoais)
-
-Todo o resto — README, LICENSE, guias, exemplos — é documentação do framework e não vai pro seu projeto.
-
-**[Guia completo de instalação em projeto existente →](guias/instalacao-projeto-existente.md)**
-
-O guia cobre:
-- Exatamente o que copiar e o que ignorar
-- Como fazer merge no `.gitignore` sem sobrescrever
-- O que fazer se você já tem um `CLAUDE.md`
-- Como desinstalar sem deixar resíduo
+Um protocolo simples de pastas. Coloque arquivos na pasta de entrada para a IA processar. Ela entrega resultados na pasta de saída. Sem copiar, sem colar, sem perder contexto no meio do caminho.
 
 ---
 
@@ -162,11 +117,23 @@ Uma vez configurado, cada sessão de trabalho segue um ritmo natural — como ab
 
 | Comando | Quando | O que faz |
 |---------|--------|-----------|
-| `/comece-por-aqui` | Uma vez, após clonar | Te entrevista e constrói sua IA personalizada. |
+| `/comece-por-aqui` | Uma vez, na configuração inicial | Te entrevista e constrói sua IA personalizada. |
 | `/iniciar` | Início de cada sessão | Carrega tudo. A IA chega pronta. |
 | `/ate-a-proxima` | Final de cada sessão | Salva o estado e encerra de forma limpa. |
-| `/criar-skill` | Quando quiser criar uma nova skill | Entrevista guiada que gera o SKILL.md completo. |
+| `/criar-skill` | Quando quiser criar uma nova skill | Entrevista guiada que gera a automação completa. |
 | `/marketplace` | Quando quiser descobrir skills extras | Mostra o catálogo, recomenda e ativa com um comando. |
+
+---
+
+## A história por trás
+
+Este framework nasceu por acidente. **Joc** estava construindo o Jiim Hawkins — um projeto ambicioso de agente de IA pessoal. E no processo de preparar o ambiente de trabalho com o Claude Code, percebeu algo: *a preparação era o produto*.
+
+O jeito como você configura identidade, memória e comportamento para uma IA não é um passo preliminar — é a coisa em si. É o que separa usar IA como um buscador glorificado de usar IA como um instrumento que evolui com você.
+
+Um músico não compra um instrumento e sai tocando. Ele afina. Aprende os vícios. Desenvolve um relacionamento com o que o instrumento faz bem e onde ele resiste. Essa afinação é o que este repositório documenta.
+
+E o mais bonito: o repositório é o framework *e* o exemplo vivo ao mesmo tempo. A documentação técnica explica como tudo funciona. Os exemplos mostram uma implementação real, sanitizada. As skills, o diário, os guias — todos são usados ativamente, não foram escritos para vitrine.
 
 ---
 
@@ -183,15 +150,14 @@ Por isso existe o **marketplace** — um repositório separado com skills extras
 | Skill | O que faz | Pra quem é útil |
 |-------|-----------|-----------------|
 | `/tornar-publico` | Separa dados pessoais de conteúdo público, sanitiza e prepara para publicação. Nada sai sem sua aprovação. | Quem trabalha em repositórios públicos e precisa proteger dados sensíveis. |
-| `/revisar-texto` | Percorre todos os .md do projeto corrigindo ortografia, convenções brasileiras e inconsistências. Correções ambíguas pedem aprovação. | Quem escreve documentação e quer manter consistência e qualidade. |
+| `/revisar-texto` | Percorre todos os arquivos de documentação do projeto corrigindo ortografia, convenções brasileiras e inconsistências. Correções ambíguas pedem aprovação. | Quem escreve documentação e quer manter consistência e qualidade. |
 
 ### Como instalar uma skill
 
-Existem duas formas:
+A forma mais simples: digite `/marketplace` numa conversa com a IA. Ela mostra o catálogo, explica cada skill, recomenda as que fazem sentido pro seu perfil, e instala pra você.
 
-**Pela conversa (recomendado):** Digite `/marketplace`. A IA mostra o catálogo, explica cada skill, recomenda as que fazem sentido pro seu perfil, e instala com um comando. Se o marketplace não estiver baixado, ela oferece fazer o clone pra você.
-
-**Manualmente:**
+<details>
+<summary>Instalação manual (linha de comando)</summary>
 
 ```bash
 # 1. Baixe o marketplace (só precisa fazer uma vez)
@@ -203,74 +169,114 @@ cp -r marketplace/tornar-publico .claude/skills/
 
 Pronto. O Claude Code descobre sozinho. Sem reiniciar, sem configurar.
 
-### Como desinstalar uma skill
+**Para desinstalar:** delete a pasta da skill de dentro de `.claude/skills/`.
 
-Delete a pasta de dentro de `.claude/skills/`:
+**Para atualizar o marketplace:** entre na pasta `marketplace/` e rode `git pull origin main`.
 
-```bash
-rm -rf .claude/skills/tornar-publico
-```
-
-A skill deixa de existir. Sem efeitos colaterais, sem resíduos. Se mudar de ideia, instale de novo.
-
-### Como receber novas skills
-
-A comunidade pode contribuir com skills a qualquer momento. Para atualizar seu marketplace local:
-
-```bash
-cd marketplace
-git pull origin main
-```
-
-As novas skills aparecem na pasta. Ative as que quiser com o mesmo `cp -r`.
+</details>
 
 ### Como contribuir com uma skill
 
 Criou uma skill que resolveu um problema real pra você? Provavelmente resolve pra outros também.
 
 1. Faça um fork do [repositório de skills](https://github.com/jocsaacesar/interface-colaboracao-skills).
-2. Crie uma pasta com o nome da skill e um `SKILL.md` dentro.
+2. Crie uma pasta com o nome da skill e um arquivo de definição dentro.
 3. Abra um PR descrevendo o que ela faz e por que é útil.
 
 Requisitos: documentação em português, sem dados pessoais, e a skill precisa funcionar de forma independente.
 
 ---
 
+## Começar agora
+
+Você precisa do [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) instalado. Se ainda não tem, siga a [documentação oficial](https://docs.anthropic.com/en/docs/claude-code/overview).
+
+Depois disso:
+
+1. Baixe este projeto no seu computador
+2. Abra o Claude Code na pasta do projeto
+3. Diga: **"Leia o PRIMEIRO-USO.md e siga as instruções"**
+
+A IA lê o arquivo, entende o que precisa fazer e conduz o onboarding completo — entrevista, criação da identidade, memórias iniciais e configuração das skills.
+
+> **Importante:** Tudo que é criado fica dentro da pasta do projeto. A única exceção é a skill `/iniciar`, que o Claude vai te pedir autorização para instalar na sua pasta pessoal — isso é o que permite usá-la em qualquer projeto. Totalmente opcional. Veja [Segurança e escopo](#segurança-e-escopo) para detalhes.
+
+<details>
+<summary>Comandos exatos para o terminal</summary>
+
+```bash
+git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
+cd interface-de-colaboracao
+```
+
+Abra o Claude Code nessa pasta e diga:
+
+```
+Leia o PRIMEIRO-USO.md e siga as instruções
+```
+
+</details>
+
+<details>
+<summary>Já tem um projeto rodando? Não clone por cima</summary>
+
+Se você já tem um repositório com código, `.gitignore`, `README.md` e tudo mais — **não clone este repositório por cima**.
+
+O framework foi pensado pra coexistir com projetos existentes, mas precisa de um cuidado que um clone direto não dá: separar o que é do framework do que é do seu projeto.
+
+Na prática, você só precisa de **duas coisas**:
+1. A pasta `.claude/skills/` (as skills)
+2. Algumas linhas no seu `.gitignore` (pra proteger dados pessoais)
+
+Todo o resto — README, LICENSE, guias, exemplos — é documentação do framework e não vai pro seu projeto.
+
+**[Guia completo de instalação em projeto existente →](guias/instalacao-projeto-existente.md)**
+
+O guia cobre:
+- Exatamente o que copiar e o que ignorar
+- Como fazer merge no `.gitignore` sem sobrescrever
+- O que fazer se você já tem um `CLAUDE.md`
+- Como desinstalar sem deixar resíduo
+
+</details>
+
+---
+
 ## Segurança e escopo
 
-Quando alguém te pede para clonar um repositório e rodar comandos, é justo perguntar: *"o que isso faz na minha máquina?"*
+Quando alguém te pede para baixar um projeto e rodar comandos, é justo perguntar: *"o que isso faz na minha máquina?"*
 
 A resposta aqui é simples.
 
-### Tudo é local ao projeto
+**Tudo fica dentro da pasta do projeto.** Identidade, memórias, skills — nada sai dessa pasta. O Claude Code descobre as skills automaticamente quando abre o projeto. Não há instalação global.
 
-- Todos os arquivos — identidade, memórias, skills — ficam **dentro da pasta do projeto**. Ponto.
-- Nada é instalado na sua configuração global do Claude Code (`~/.claude/`).
-- Nada modifica outros projetos, outros workflows, outras configurações.
-- O Claude Code descobre as skills automaticamente quando abre a pasta. Não há instalação.
+A **única exceção** é a skill `/iniciar`, que durante a configuração o Claude oferece instalar na sua pasta pessoal — com sua autorização explícita. É um único arquivo de texto. Se recusar, tudo funciona normalmente dentro do projeto; o `/iniciar` só não será global.
 
-### Convivência com projetos existentes
+Nada modifica outros projetos, outros workflows, outras configurações.
 
-- O repositório envia um `CLAUDE.md` placeholder — o `/comece-por-aqui` o substitui com o seu.
-- A documentação do framework vive em `CLAUDE-IC.md`, separada da sua identidade.
-- Skills só existem dentro desta pasta. Fora dela, é como se não existissem.
-- Se você já tem um projeto com `.gitignore`, `README.md` ou `CLAUDE.md`, **não clone por cima** — use o [guia de instalação em projeto existente](guias/instalacao-projeto-existente.md).
+**Para desinstalar:** delete a pasta do projeto. Pronto.
 
-### Como desinstalar
+<details>
+<summary>Detalhes técnicos de limpeza</summary>
 
-Delete a pasta. Pronto. Não tem nada pra desinstalar, nenhum estado global, nenhuma configuração residual.
+Se instalou a skill `/iniciar` globalmente durante o onboarding:
+```bash
+rm -rf ~/.claude/skills/iniciar/
+```
 
 Se sincronizou memórias para `~/.claude/projects/`:
 ```bash
 rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 ```
 
+</details>
+
 ---
 
 ## Indo mais fundo
 
 - **[Glossário de Skills](GLOSSARIO_DE_SKILLS.md)** — Cada skill explicada em detalhe: o que faz, o que esperar, o que nunca fará.
-- **[Primeiro uso](PRIMEIRO-USO.md)** — Se as skills não funcionarem na primeira abertura.
+- **[Primeiro uso](PRIMEIRO-USO.md)** — Ponto de entrada do onboarding. O Claude lê e conduz tudo.
 - **[Instalação em projeto existente](guias/instalacao-projeto-existente.md)** — O que copiar, o que ignorar, como evitar conflitos.
 - **[Marketplace](https://github.com/jocsaacesar/interface-colaboracao-skills)** — Skills opcionais criadas pela comunidade.
 - **[Guias](guias/)** — Como criar um CLAUDE.md, projetar skills, usar o sistema de memória.
@@ -283,8 +289,9 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 <summary>Estrutura do projeto (clique para expandir)</summary>
 
 ```
-├── CLAUDE.md                           # Sua identidade (gerado pelo /comece-por-aqui)
+├── CLAUDE.md                           # Sua identidade (gerado pelo onboarding)
 ├── CLAUDE-IC.md                        # Documentação do framework
+├── PRIMEIRO-USO.md                     # Ponto de entrada — o Claude lê e conduz o setup
 ├── README.md                           # Você está aqui
 ├── JOURNAL.md                          # Decisões e aprendizados
 ├── GLOSSARIO_DE_SKILLS.md              # Guia do usuário para todas as skills
@@ -296,25 +303,12 @@ rm -rf ~/.claude/projects/<pasta-do-seu-projeto>/memory/
 ├── modelos/                            # Arquivos iniciais para seu projeto
 ├── exemplos/                           # Implementação de referência
 ├── .claude/skills/                     # Skills core (locais ao projeto)
-├── memoria/                            # Seus arquivos de memória (no gitignore)
-└── troca/                              # Troca de arquivos (no gitignore)
+├── memoria/                            # Seus arquivos de memória (privado)
+├── estudos/                            # Resumos pessoais de estudo (privado)
+└── troca/                              # Troca de arquivos (privado)
 ```
 
 </details>
-
----
-
-## A história por trás
-
-Este framework nasceu por acidente. **Joc** estava construindo o Jiim Hawkins — um projeto ambicioso de agente de IA pessoal. E no processo de preparar o ambiente de trabalho com o Claude Code, percebeu algo: *a preparação era o produto*.
-
-O jeito como você configura identidade, memória e comportamento para uma IA não é um passo preliminar — é a coisa em si. É o que separa usar IA como um buscador glorificado de usar IA como um instrumento que evolui com você.
-
-Um músico não compra um instrumento e sai tocando. Ele afina. Aprende os vícios. Desenvolve um relacionamento com o que o instrumento faz bem e onde ele resiste. Essa afinação é o que este repositório documenta.
-
-E o mais bonito: o repositório é o framework *e* o exemplo vivo ao mesmo tempo. O `CLAUDE-IC.md` documenta como tudo funciona. O `exemplos/leland/` mostra uma implementação real, sanitizada. As skills, o diário, os guias — todos são usados ativamente, não foram escritos para vitrine.
-
-**Repositório:** [github.com/jocsaacesar/interface-de-colaboracao](https://github.com/jocsaacesar/interface-de-colaboracao)
 
 ---
 
@@ -325,6 +319,8 @@ Contribuições são bem-vindas. Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes d
 ## Licença
 
 [MIT](LICENSE)
+
+**Repositório:** [github.com/jocsaacesar/interface-de-colaboracao](https://github.com/jocsaacesar/interface-de-colaboracao)
 
 ---
 
