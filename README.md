@@ -189,33 +189,78 @@ Requisitos: documentação em português, sem dados pessoais, e a skill precisa 
 
 ## Começar agora
 
-Você precisa do [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) instalado. Se ainda não tem, siga a [documentação oficial](https://docs.anthropic.com/en/docs/claude-code/overview).
+São quatro passos. Se você nunca usou um terminal antes, não se preocupe — cada passo tem instruções detalhadas.
 
-Depois disso:
+### Passo 1 — Instalar o Node.js
 
-1. Baixe este projeto no seu computador
-2. Abra o Claude Code na pasta do projeto
-3. Diga: **"Leia o PRIMEIRO-USO.md e siga as instruções"**
+O [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) precisa do Node.js pra funcionar. O Node.js é um programa que roda nos bastidores — você instala uma vez e não precisa pensar nele de novo.
 
-A IA lê o arquivo, entende o que precisa fazer e conduz o onboarding completo — entrevista, criação da identidade, memórias iniciais e configuração das skills.
-
-> **Importante:** Tudo que é criado fica dentro da pasta do projeto. A única exceção é a skill `/iniciar`, que o Claude vai te pedir autorização para instalar na sua pasta pessoal — isso é o que permite usá-la em qualquer projeto. Totalmente opcional. Veja [Segurança e escopo](#segurança-e-escopo) para detalhes.
+Acesse **[nodejs.org](https://nodejs.org)**, baixe a versão **LTS** (a recomendada) e siga a instalação padrão. No Windows, é um instalador comum de "avançar, avançar, concluir". No Mac, idem.
 
 <details>
-<summary>Comandos exatos para o terminal</summary>
+<summary>Como verificar se já tem o Node.js instalado</summary>
 
+Abra o terminal (no Windows, procure por "Terminal" ou "Prompt de Comando"; no Mac, procure por "Terminal") e digite:
+
+```bash
+node --version
+```
+
+Se aparecer algo como `v20.11.0`, você já tem. Se der erro, instale pelo site acima.
+
+</details>
+
+### Passo 2 — Instalar o Claude Code
+
+Com o Node.js instalado, abra o terminal e digite:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+Esse comando instala o Claude Code no seu computador. Depois disso, o comando `claude` fica disponível no terminal.
+
+> **Primeira vez usando?** Na primeira execução, o Claude Code vai pedir que você faça login com sua conta da Anthropic. Siga as instruções na tela — é um processo de autenticação único.
+
+<details>
+<summary>Documentação oficial completa</summary>
+
+Para opções avançadas de instalação, configuração e solução de problemas, consulte a [documentação oficial do Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview).
+
+</details>
+
+### Passo 3 — Baixar este projeto
+
+Você tem duas opções:
+
+**Opção A — Pelo terminal** (se tiver o Git instalado):
 ```bash
 git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
 cd interface-de-colaboracao
 ```
 
-Abra o Claude Code nessa pasta e diga:
+**Opção B — Pelo navegador** (sem precisar do Git):
+1. Acesse o [repositório no GitHub](https://github.com/jocsaacesar/interface-de-colaboracao)
+2. Clique no botão verde **"Code"** e depois em **"Download ZIP"**
+3. Descompacte a pasta onde preferir
+
+### Passo 4 — Configurar sua IA
+
+Abra o terminal **dentro da pasta do projeto** e digite:
+
+```bash
+claude
+```
+
+Quando o Claude Code abrir, diga:
 
 ```
 Leia o PRIMEIRO-USO.md e siga as instruções
 ```
 
-</details>
+A IA lê o arquivo, entende o que precisa fazer e conduz o onboarding completo — entrevista, criação da identidade, memórias iniciais e configuração das skills. Leva uns 5-10 minutos.
+
+> **Importante:** Tudo que é criado fica dentro da pasta do projeto. A única exceção é a skill `/iniciar`, que o Claude vai te pedir autorização para instalar na sua pasta pessoal — isso é o que permite usá-la em qualquer projeto. Totalmente opcional. Veja [Segurança e escopo](#segurança-e-escopo) para detalhes.
 
 <details>
 <summary>Já tem um projeto rodando? Não clone por cima</summary>
