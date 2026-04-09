@@ -9,6 +9,36 @@ Cada entrada responde três perguntas:
 
 ---
 
+## 08/04/2026 — PRIMEIRO-USO.md como ponto de entrada único do onboarding
+
+**O que decidimos:** Reescrever o PRIMEIRO-USO.md de um guia de troubleshooting para o **ponto de entrada principal** do framework. O usuário diz "Leia o PRIMEIRO-USO.md e siga as instruções" e o Claude conduz todo o onboarding: entrevista, identidade, memórias, workspace e instalação da skill `/iniciar` globalmente.
+
+**Por quê:** Depender de skill discovery automática (`/comece-por-aqui`) é frágil — nem sempre funciona na primeira abertura. Pedir pro Claude ler um arquivo funciona sempre. Além disso, o fluxo antigo não cobria a instalação global do `/iniciar`, que é o que conecta o framework entre projetos.
+
+**O que aprendemos:** O ponto de entrada mais confiável de um framework para IA não é um comando — é um arquivo. Comandos dependem de discovery; arquivos dependem apenas de leitura. E o onboarding é o momento certo pra instalar a skill global, porque o contexto de "por que isso existe" já foi construído pela entrevista.
+
+---
+
+## 08/04/2026 — Skills genéricas: sem referências hardcoded ao Leland
+
+**O que decidimos:** Remover todas as referências ao "Leland" das skills executáveis (`/iniciar`, `/tornar-publico`, `/revisar-texto`). Paths como `exemplos/leland/` foram substituídos por `exemplos/<nome-da-ia>/`. Referências ao Leland em documentação e exemplos permaneceram — ele é a implementação de referência.
+
+**Por quê:** Um usuário novo que cria uma IA chamada "Atlas" não deveria ter paths apontando pra `exemplos/leland/`. Skills executáveis precisam ser genéricas; exemplos e documentação podem referenciar a implementação original.
+
+**O que aprendemos:** Existe uma diferença entre código e documentação quando se trata de nomes próprios. Código (skills) deve ser parametrizado. Documentação pode usar exemplos concretos. Misturar os dois cria uma experiência quebrada pra quem não é o autor original.
+
+---
+
+## 08/04/2026 — Este repo é o framework, não o Jiim Hawkins
+
+**O que decidimos:** Separar definitivamente o framework (Interface de Colaboração) do projeto Jiim Hawkins. Este repositório gerencia apenas o framework — identidade, memória, skills, marketplace. O Jiim Hawkins será um repositório próprio quando a Camada 0 começar.
+
+**Por quê:** O repo nasceu como workspace do Jiim Hawkins e evoluiu para framework público. Mas o CLAUDE.md, as memórias e a pasta `projeto/` ainda tratavam como se o produto morasse aqui. Isso criava ambiguidade: é o framework ou é o agente? A resposta é que são dois projetos distintos com ciclos de vida diferentes.
+
+**O que aprendemos:** Quando um projeto muda de natureza, a infraestrutura precisa acompanhar. Nomes de pastas, memórias e documentação que referenciam a identidade antiga viram ruído. A renomeação da pasta de `projeto-jiim-haawkins` para `interface-de-colaboracao` fecha esse ciclo — o nome do diretório agora diz o que ele é.
+
+---
+
 ## 07/04/2026 — Documentar antes de automatizar: guia de instalação em projeto existente
 
 **O que decidimos:** Criar um guia escrito (`guias/instalacao-projeto-existente.md`) explicando como instalar o framework em um projeto que já existe, em vez de construir imediatamente uma skill `/instalar` automatizada. Também adicionamos uma seção no README apontando para o guia.

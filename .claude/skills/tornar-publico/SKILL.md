@@ -36,13 +36,13 @@ Construir uma lista de todos os arquivos alterados, categorizados como:
 
 Para cada arquivo marcado como "pessoal — com valor público":
 
-1. **Arquivos de memória** → Criar versão sanitizada em `exemplos/leland/memoria/`:
+1. **Arquivos de memória** → Criar versão sanitizada em `exemplos/<nome-da-ia>/memoria/` (usar o nome definido no CLAUDE.md, em minúsculas e sem espaços):
    - Remover o nome real do usuário — substituir por termos genéricos ("o usuário", "o dono do projeto").
    - Remover referências externas específicas (nomes de empresas, URLs, credenciais).
    - Manter a estrutura, tipo e lição intactos — o formato É o ensinamento.
    - Preservar as seções **Por quê** e **Como aplicar** — são as partes mais valiosas.
 
-2. **Arquivos de skill** → Criar descrição simplificada em `exemplos/leland/skills/`:
+2. **Arquivos de skill** → Criar descrição simplificada em `exemplos/<nome-da-ia>/skills/`:
    - Não copiar o SKILL.md completo (esse é a implementação real).
    - Escrever um resumo: o que faz, decisões-chave de design, onde encontrar a versão real.
 

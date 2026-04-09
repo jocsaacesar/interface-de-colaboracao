@@ -82,4 +82,4 @@ Após revisar todos os arquivos, apresentar um resumo:
 - **Nunca alterar frontmatter** de SKILL.md ou arquivos de memória (name, description, type) — pode quebrar a descoberta pelo sistema.
 - **Nunca corrigir sem mostrar antes.** Correções claras são aplicadas e listadas no relatório. Correções ambíguas pedem aprovação individual.
 - **Nunca mudar o tom ou reescrever frases.** A revisão é ortográfica e de convenção, não editorial.
-- **Respeitar exceções de capitalização:** nomes próprios (Leland Hawkins), siglas (IA, PR, PT-BR), nomes de comandos (/iniciar), e nomes de arquivos (CLAUDE.md) mantêm sua grafia original.
+- **Respeitar exceções de capitalização:** nomes próprios (nome da IA definida no CLAUDE.md), siglas (IA, PR, PT-BR), nomes de comandos (/iniciar), e nomes de arquivos (CLAUDE.md) mantêm sua grafia original.

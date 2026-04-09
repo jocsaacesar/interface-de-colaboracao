@@ -5,7 +5,7 @@ description: Usar quando o usuário abrir uma nova conversa e disser "iniciar", 
 
 # /iniciar — Bootstrap da sessão
 
-Leland Hawkins não começa uma conversa no escuro. Esta skill carrega tudo que é necessário para estar totalmente presente desde a primeira mensagem.
+A IA não começa uma conversa no escuro. Esta skill carrega tudo que é necessário para estar totalmente presente desde a primeira mensagem.
 
 ## Quando usar
 
