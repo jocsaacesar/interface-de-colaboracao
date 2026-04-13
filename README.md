@@ -8,11 +8,36 @@
 
 ## Guia para quem nunca programou
 
-Você não precisa saber programar para usar isto. Precisa apenas seguir estes passos — e se algo der errado, o próprio Claude te ajuda a resolver.
+Você não precisa saber programar para usar isto. Precisa apenas de um Terminal aberto.
 
 **Site com tutorial completo:** [mnemosine.ia.br](https://mnemosine.ia.br)
 
-### 1. Instale o Node.js
+### Instalação com um comando
+
+Abra o **Terminal** do seu computador:
+- **Windows:** procure por "Terminal" ou "PowerShell" no menu Iniciar
+- **Mac/Linux:** procure por "Terminal"
+
+Cole **um** destes comandos e aperte Enter:
+
+**Mac / Linux:**
+```bash
+curl -fsSL https://mnemosine.ia.br/instalar.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+irm https://mnemosine.ia.br/instalar.ps1 | iex
+```
+
+O script instala tudo que for necessário (Node.js, Git, Claude Code), baixa o projeto e abre o Claude. Diga "oi" e o processo de configuração começa automaticamente.
+
+**Deu erro?** Copie a mensagem de erro e cole no Claude quando ele abrir — ele vai te ajudar a resolver.
+
+<details>
+<summary>Prefere instalar passo a passo? (clique para expandir)</summary>
+
+#### 1. Instale o Node.js
 
 O Claude Code precisa de um programa chamado Node.js para funcionar. Você instala uma vez e esquece.
 
@@ -20,13 +45,9 @@ O Claude Code precisa de um programa chamado Node.js para funcionar. Você insta
 2. Clique no botão grande escrito **LTS** (é a versão recomendada)
 3. Abra o arquivo baixado e siga a instalação normal (avançar, avançar, concluir)
 
-### 2. Instale o Claude Code
+#### 2. Instale o Claude Code
 
-Abra o **Terminal** do seu computador:
-- **Windows:** procure por "Terminal" ou "Prompt de Comando" no menu Iniciar
-- **Mac:** procure por "Terminal" no Spotlight (Cmd + Espaço)
-
-Copie e cole este comando e aperte Enter:
+Copie e cole este comando no Terminal e aperte Enter:
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -34,39 +55,24 @@ npm install -g @anthropic-ai/claude-code
 
 > Na primeira vez, o Claude Code vai pedir que você faça login com sua conta da Anthropic. Siga as instruções na tela.
 
-### 3. Baixe este projeto
-
-Ainda no GitHub (esta página), faça assim:
-
-1. Clique no botão verde **"<> Code"** no canto superior direito
-2. Na aba **HTTPS**, clique no icone de copiar ao lado do link
-3. Volte ao Terminal e cole este comando (trocando o link se necessário):
+#### 3. Baixe este projeto
 
 ```bash
 git clone https://github.com/jocsaacesar/mnemosine.git
 ```
 
-**Não tem o Git instalado?** Sem problema — clique em **"Download ZIP"** no mesmo botão verde, descompacte a pasta onde preferir.
+**Não tem o Git instalado?** No GitHub, clique no botão verde **"<> Code"** > **"Download ZIP"** e descompacte a pasta.
 
-### 4. Abra o Claude Code na pasta do projeto
-
-No Terminal, entre na pasta que acabou de baixar:
+#### 4. Abra o Claude Code
 
 ```bash
 cd mnemosine
-```
-
-E depois inicie o Claude:
-
-```bash
 claude
 ```
 
-### 5. Pronto — o Claude faz o resto
+Diga "oi" — o Claude detecta que é o primeiro uso e começa a configuração automaticamente.
 
-Quando o Claude abrir, ele já sabe o que fazer. Diga "oi", "bom dia", ou qualquer coisa — o processo de configuração começa automaticamente. Ele vai te fazer algumas perguntas para te conhecer e criar uma IA personalizada para você. Leva uns 5-10 minutos.
-
-**Deu erro em qualquer passo?** Copie a mensagem de erro e cole no Claude. Ele vai entender o problema e te guiar na solução — você não precisa saber o que o erro significa.
+</details>
 
 ---
 
