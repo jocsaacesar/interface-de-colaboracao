@@ -1,6 +1,6 @@
 # Contribuindo
 
-Obrigado pelo interesse em melhorar a Interface de Colaboração com Claude. Este projeto existe para ajudar criadores a construir colaborações mais profundas e intencionais com IA — e contribuições que sirvam a essa missão são bem-vindas.
+Obrigado pelo interesse em melhorar o Mnemosine. Este projeto existe para ajudar criadores a construir colaborações mais profundas e intencionais com IA — e contribuições que sirvam a essa missão são bem-vindas.
 
 ## Antes de contribuir
 

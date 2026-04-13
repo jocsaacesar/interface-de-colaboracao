@@ -68,7 +68,7 @@ cp -r /caminho/para/mnemosine/.claude/skills/* .claude/skills/
 **Não sobrescreva seu `.gitignore`.** Adicione estas linhas ao final:
 
 ```gitignore
-# === Interface de Colaboração — dados pessoais ===
+# === Mnemosine — dados pessoais ===
 /memoria/
 /memory/
 /troca/

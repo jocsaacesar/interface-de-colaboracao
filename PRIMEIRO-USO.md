@@ -6,7 +6,7 @@
 
 ## O que está acontecendo
 
-O usuário baixou o framework **Interface de Colaboração** dentro do projeto dele. Este framework cria uma camada de relacionamento persistente entre humano e IA — com identidade, memória estruturada e skills que sobrevivem entre conversas.
+O usuário baixou o **Mnemosine** (framework de Interface de Colaboração com Claude Code). Este framework cria uma camada de relacionamento persistente entre humano e IA — com identidade, memória estruturada e skills que sobrevivem entre conversas.
 
 Você vai conduzir a configuração completa. Ao final, o usuário terá:
 - Uma IA com nome, personalidade e regras de comportamento sob medida

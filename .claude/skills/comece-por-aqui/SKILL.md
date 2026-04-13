@@ -1,16 +1,16 @@
 ---
 name: comece-por-aqui
-description: Skill de onboarding para novos usuários. Entrevista o usuário para entender quem é, o que precisa, e constrói uma interface de colaboração personalizada do zero. Rodar uma vez após clonar o repositório.
+description: Skill de onboarding para novos usuários do Mnemosine. Entrevista o usuário para entender quem é, o que precisa, e constrói uma interface de colaboração personalizada do zero. Disparada automaticamente no primeiro uso.
 ---
 
 # /comece-por-aqui — Sua primeira interface de colaboração
 
-Esta skill transforma um repositório clonado em um ambiente de colaboração personalizado. Ela faz perguntas, escuta e constrói — o usuário sai com uma identidade de IA funcional, memórias iniciais e um workspace configurado.
+Esta skill transforma uma instalação do Mnemosine em um ambiente de colaboração personalizado. Ela faz perguntas, escuta e constrói — o usuário sai com uma identidade de IA funcional, memórias iniciais e um workspace configurado.
 
 ## Quando usar
 
-- Quando um novo usuário clona o repositório e quer configurar sua própria interface de colaboração.
-- Quando alguém digita `/comece-por-aqui` pela primeira vez.
+- Quando o CLAUDE.md detecta primeiro uso e dispara o onboarding automaticamente.
+- Quando um novo usuário digita `/comece-por-aqui` manualmente.
 - **Roda apenas uma vez por configuração de projeto.** Após o onboarding inicial, o usuário trabalha com `/iniciar`, `/tornar-publico` e `/ate-a-proxima`.
 
 ## Tom

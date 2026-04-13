@@ -33,7 +33,7 @@ erro()    { echo -e "${RED}[erro]${NC} $1"; }
 echo ""
 echo -e "${BOLD}╔══════════════════════════════════════════════╗${NC}"
 echo -e "${BOLD}║          Mnemosine — Instalação              ║${NC}"
-echo -e "${BOLD}║   Interface de Colaboração com Claude Code   ║${NC}"
+echo -e "${BOLD}║      Sua IA com memória e identidade         ║${NC}"
 echo -e "${BOLD}╚══════════════════════════════════════════════╝${NC}"
 echo ""
 

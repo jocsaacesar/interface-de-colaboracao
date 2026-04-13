@@ -1,6 +1,6 @@
-# Interface de Colaboração com Claude — Guia Prático
+# Mnemosine — Guia Prático
 
-Este arquivo é a **documentação do framework**. Ele NÃO é lido automaticamente pelo Claude Code — o que é lido é o `CLAUDE.md` na raiz, que contém a identidade da sua IA (gerado pelo `/comece-por-aqui`).
+Este arquivo é a **documentação do framework Mnemosine** (Interface de Colaboração com Claude Code). Ele NÃO é lido automaticamente pelo Claude Code — o que é lido é o `CLAUDE.md` na raiz, que contém a identidade da sua IA (gerado automaticamente no primeiro uso).
 
 Use este arquivo como referência para entender como o sistema de identidade, memória, skills e sessões funciona.
 
@@ -380,11 +380,11 @@ projeto/
 
 ## 11. Estado atual
 
-- **Fase do projeto:** Framework v1.2 — guia de instalação para projetos existentes, correção do gitignore, separação do marketplace. 17 PRs merged.
+- **Fase do projeto:** Mnemosine v1.4 — onboarding automático, scripts de instalação (PT-BR e EN), seção para não-programadores. 25 PRs merged.
 - **Repositório:** `github.com/jocsaacesar/mnemosine` — PT-BR, proteção de branch, padrões comunitários.
+- **Site:** `mnemosine.ia.br` — tutorial para leigos, hospedado no Linode.
 - **Skills core (5):** /comece-por-aqui, /iniciar, /ate-a-proxima, /criar-skill, /marketplace.
 - **Marketplace (2):** /tornar-publico, /revisar-texto.
-- **Arquitetura-chave:** CLAUDE.md = identidade do usuário, CLAUDE-IC.md = documentação do framework. Separação skills core vs marketplace.
-- **Novo:** Guia de instalação para projetos existentes (`guias/instalacao-projeto-existente.md`).
-- **Objetivo Jiim Hawkins:** Ainda ativo — agente de IA pessoal (LLM fine-tuned + RAG + ferramentas de agente), rodando localmente com GPU Linode para escalar.
-- **Próximo passo:** Continuar coletando feedback de testadores. Testar instalação em projeto real existente (UniBGR). Layer 0 quando pronto.
+- **Arquitetura-chave:** CLAUDE.md detecta primeiro uso e dispara onboarding automaticamente. CLAUDE-IC.md = documentação do framework. Separação skills core vs marketplace.
+- **Instalação automatizada:** Scripts bash e PowerShell em `scripts/` (PT-BR) e `scripts/en/` (EN) que instalam Node.js, Git, Claude Code e clonam o repo com um único comando.
+- **Próximo passo:** Aprimoramentos contínuos no framework, site mnemosine.ia.br.

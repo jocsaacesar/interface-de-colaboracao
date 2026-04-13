@@ -1,6 +1,6 @@
 # Glossário de skills
 
-Uma referência prática para cada skill disponível na Interface de Colaboração com Claude. Cada entrada explica o que a skill faz, quando usar, o que esperar e o que ela nunca fará.
+Uma referência prática para cada skill disponível no Mnemosine. Cada entrada explica o que a skill faz, quando usar, o que esperar e o que ela nunca fará.
 
 **Skills core** vêm incluídas e funcionam imediatamente. **Skills do marketplace** são opcionais — você instala copiando a pasta para `.claude/skills/`.
 
@@ -34,12 +34,12 @@ Constrói toda a sua interface de colaboração personalizada do zero — identi
 
 ### Quando usar
 
-- Logo após clonar o repositório pela primeira vez.
+- Logo após instalar o Mnemosine (o CLAUDE.md detecta automaticamente e inicia o onboarding).
 - Se quiser refazer sua configuração do zero.
 
 ### Nota sobre bootstrap
 
-Esta é a **única skill que roda sem `/iniciar`**. Ela foi projetada para funcionar em um ambiente completamente vazio — sem CLAUDE.md, sem memórias, sem contexto prévio. O Claude Code a descobre automaticamente da pasta `.claude/skills/`. Você clona, abre o Claude Code, digita `/comece-por-aqui`, e funciona.
+Esta é a **única skill que roda sem `/iniciar`**. Ela foi projetada para funcionar em um ambiente completamente vazio — sem CLAUDE.md personalizado, sem memórias, sem contexto prévio. O Claude Code a descobre automaticamente da pasta `.claude/skills/`. Na instalação padrão, o CLAUDE.md detecta o primeiro uso e dispara o onboarding automaticamente — o usuário não precisa digitar nenhum comando.
 
 ### O que acontece
 
