@@ -381,7 +381,7 @@ projeto/
 ## 11. Estado atual
 
 - **Fase do projeto:** Framework v1.2 — guia de instalação para projetos existentes, correção do gitignore, separação do marketplace. 17 PRs merged.
-- **Repositório:** `github.com/jocsaacesar/interface-de-colaboracao` — PT-BR, proteção de branch, padrões comunitários.
+- **Repositório:** `github.com/jocsaacesar/mnemosine` — PT-BR, proteção de branch, padrões comunitários.
 - **Skills core (5):** /comece-por-aqui, /iniciar, /ate-a-proxima, /criar-skill, /marketplace.
 - **Marketplace (2):** /tornar-publico, /revisar-texto.
 - **Arquitetura-chave:** CLAUDE.md = identidade do usuário, CLAUDE-IC.md = documentação do framework. Separação skills core vs marketplace.

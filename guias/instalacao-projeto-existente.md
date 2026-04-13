@@ -45,7 +45,7 @@ Nem tudo no repositório do framework é pra ir pro seu projeto. A maioria dos a
 
 ```bash
 # Em qualquer lugar fora do seu projeto
-git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
+git clone https://github.com/jocsaacesar/mnemosine.git
 ```
 
 ### 2. Copie as skills
@@ -53,14 +53,14 @@ git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
 ```bash
 # Dentro da pasta do seu projeto
 # Se já tiver .claude/skills/, as skills são adicionadas sem apagar as existentes
-cp -r /caminho/para/interface-de-colaboracao/.claude/skills/* .claude/skills/
+cp -r /caminho/para/mnemosine/.claude/skills/* .claude/skills/
 ```
 
 Se a pasta `.claude/skills/` não existir, crie:
 
 ```bash
 mkdir -p .claude/skills
-cp -r /caminho/para/interface-de-colaboracao/.claude/skills/* .claude/skills/
+cp -r /caminho/para/mnemosine/.claude/skills/* .claude/skills/
 ```
 
 ### 3. Atualize seu .gitignore
@@ -80,8 +80,8 @@ A barra inicial (`/`) é importante — garante que só ignora essas pastas na r
 ### 4. Copie a documentação de referência (opcional)
 
 ```bash
-cp /caminho/para/interface-de-colaboracao/CLAUDE-IC.md .
-cp /caminho/para/interface-de-colaboracao/GLOSSARIO_DE_SKILLS.md .
+cp /caminho/para/mnemosine/CLAUDE-IC.md .
+cp /caminho/para/mnemosine/GLOSSARIO_DE_SKILLS.md .
 ```
 
 ### 5. Rode o onboarding

@@ -235,12 +235,12 @@ Você tem duas opções:
 
 **Opção A — Pelo terminal** (se tiver o Git instalado):
 ```bash
-git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
-cd interface-de-colaboracao
+git clone https://github.com/jocsaacesar/mnemosine.git
+cd mnemosine
 ```
 
 **Opção B — Pelo navegador** (sem precisar do Git):
-1. Acesse o [repositório no GitHub](https://github.com/jocsaacesar/interface-de-colaboracao)
+1. Acesse o [repositório no GitHub](https://github.com/jocsaacesar/mnemosine)
 2. Clique no botão verde **"Code"** e depois em **"Download ZIP"**
 3. Descompacte a pasta onde preferir
 
@@ -365,7 +365,7 @@ Contribuições são bem-vindas. Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes d
 
 [MIT](LICENSE)
 
-**Repositório:** [github.com/jocsaacesar/interface-de-colaboracao](https://github.com/jocsaacesar/interface-de-colaboracao)
+**Repositório:** [github.com/jocsaacesar/mnemosine](https://github.com/jocsaacesar/mnemosine)
 
 ---
 
