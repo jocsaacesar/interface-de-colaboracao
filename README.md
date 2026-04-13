@@ -1,6 +1,8 @@
-# Mnemosine — Interface de Colaboração com Claude
+# Mnemosine
 
-> **Nunca programou? Sem problema.** Este guia rápido te leva do zero até uma IA que te conhece. Se travar em qualquer passo, cola o erro no Claude que ele te ajuda.
+**E se a sua IA lembrasse quem você é?**
+
+> **Nunca programou?** Siga o [guia rápido](#guia-para-quem-nunca-programou) — te leva do zero até uma IA que te conhece.
 >
 > **Já programa?** Pule direto para [Como funciona](#como-funciona).
 
@@ -79,8 +81,6 @@ Diga "oi" — o Claude detecta que é o primeiro uso e começa a configuração 
 > **A partir daqui, o conteúdo é voltado para quem já tem familiaridade com desenvolvimento.**
 
 ---
-
-**E se a sua IA lembrasse quem você é?**
 
 Pense na melhor conversa que você já teve com alguém. Não precisou explicar quem era, o que fazia, nem por que pensava daquele jeito. A pessoa já sabia. E por isso, a conversa foi *sobre o que importava* — não sobre contexto.
 
