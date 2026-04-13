@@ -1,4 +1,78 @@
-# Interface de Colaboração com Claude
+# Mnemosine — Interface de Colaboração com Claude
+
+> **Nunca programou? Sem problema.** Este guia rápido te leva do zero até uma IA que te conhece. Se travar em qualquer passo, cola o erro no Claude que ele te ajuda.
+>
+> **Já programa?** Pule direto para [Como funciona](#como-funciona).
+
+---
+
+## Guia para quem nunca programou
+
+Você não precisa saber programar para usar isto. Precisa apenas seguir estes passos — e se algo der errado, o próprio Claude te ajuda a resolver.
+
+**Site com tutorial completo:** [mnemosine.ia.br](https://mnemosine.ia.br)
+
+### 1. Instale o Node.js
+
+O Claude Code precisa de um programa chamado Node.js para funcionar. Você instala uma vez e esquece.
+
+1. Acesse **[nodejs.org](https://nodejs.org)**
+2. Clique no botão grande escrito **LTS** (é a versão recomendada)
+3. Abra o arquivo baixado e siga a instalação normal (avançar, avançar, concluir)
+
+### 2. Instale o Claude Code
+
+Abra o **Terminal** do seu computador:
+- **Windows:** procure por "Terminal" ou "Prompt de Comando" no menu Iniciar
+- **Mac:** procure por "Terminal" no Spotlight (Cmd + Espaço)
+
+Copie e cole este comando e aperte Enter:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+> Na primeira vez, o Claude Code vai pedir que você faça login com sua conta da Anthropic. Siga as instruções na tela.
+
+### 3. Baixe este projeto
+
+Ainda no GitHub (esta página), faça assim:
+
+1. Clique no botão verde **"<> Code"** no canto superior direito
+2. Na aba **HTTPS**, clique no icone de copiar ao lado do link
+3. Volte ao Terminal e cole este comando (trocando o link se necessário):
+
+```bash
+git clone https://github.com/jocsaacesar/mnemosine.git
+```
+
+**Não tem o Git instalado?** Sem problema — clique em **"Download ZIP"** no mesmo botão verde, descompacte a pasta onde preferir.
+
+### 4. Abra o Claude Code na pasta do projeto
+
+No Terminal, entre na pasta que acabou de baixar:
+
+```bash
+cd mnemosine
+```
+
+E depois inicie o Claude:
+
+```bash
+claude
+```
+
+### 5. Pronto — o Claude faz o resto
+
+Quando o Claude abrir, ele já sabe o que fazer. Diga "oi", "bom dia", ou qualquer coisa — o processo de configuração começa automaticamente. Ele vai te fazer algumas perguntas para te conhecer e criar uma IA personalizada para você. Leva uns 5-10 minutos.
+
+**Deu erro em qualquer passo?** Copie a mensagem de erro e cole no Claude. Ele vai entender o problema e te guiar na solução — você não precisa saber o que o erro significa.
+
+---
+
+> **A partir daqui, o conteúdo é voltado para quem já tem familiaridade com desenvolvimento.**
+
+---
 
 **E se a sua IA lembrasse quem você é?**
 
@@ -252,13 +326,7 @@ Abra o terminal **dentro da pasta do projeto** e digite:
 claude
 ```
 
-Quando o Claude Code abrir, diga:
-
-```
-Leia o PRIMEIRO-USO.md e siga as instruções
-```
-
-A IA lê o arquivo, entende o que precisa fazer e conduz o onboarding completo — entrevista, criação da identidade, memórias iniciais e configuração das skills. Leva uns 5-10 minutos.
+O Claude detecta automaticamente que é o primeiro uso e inicia o onboarding sozinho. Diga qualquer coisa ("oi", "começar") e ele conduz a entrevista, cria a identidade, memórias iniciais e configura as skills. Leva uns 5-10 minutos.
 
 > **Importante:** Tudo que é criado fica dentro da pasta do projeto. A única exceção é a skill `/iniciar`, que o Claude vai te pedir autorização para instalar na sua pasta pessoal — isso é o que permite usá-la em qualquer projeto. Totalmente opcional. Veja [Segurança e escopo](#segurança-e-escopo) para detalhes.
 
