@@ -1,0 +1,3 @@
+- [Language convention](feedback_language.md) — Project files in English, technical terms preserved as-is
+- [User profile](user_profile.md) — Example profile showing how to capture role and preferences
+- [Session bootstrap](feedback_session_bootstrap.md) — Memory files live in the project folder for full transparency

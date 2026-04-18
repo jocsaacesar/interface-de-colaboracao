@@ -1,0 +1,179 @@
+# Installation in an existing project
+
+This guide is for those who **already have a project running** and want to add the collaboration framework without breaking anything. If you're starting from scratch, the simplest path is to clone the repository directly — see the [README](../README.md#quick-start).
+
+---
+
+## What you need to copy
+
+Not everything in the framework repository belongs in your project. Most files are documentation, examples, and infrastructure for the repository itself. What actually needs to be in your project is minimal:
+
+### Essential (the framework doesn't work without these)
+
+| What | Why |
+|------|-----|
+| `.claude/skills/` | The skills — `/get-started`, `/start`, `/wrap-up`, `/create-skill`, `/marketplace`. Without them, there's no framework. |
+| Entries in `.gitignore` | Protect your memory and file exchange folders. **Don't copy the entire file** — add the lines to your existing `.gitignore`. |
+
+### Recommended (reference and documentation)
+
+| What | Why |
+|------|-----|
+| `CLAUDE-IC.md` | Complete framework documentation. Unique name, doesn't conflict with anything. |
+| `SKILL_GLOSSARY.md` | User guide for all skills. |
+
+### Don't copy (these belong to the framework repository, not your project)
+
+| What | Why not |
+|------|---------|
+| `README.md` | It's the framework's presentation, not your project's. You already have yours. |
+| `LICENSE` | Your project has its own license. |
+| `CONTRIBUTING.md` | Framework contribution rules, not your project's. |
+| `CODE_OF_CONDUCT.md` | Same. |
+| `SECURITY.md` | Same. |
+| `.github/` | Framework PR and issue templates. You may already have yours. |
+| `JOURNAL.md` | Optional. If you want a decision journal, create yours from scratch. |
+| `guides/` | Reference. Read in the original repository, doesn't need to be in your project. |
+| `templates/` | Templates. Use when needed, no need to copy. |
+| `examples/` | Reference implementation. Doesn't make sense in your project. |
+
+---
+
+## Step by step
+
+### 1. Download the framework
+
+```bash
+# Anywhere outside your project
+git clone https://github.com/jocsaacesar/interface-de-colaboracao.git
+```
+
+### 2. Copy the skills
+
+```bash
+# Inside your project folder
+# If you already have .claude/skills/, skills are added alongside existing ones
+cp -r /path/to/interface-de-colaboracao/.claude/skills/* .claude/skills/
+```
+
+If the `.claude/skills/` folder doesn't exist, create it:
+
+```bash
+mkdir -p .claude/skills
+cp -r /path/to/interface-de-colaboracao/.claude/skills/* .claude/skills/
+```
+
+### 3. Update your .gitignore
+
+**Don't overwrite your `.gitignore`.** Add these lines at the end:
+
+```gitignore
+# === Collaboration Interface — personal data ===
+/memory/
+/exchange/
+```
+
+The leading slash (`/`) is important — it ensures only these folders at the project root are ignored, without affecting subfolders with matching names.
+
+### 4. Copy reference documentation (optional)
+
+```bash
+cp /path/to/interface-de-colaboracao/CLAUDE-IC.md .
+cp /path/to/interface-de-colaboracao/SKILL_GLOSSARY.md .
+```
+
+### 5. Run the onboarding
+
+Open Claude Code in your project folder and type:
+
+```
+/get-started
+```
+
+The skill will interview you and generate a personalized `CLAUDE.md`. If you **already have a `CLAUDE.md`**, the skill should detect it and ask what to do. If it doesn't ask, see the [Caveats](#caveats) section below.
+
+---
+
+## Caveats
+
+### You already have a `CLAUDE.md`
+
+If your project already uses a `CLAUDE.md` with Claude Code instructions, `/get-started` will try to create a new one. Before running:
+
+1. **Read your current `CLAUDE.md`** — note what's important.
+2. **Rename temporarily** — `mv CLAUDE.md CLAUDE.backup.md`.
+3. **Run `/get-started`** — let the skill generate the new one.
+4. **Merge manually** — take the instructions from the backup and add them to the newly generated `CLAUDE.md`.
+
+This is the only file that requires manual attention. Everything else either doesn't conflict or doesn't need to be copied.
+
+### You already have `.claude/skills/`
+
+No problem. The `cp -r` adds the framework skills alongside yours. No existing skill is overwritten — unless you already have a folder with the same name (unlikely, the names are specific).
+
+### You already have `.github/`
+
+Don't copy the framework's `.github/`. The issue and PR templates were written for the framework repository, not your project.
+
+### Marketplace in an existing project
+
+The marketplace works the same way:
+
+```bash
+git clone https://github.com/jocsaacesar/interface-colaboracao-skills.git marketplace
+```
+
+Or, after installing the core skills, type `/marketplace` in the conversation and the AI handles the rest.
+
+---
+
+## What the framework creates in your project
+
+After `/get-started`, these new folders and files will exist:
+
+```
+your-project/
+├── .claude/skills/          <- Framework skills (you copied)
+├── CLAUDE.md                <- Your AI's identity (generated by the skill)
+├── CLAUDE-IC.md             <- Framework documentation (you copied)
+├── memory/                  <- Created by /get-started (in .gitignore)
+│   └── MEMORY.md
+└── exchange/                <- Created by /get-started (in .gitignore)
+    ├── inbox/
+    └── outbox/
+```
+
+The `memory/` and `exchange/` folders are protected by `.gitignore` — they'll never go to your repository. Everything else coexists with the files you already have.
+
+---
+
+## How to uninstall
+
+If you want to remove the framework from your project:
+
+```bash
+# Remove skills
+rm -rf .claude/skills/get-started
+rm -rf .claude/skills/start
+rm -rf .claude/skills/wrap-up
+rm -rf .claude/skills/create-skill
+rm -rf .claude/skills/marketplace
+
+# Remove framework files
+rm -f CLAUDE-IC.md SKILL_GLOSSARY.md
+
+# Remove created folders (optional — they contain your data)
+rm -rf memory/ exchange/
+
+# Remove .gitignore entries (edit manually)
+# Remove the lines /memory/, /exchange/
+
+# Remove CLAUDE.md (your call — you may want to keep it)
+```
+
+If you synced memory to the system folder:
+```bash
+rm -rf ~/.claude/projects/<your-project-name>/memory/
+```
+
+No residue. No global state. Your project goes back to exactly how it was before.
