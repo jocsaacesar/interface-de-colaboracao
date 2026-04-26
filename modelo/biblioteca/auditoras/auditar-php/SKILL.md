@@ -1,54 +1,56 @@
 ---
 name: auditar-php
-description: Audita codigo PHP do PR aberto contra as regras definidas em docs/padroes-php.md. Entrega relatorio de violacoes e plano de correcoes. Trigger manual apenas.
+description: Audita código PHP do PR aberto contra as regras definidas em docs/padroes-php.md. Entrega relatório de violações e plano de correções. Trigger manual apenas.
 ---
 
-# /auditar-php — Auditora de padroes PHP
+# /auditar-php — Auditora de padrões PHP
 
-Le as regras de `docs/padroes-php.md`, identifica os arquivos PHP alterados no PR aberto (nao mergeado) e compara cada arquivo contra cada regra aplicavel. Entrega um relatorio de violacoes com referencia ao ID da regra e um plano de correcoes quando necessario.
+Lê as regras de `docs/padroes-php.md`, identifica os arquivos PHP alterados no PR aberto (não mergeado) e compara cada arquivo contra cada regra aplicável. Entrega um relatório de violações com referência ao ID da regra e um plano de correções quando necessário.
 
 ## Quando usar
 
-- **APENAS** quando o usuario digitar `/auditar-php` explicitamente.
+- **APENAS** quando o usuário digitar `/auditar-php` explicitamente.
 - Rodar antes de mergear um PR — funciona como gate de qualidade.
 - **Nunca** disparar automaticamente, nem como parte de outra skill.
 
-## Padroes minimos exigidos
+## Padrões mínimos exigidos
 
-> Esta secao contem os padroes completos usados pela auditoria. Edite para personalizar ao seu projeto.
+> Esta seção contém os padrões completos usados pela auditoria. Edite para personalizar ao seu projeto.
 
-# Padrao de programacao em PHP
+# Padrão de programação em PHP
 
-## Descricao
+## Descrição
 
-Documento de referencia para auditoria de codigo PHP no projeto. Define regras obrigatorias e recomendacoes que toda classe, metodo e arquivo PHP deve seguir. A skill `/auditar-php` le este documento e compara contra o codigo-alvo.
+Documento de referência para auditoria de código PHP no projeto Acertando os Pontos. Define regras obrigatórias e recomendações que toda classe, método e arquivo PHP deve seguir. A skill `/auditar-php` lê este documento e compara contra o código-alvo.
 
 ## Escopo
 
-- Todo codigo PHP dentro dos diretorios do projeto
+- Todo código PHP dentro de `acertandoospontos/inc/` e `acertandoospontos/paginas/`
 - PHP 8.1+ com `declare(strict_types=1)`
+- Contexto: WordPress Multisite, OOP, dados financeiros
 
-## Referencias
+## Referências
 
 - [PSR-1: Basic Coding Standard](https://www.php-fig.org/psr/psr-1/)
 - [PSR-4: Autoloading Standard](https://www.php-fig.org/psr/psr-4/)
 - [PSR-12: Extended Coding Style Guide](https://www.php-fig.org/psr/psr-12/)
+- [WordPress Coding Standards — PHP](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/)
 - [SemVer 2.0.0](https://semver.org/lang/pt-BR/)
 
 ## Severidade
 
-- **ERRO** — Violacao bloqueia aprovacao. Deve ser corrigida antes de merge.
-- **AVISO** — Recomendacao forte. Deve ser justificada se ignorada.
+- **ERRO** — Violação bloqueia aprovação. Deve ser corrigida antes de merge.
+- **AVISO** — Recomendação forte. Deve ser justificada se ignorada.
 
 ---
 
-## 1. Principios fundamentais
+## 1. Princípios fundamentais
 
-Estes principios regem toda decisao de codigo. A skill os usa como criterio de julgamento quando uma regra especifica nao cobre o caso.
+Estes princípios regem toda decisão de código. A skill os usa como critério de julgamento quando uma regra específica não cobre o caso.
 
 ### PHP-001 — KISS: simplicidade primeiro [AVISO]
 
-O codigo deve ser o mais simples possivel. Se existe uma forma direta de resolver, usar essa. Abstracoes, patterns e indirecoes so entram quando o problema exige.
+O código deve ser o mais simples possível. Se existe uma forma direta de resolver, usar essa. Abstrações, patterns e indireções só entram quando o problema exige.
 
 ```php
 // correto — direto
@@ -57,7 +59,7 @@ public function estaAtiva(): bool
     return $this->status === self::STATUS_ATIVA;
 }
 
-// incorreto — indirecao sem necessidade
+// incorreto — indireção sem necessidade
 public function estaAtiva(): bool
 {
     return (new StatusChecker($this))->verificar(self::STATUS_ATIVA);
@@ -66,11 +68,11 @@ public function estaAtiva(): bool
 
 ### PHP-002 — DRY: uma regra, um lugar [ERRO]
 
-Uma regra de negocio e implementada em um unico ponto do sistema. Se o mesmo calculo ou validacao aparece em dois lugares, extrair para um metodo ou classe.
+Uma regra de negócio é implementada em um único ponto do sistema. Se o mesmo cálculo ou validação aparece em dois lugares, extrair para um método ou classe.
 
 ```php
-// correto — calculo centralizado na entidade
-class Pedido
+// correto — cálculo centralizado na entidade
+class Lancamento
 {
     public function valorLiquido(): int
     {
@@ -78,38 +80,38 @@ class Pedido
     }
 }
 
-// incorreto — calculo duplicado no handler e no manager
+// incorreto — cálculo duplicado no handler e no manager
 // handler: $liquido = $valor - $desconto;
 // manager: $liquido = $valor - $desconto;
 ```
 
-### PHP-003 — YAGNI: nao construa o que nao precisa agora [AVISO]
+### PHP-003 — YAGNI: não construa o que não precisa agora [AVISO]
 
-Nao implementar classes, metodos ou parametros pensando em "possibilidades futuras". Implementar estritamente o que o requisito atual exige. Codigo que nunca sera usado e divida tecnica desde o nascimento.
+Não implementar classes, métodos ou parâmetros pensando em "possibilidades futuras". Implementar estritamente o que o requisito atual exige. Código que nunca será usado é dívida técnica desde o nascimento.
 
-### PHP-004 — Separacao de responsabilidades (SoC) [ERRO]
+### PHP-004 — Separação de responsabilidades (SoC) [ERRO]
 
 Cada camada tem um trabalho:
 
 | Camada | Responsabilidade | Pasta |
 |--------|-----------------|-------|
-| Entidade | Logica de dominio, estado, predicados | `inc/entidades/` |
-| Repositorio | Acesso a dados, queries, hidratacao | `inc/repositorios/` |
-| Gerenciador | Orquestracao, regras entre entidades | `inc/gerenciadores/` |
+| Entidade | Lógica de domínio, estado, predicados | `inc/entidades/` |
+| Repositório | Acesso a dados, queries, hidratação | `inc/repositorios/` |
+| Gerenciador | Orquestração, regras entre entidades | `inc/gerenciadores/` |
 | Handler | Receber request, validar, delegar, responder | `inc/handlers/` |
 
-Handler nunca faz query. Repositorio nunca valida request. Entidade nunca acessa banco.
+Handler nunca faz query. Repositório nunca valida request. Entidade nunca acessa banco.
 
-### PHP-005 — Lei de Demeter: fale so com seus vizinhos [AVISO]
+### PHP-005 — Lei de Demeter: fale só com seus vizinhos [AVISO]
 
-Um objeto interage apenas com suas dependencias diretas. Nunca encadear chamadas que atravessam camadas.
+Um objeto interage apenas com suas dependências diretas. Nunca encadear chamadas que atravessam camadas.
 
 ```php
 // correto
 $saldo = $conta->saldoAtual();
 
 // incorreto — o handler conhece a estrutura interna da conta
-$saldo = $pedido->conta()->repositorio()->calcularSaldo();
+$saldo = $lancamento->conta()->repositorio()->calcularSaldo();
 ```
 
 ---
@@ -120,15 +122,15 @@ $saldo = $pedido->conta()->repositorio()->calcularSaldo();
 
 ```php
 // correto
-class PedidoRepository {}
+class LancamentoRepository {}
 class FinanceiroManager {}
 
 // incorreto
-class pedido_repository {}
+class lancamento_repository {}
 class financeiroManager {}
 ```
 
-### PHP-007 — Metodos e propriedades em camelCase [ERRO]
+### PHP-007 — Métodos e propriedades em camelCase [ERRO]
 
 ```php
 // correto
@@ -152,27 +154,27 @@ public const statusAtivo = 'ativo';
 private const maxTentativas = 3;
 ```
 
-### PHP-009 — Variaveis locais em camelCase [AVISO]
+### PHP-009 — Variáveis locais em camelCase [AVISO]
 
 ```php
 // correto
-$valorTotal = $pedido->valorCents();
+$valorTotal = $lancamento->valorCents();
 $categoriaId = $request['categoria_id'];
 
 // incorreto
-$valor_total = $pedido->valorCents();
+$valor_total = $lancamento->valorCents();
 $CategoriaId = $request['categoria_id'];
 ```
 
-### PHP-010 — Nomes descritivos, sem abreviacoes obscuras [AVISO]
+### PHP-010 — Nomes descritivos, sem abreviações obscuras [AVISO]
 
 ```php
 // correto
-$pedidoRepository = new PedidoRepository($db);
+$lancamentoRepository = new LancamentoRepository($wpdb);
 $categoriaAtiva = $categoria->estaAtiva();
 
 // incorreto
-$pr = new PedidoRepository($db);
+$lr = new LancamentoRepository($wpdb);
 $ca = $categoria->estaAtiva();
 ```
 
@@ -182,11 +184,11 @@ $ca = $categoria->estaAtiva();
 
 ### PHP-011 — Um arquivo por classe [ERRO]
 
-Cada classe PHP vive em seu proprio arquivo. O nome do arquivo e o nome da classe seguido de `.php`.
+Cada classe PHP vive em seu próprio arquivo. O nome do arquivo é o nome da classe seguido de `.php`.
 
 ```
-inc/entidades/Pedido.php              <- classe Pedido
-inc/repositorios/PedidoRepository.php <- classe PedidoRepository
+inc/entidades/Lancamento.php              ← classe Lancamento
+inc/repositorios/LancamentoRepository.php ← classe LancamentoRepository
 ```
 
 ### PHP-012 — Todo arquivo PHP abre com strict_types [ERRO]
@@ -196,22 +198,22 @@ inc/repositorios/PedidoRepository.php <- classe PedidoRepository
 <?php
 declare(strict_types=1);
 
-class Pedido {}
+class Lancamento {}
 
 // incorreto
 <?php
-class Pedido {}
+class Lancamento {}
 ```
 
 ### PHP-013 — Sem tag de fechamento PHP [ERRO]
 
-Arquivos que contem apenas PHP nao usam `?>` no final.
+Arquivos que contêm apenas PHP não usam `?>` no final.
 
 ---
 
 ## 4. Tipagem
 
-### PHP-014 — Type hints obrigatorios em parametros [ERRO]
+### PHP-014 — Type hints obrigatórios em parâmetros [ERRO]
 
 ```php
 // correto
@@ -221,22 +223,22 @@ public function buscarPorUsuario(int $userId): array {}
 public function buscarPorUsuario($userId) {}
 ```
 
-### PHP-015 — Tipo de retorno obrigatorio [ERRO]
+### PHP-015 — Tipo de retorno obrigatório [ERRO]
 
 ```php
 // correto
 public function calcularSaldo(): int {}
-public function buscarOuNulo(int $id): ?Pedido {}
+public function buscarOuNulo(int $id): ?Lancamento {}
 
 // incorreto
 public function calcularSaldo() {}
 ```
 
-### PHP-016 — Usar tipos union quando necessario, nunca mixed [AVISO]
+### PHP-016 — Usar tipos union quando necessário, nunca mixed [AVISO]
 
 ```php
 // correto
-public function encontrar(int $id): Pedido|null {}
+public function encontrar(int $id): Lancamento|null {}
 
 // incorreto
 public function encontrar(int $id): mixed {}
@@ -259,9 +261,9 @@ private $descricao;
 
 ## 5. Classes e objetos
 
-### PHP-018 — Visibilidade explicita em tudo [ERRO]
+### PHP-018 — Visibilidade explícita em tudo [ERRO]
 
-Toda propriedade, metodo e constante deve declarar visibilidade (`public`, `protected`, `private`).
+Toda propriedade, método e constante deve declarar visibilidade (`public`, `protected`, `private`).
 
 ```php
 // correto
@@ -273,7 +275,7 @@ int $id;
 function id(): int { return $this->id; }
 ```
 
-### PHP-019 — Propriedades readonly quando nao mutaveis [AVISO]
+### PHP-019 — Propriedades readonly quando não mutáveis [AVISO]
 
 ```php
 // correto
@@ -282,57 +284,57 @@ public function __construct(
     private readonly string $nome,
 ) {}
 
-// incorreto (se o valor nunca muda apos construcao)
+// incorreto (se o valor nunca muda após construção)
 public function __construct(
     private int $id,
     private string $nome,
 ) {}
 ```
 
-### PHP-020 — Construtores via promocao de propriedades [AVISO]
+### PHP-020 — Construtores via promoção de propriedades [AVISO]
 
-Preferir constructor promotion quando aplicavel.
+Preferir constructor promotion quando aplicável.
 
 ```php
 // correto
 public function __construct(
-    private readonly Database $db,
-    private readonly Logger $logger,
+    private readonly \wpdb $wpdb,
+    private readonly Criptografia $cripto,
 ) {}
 
-// aceitavel mas verboso
-public function __construct(Database $db, Logger $logger)
+// aceitável mas verboso
+public function __construct(\wpdb $wpdb, Criptografia $cripto)
 {
-    $this->db = $db;
-    $this->logger = $logger;
+    $this->wpdb = $wpdb;
+    $this->cripto = $cripto;
 }
 ```
 
-### PHP-021 — Composicao sobre heranca [AVISO]
+### PHP-021 — Composição sobre herança [AVISO]
 
-Heranca cria acoplamento forte. Usar apenas para hierarquias reais (ex.: excecoes tipadas). Para reutilizar comportamento, injetar dependencias.
+Herança cria acoplamento forte. Usar apenas para hierarquias reais (ex.: exceções tipadas). Para reutilizar comportamento, injetar dependências.
 
 ```php
-// correto — composicao
+// correto — composição
 class FinanceiroManager
 {
     public function __construct(
-        private readonly PedidoRepository $pedidos,
-        private readonly Logger $logger,
+        private readonly LancamentoRepository $lancamentos,
+        private readonly Criptografia $cripto,
     ) {}
 }
 
-// incorreto — heranca para reaproveitar codigo
+// incorreto — herança para reaproveitar código
 class FinanceiroManager extends BaseManager {}
 ```
 
-### PHP-022 — Entidades ricas, nao anemicas [ERRO]
+### PHP-022 — Entidades ricas, não anêmicas [ERRO]
 
-Entidades contem logica de dominio: predicados, transicoes de estado, validacoes de regra de negocio. Nunca devem ser apenas sacos de getters e setters.
+Entidades contêm lógica de domínio: predicados, transições de estado, validações de regra de negócio. Nunca devem ser apenas sacos de getters e setters.
 
 ```php
 // correto — entidade com comportamento
-class Pedido
+class Lancamento
 {
     public function confirmar(): void
     {
@@ -348,8 +350,8 @@ class Pedido
     }
 }
 
-// incorreto — entidade anemica
-class Pedido
+// incorreto — entidade anêmica
+class Lancamento
 {
     public function getStatus(): string { return $this->status; }
     public function setStatus(string $status): void { $this->status = $status; }
@@ -358,7 +360,7 @@ class Pedido
 
 ### PHP-023 — Getters sem prefixo get_ [ERRO]
 
-Metodos de acesso usam o nome da propriedade diretamente.
+Métodos de acesso usam o nome da propriedade diretamente.
 
 ```php
 // correto
@@ -373,10 +375,10 @@ public function getNome(): string { return $this->nome; }
 
 ### PHP-024 — FSM na entidade via STATUS_TRANSITIONS [ERRO]
 
-Entidades com estado definem suas transicoes validas como constante e expoem lifecycle methods.
+Entidades com estado definem suas transições válidas como constante e expõem lifecycle methods.
 
 ```php
-class Pedido
+class Lancamento
 {
     public const STATUS_PENDENTE = 'pendente';
     public const STATUS_CONFIRMADO = 'confirmado';
@@ -403,9 +405,9 @@ class Pedido
 }
 ```
 
-### PHP-025 — from_row() tolerante, nunca lanca exception [ERRO]
+### PHP-025 — from_row() tolerante, nunca lança exception [ERRO]
 
-Dados do banco sao fato consumado. O metodo `from_row()` nunca lanca exception — usa `ReflectionClass::newInstanceWithoutConstructor()` para bypassar validacoes do construtor.
+Dados do banco são fato consumado. O método `from_row()` nunca lança exception — usa `ReflectionClass::newInstanceWithoutConstructor()` para bypassar validações do construtor.
 
 ```php
 // correto
@@ -426,18 +428,18 @@ public static function fromRow(object $row): self
 {
     return new self(
         id: (int) $row->id,
-        nome: (string) $row->nome, // construtor pode validar e lancar exception
+        nome: (string) $row->nome, // construtor pode validar e lançar exception
     );
 }
 ```
 
-### PHP-026 — Entidades nao dependem de infraestrutura [ERRO]
+### PHP-026 — Entidades não dependem de infraestrutura [ERRO]
 
-Classes de entidade nunca importam classes de banco de dados, classes de repositorio ou servicos externos. Entidades contem logica de dominio pura.
+Classes de entidade (`inc/entidades/`) nunca importam `$wpdb`, classes de repositório ou serviços externos. Entidades contêm lógica de domínio pura.
 
 ```php
 // correto — entidade pura
-class Pedido
+class Lancamento
 {
     public function estaConfirmado(): bool
     {
@@ -446,26 +448,26 @@ class Pedido
 }
 
 // incorreto — entidade acoplada a infraestrutura
-class Pedido
+class Lancamento
 {
-    public function salvar(Database $db): void
+    public function salvar(\wpdb $wpdb): void
     {
-        $db->insert(...);
+        $wpdb->insert(...);
     }
 }
 ```
 
-### PHP-027 — SOLID: responsabilidade unica por classe [ERRO]
+### PHP-027 — SOLID: responsabilidade única por classe [ERRO]
 
-Uma classe tem um unico motivo para mudar. Se uma classe faz validacao, calculo e persistencia, ela tem tres motivos — dividir.
+Uma classe tem um único motivo para mudar. Se uma classe faz validação, cálculo e persistência, ela tem três motivos — dividir.
 
-### PHP-028 — SOLID: aberto para extensao, fechado para modificacao [AVISO]
+### PHP-028 — SOLID: aberto para extensão, fechado para modificação [AVISO]
 
-Quando um novo comportamento e necessario (ex.: novo tipo de pedido), preferir polimorfismo ou estrategia em vez de adicionar `if/else` ao codigo existente.
+Quando um novo comportamento é necessário (ex.: novo tipo de lançamento), preferir polimorfismo ou estratégia em vez de adicionar `if/else` ao código existente.
 
-### PHP-029 — SOLID: inversao de dependencia [AVISO]
+### PHP-029 — SOLID: inversão de dependência [AVISO]
 
-Gerenciadores e handlers dependem de abstracoes (interfaces), nao de classes concretas, quando a dependencia pode variar.
+Gerenciadores e handlers dependem de abstrações (interfaces), não de classes concretas, quando a dependência pode variar (ex.: mecanismo de criptografia, provedor de email).
 
 ```php
 // correto
@@ -473,19 +475,19 @@ public function __construct(
     private readonly CriptografiaInterface $cripto,
 ) {}
 
-// aceitavel para dependencias estaveis
+// aceitável para dependências estáveis (ex.: $wpdb)
 public function __construct(
-    private readonly Database $db,
+    private readonly \wpdb $wpdb,
 ) {}
 ```
 
 ---
 
-## 6. Metodos
+## 6. Métodos
 
-### PHP-030 — Maximo 20 linhas por metodo [AVISO]
+### PHP-030 — Máximo 20 linhas por método [AVISO]
 
-Se um metodo ultrapassa 20 linhas, provavelmente faz mais de uma coisa. Extrair submetodos.
+Se um método ultrapassa 20 linhas, provavelmente faz mais de uma coisa. Extrair submétodos.
 
 ### PHP-031 — Retorno antecipado (early return) [AVISO]
 
@@ -493,46 +495,46 @@ Reduzir aninhamento usando guard clauses.
 
 ```php
 // correto
-public function processar(Pedido $pedido): void
+public function processar(Lancamento $lancamento): void
 {
-    if ($pedido->estaCancelado()) {
+    if ($lancamento->estaCancelado()) {
         return;
     }
 
-    if (!$pedido->temConta()) {
-        throw new PedidoSemContaException();
+    if (!$lancamento->temConta()) {
+        throw new LancamentoSemContaException();
     }
 
-    // logica principal aqui
+    // lógica principal aqui
 }
 
 // incorreto
-public function processar(Pedido $pedido): void
+public function processar(Lancamento $lancamento): void
 {
-    if (!$pedido->estaCancelado()) {
-        if ($pedido->temConta()) {
-            // logica principal aqui
+    if (!$lancamento->estaCancelado()) {
+        if ($lancamento->temConta()) {
+            // lógica principal aqui
         } else {
-            throw new PedidoSemContaException();
+            throw new LancamentoSemContaException();
         }
     }
 }
 ```
 
-### PHP-032 — Maximo 4 parametros por metodo [AVISO]
+### PHP-032 — Máximo 4 parâmetros por método [AVISO]
 
-Se um metodo precisa de mais de 4 parametros, considerar um objeto de valor (Value Object) ou DTO.
+Se um método precisa de mais de 4 parâmetros, considerar um objeto de valor (Value Object) ou DTO.
 
-### PHP-033 — Metodos publicos de entidade como predicados descritivos [AVISO]
+### PHP-033 — Métodos públicos de entidade como predicados descritivos [AVISO]
 
 ```php
 // correto
-$pedido->estaConfirmado();
+$lancamento->estaConfirmado();
 $conta->estaAtiva();
 $meta->foiAtingida();
 
 // incorreto
-$pedido->getStatus() === 'confirmado';
+$lancamento->getStatus() === 'confirmado';
 $conta->getAtiva() === true;
 ```
 
@@ -540,16 +542,16 @@ $conta->getAtiva() === true;
 
 ## 7. Tratamento de erros
 
-### PHP-034 — Excecoes tipadas, nunca genericas [ERRO]
+### PHP-034 — Exceções tipadas, nunca genéricas [ERRO]
 
 ```php
 // correto
 throw new SaldoInsuficienteException($conta->id(), $valorSolicitado);
-throw new PedidoNaoEncontradoException($id);
+throw new LancamentoNaoEncontradoException($id);
 
 // incorreto
 throw new \Exception('Saldo insuficiente');
-throw new \RuntimeException('Nao encontrado');
+throw new \RuntimeException('Não encontrado');
 ```
 
 ### PHP-035 — Nunca silenciar erros com @ [ERRO]
@@ -565,19 +567,19 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 $resultado = @json_decode($json, true);
 ```
 
-### PHP-036 — Catch especifico, nunca \Throwable generico [AVISO]
+### PHP-036 — Catch específico, nunca \Throwable genérico [AVISO]
 
 ```php
 // correto
 try {
-    $this->repositorio->salvar($pedido);
+    $this->repositorio->salvar($lancamento);
 } catch (DuplicataException $e) {
-    // tratar caso especifico
+    // tratar caso específico
 }
 
 // incorreto
 try {
-    $this->repositorio->salvar($pedido);
+    $this->repositorio->salvar($lancamento);
 } catch (\Throwable $e) {
     // engolir tudo
 }
@@ -585,40 +587,52 @@ try {
 
 ---
 
-## 8. Seguranca
+## 8. Segurança
 
-### PHP-037 — Dados sensiveis criptografados em repouso [ERRO]
+### PHP-037 — Dados financeiros sempre criptografados em repouso [ERRO]
 
-Todo valor sensivel deve ser criptografado antes de gravar no banco e descriptografado apos leitura.
-
-```php
-// correto
-$valorCriptografado = $this->cripto->criptografar((string) $pedido->valorCents());
-$db->insert($tabela, ['valor_cents' => $valorCriptografado]);
-
-// incorreto
-$db->insert($tabela, ['valor_cents' => $pedido->valorCents()]);
-```
-
-### PHP-038 — Sempre usar queries parametrizadas [ERRO]
+Todo valor financeiro sensível (valores, descrições, nomes de contas) deve ser criptografado antes de gravar no banco e descriptografado após leitura. Usar a classe `Criptografia` do projeto.
 
 ```php
 // correto
-$db->prepare("SELECT * FROM {$tabela} WHERE user_id = ?", [$userId]);
+$valorCriptografado = $this->cripto->criptografar((string) $lancamento->valorCents());
+$wpdb->insert($tabela, ['valor_cents' => $valorCriptografado]);
 
 // incorreto
-$db->query("SELECT * FROM {$tabela} WHERE user_id = {$userId}");
+$wpdb->insert($tabela, ['valor_cents' => $lancamento->valorCents()]);
 ```
 
-### PHP-039 — Sanitizar entrada, escapar saida [ERRO]
+### PHP-038 — Sempre usar $wpdb->prepare() para queries [ERRO]
 
-Toda entrada do usuario e sanitizada antes de uso. Toda saida para o navegador e escapada.
+```php
+// correto
+$wpdb->get_results($wpdb->prepare(
+    "SELECT * FROM {$tabela} WHERE user_id = %d AND status = %s",
+    $userId,
+    $status
+));
 
-### PHP-040 — Validacao na fronteira do sistema [ERRO]
+// incorreto
+$wpdb->get_results("SELECT * FROM {$tabela} WHERE user_id = {$userId}");
+```
 
-Handlers validam e sanitizam todos os dados recebidos antes de passar para gerenciadores ou repositorios. Entidades e repositorios confiam que os dados ja chegam limpos.
+### PHP-039 — Sanitizar entrada, escapar saída [ERRO]
 
-### PHP-041 — Chaves e segredos vivem no .env, nunca no codigo [ERRO]
+```php
+// correto
+$descricao = sanitize_text_field($_POST['descricao']);  // entrada
+echo esc_html($lancamento->descricao());                // saída
+
+// incorreto
+$descricao = $_POST['descricao'];
+echo $lancamento->descricao();
+```
+
+### PHP-040 — Validação na fronteira do sistema [ERRO]
+
+Handlers validam e sanitizam todos os dados recebidos antes de passar para gerenciadores ou repositórios. Entidades e repositórios confiam que os dados já chegam limpos.
+
+### PHP-041 — Chaves e segredos vivem no .env, nunca no código [ERRO]
 
 ```php
 // correto
@@ -628,17 +642,17 @@ $chave = getenv('APP_ENCRYPTION_KEY');
 $chave = 'minha-chave-secreta-hardcoded';
 ```
 
-### PHP-042 — Nao otimizar prematuramente [AVISO]
+### PHP-042 — Não otimizar prematuramente [AVISO]
 
-Otimizacoes de performance (cache, desnormalizacao, queries complexas) so entram quando ha medicao comprovando o gargalo. Codigo claro e correto primeiro, otimizado depois.
+Otimizações de performance (cache, desnormalização, queries complexas) só entram quando há medição comprovando o gargalo. Código claro e correto primeiro, otimizado depois.
 
 ---
 
-## 9. Formatacao
+## 9. Formatação
 
-### PHP-043 — Indentacao com 4 espacos [ERRO]
+### PHP-043 — Indentação com 4 espaços [ERRO]
 
-Nunca tabs. Sempre 4 espacos.
+Nunca tabs. Sempre 4 espaços.
 
 ### PHP-044 — Chaves na mesma linha para estruturas de controle [AVISO]
 
@@ -655,11 +669,11 @@ if ($condicao)
 }
 ```
 
-### PHP-045 — Chaves na linha seguinte para classes e metodos [AVISO]
+### PHP-045 — Chaves na linha seguinte para classes e métodos [AVISO]
 
 ```php
 // correto (PSR-12)
-class Pedido
+class Lancamento
 {
     public function valorCents(): int
     {
@@ -668,13 +682,45 @@ class Pedido
 }
 ```
 
-### PHP-046 — Linha em branco entre metodos [AVISO]
+### PHP-046 — Linha em branco entre métodos [AVISO]
 
-### PHP-047 — Maximo 120 caracteres por linha [AVISO]
+```php
+// correto
+public function id(): int
+{
+    return $this->id;
+}
+
+public function nome(): string
+{
+    return $this->nome;
+}
+
+// incorreto
+public function id(): int
+{
+    return $this->id;
+}
+public function nome(): string
+{
+    return $this->nome;
+}
+```
+
+### PHP-047 — Máximo 120 caracteres por linha [AVISO]
 
 Quebrar linhas longas com alinhamento.
 
-### PHP-048 — Uma instrucao por linha [ERRO]
+```php
+// correto
+$resultado = $wpdb->get_results($wpdb->prepare(
+    "SELECT * FROM {$tabela} WHERE user_id = %d AND status = %s ORDER BY created_at DESC",
+    $userId,
+    $status
+));
+```
+
+### PHP-048 — Uma instrução por linha [ERRO]
 
 ```php
 // correto
@@ -691,11 +737,11 @@ $a = 1; $b = 2;
 
 ### PHP-049 — SemVer 2.0.0 [AVISO]
 
-O projeto adota versionamento semantico:
+O projeto adota versionamento semântico:
 
-- **MAJOR** (X.y.z) — Alteracoes incompativeis na API.
+- **MAJOR** (X.y.z) — Alterações incompatíveis na API.
 - **MINOR** (x.Y.z) — Funcionalidades novas mantendo compatibilidade.
-- **PATCH** (x.y.Z) — Correcoes de bugs mantendo compatibilidade.
+- **PATCH** (x.y.Z) — Correções de bugs mantendo compatibilidade.
 
 ---
 
@@ -703,71 +749,71 @@ O projeto adota versionamento semantico:
 
 A skill `/auditar-php` deve verificar, para cada arquivo:
 
-- [ ] Principios: KISS, DRY, YAGNI, SoC, Demeter respeitados
+- [ ] Princípios: KISS, DRY, YAGNI, SoC, Demeter respeitados
 - [ ] `declare(strict_types=1)` presente
 - [ ] Sem tag de fechamento `?>`
 - [ ] Uma classe por arquivo
-- [ ] Classe em PascalCase, metodos em camelCase, constantes em UPPER_SNAKE_CASE
-- [ ] Visibilidade explicita em tudo
-- [ ] Type hints em todos os parametros e retornos
+- [ ] Classe em PascalCase, métodos em camelCase, constantes em UPPER_SNAKE_CASE
+- [ ] Visibilidade explícita em tudo
+- [ ] Type hints em todos os parâmetros e retornos
 - [ ] Propriedades tipadas
-- [ ] Entidades ricas (com comportamento), nao anemicas
-- [ ] Getters sem prefixo get_ (ex.: nome(), nao getNome())
+- [ ] Entidades ricas (com comportamento), não anêmicas
+- [ ] Getters sem prefixo get_ (ex.: nome(), não getNome())
 - [ ] FSM na entidade via STATUS_TRANSITIONS + lifecycle methods
-- [ ] from_row() tolerante (nunca lanca exception)
-- [ ] Entidades sem dependencia de infraestrutura
-- [ ] Responsabilidade unica por classe
-- [ ] Composicao sobre heranca
-- [ ] Excecoes tipadas (nunca genericas)
+- [ ] from_row() tolerante (nunca lança exception)
+- [ ] Entidades sem dependência de infraestrutura
+- [ ] Responsabilidade única por classe
+- [ ] Composição sobre herança
+- [ ] Exceções tipadas (nunca genéricas)
 - [ ] Sem `@` supressor de erro
-- [ ] Dados sensiveis criptografados
-- [ ] Queries parametrizadas em toda query
-- [ ] Entrada sanitizada, saida escapada
+- [ ] Dados financeiros criptografados via classe `Criptografia`
+- [ ] `$wpdb->prepare()` em toda query
+- [ ] Entrada sanitizada, saída escapada
 - [ ] Sem segredos hardcoded
-- [ ] Indentacao com 4 espacos
-- [ ] Maximo 120 caracteres por linha
+- [ ] Indentação com 4 espaços
+- [ ] Máximo 120 caracteres por linha
 
 ## Processo
 
-### Fase 1 — Carregar a regua
+### Fase 1 — Carregar a régua
 
-1. Ler a secao **Padroes minimos exigidos** deste documento.
-2. Internalizar todas as regras com seus IDs, descricoes, exemplos e severidades (ERRO/AVISO).
-3. Nao resumir nem recitar o documento de volta.
+1. Ler a seção **Padrões mínimos exigidos** deste documento.
+2. Internalizar todas as regras com seus IDs, descrições, exemplos e severidades (ERRO/AVISO).
+3. Não resumir nem recitar o documento de volta.
 
 ### Fase 2 — Identificar o PR aberto
 
 1. Executar `gh pr list --state open --base develop --json number,title,headBranch --limit 1` para encontrar o PR aberto mais recente contra `develop`.
-2. Se houver mais de um PR aberto, listar todos e perguntar ao usuario qual auditar.
-3. Se nao houver PR aberto, informar o usuario e encerrar.
+2. Se houver mais de um PR aberto, listar todos e perguntar ao usuário qual auditar.
+3. Se não houver PR aberto, informar o usuário e encerrar.
 4. Executar `gh pr diff <numero>` para obter o diff completo do PR.
-5. Filtrar apenas arquivos `.php` do projeto.
+5. Filtrar apenas arquivos `.php` dentro de `acertandoospontos/`.
 
 ### Fase 3 — Auditar arquivo por arquivo
 
 Para cada arquivo PHP alterado no PR:
 
-1. Ler o arquivo completo (nao apenas o diff — contexto importa).
+1. Ler o arquivo completo (não apenas o diff — contexto importa).
 2. Comparar contra **cada regra** de `docs/padroes-php.md`, uma por uma, na ordem do documento.
-3. Para cada violacao encontrada, registrar:
+3. Para cada violação encontrada, registrar:
    - **Arquivo** e **linha(s)** onde ocorre
-   - **ID da regra** violada (ex.: padroes-php.md, PHP-024)
+   - **ID da regra** violada (ex.: PHP-024)
    - **Severidade** (ERRO ou AVISO)
-   - **O que esta errado** — descricao concisa
-   - **Como corrigir** — correcao especifica para aquele trecho
-4. Se o arquivo nao viola nenhuma regra, registrar como aprovado.
+   - **O que está errado** — descrição concisa
+   - **Como corrigir** — correção específica para aquele trecho
+4. Se o arquivo não viola nenhuma regra, registrar como aprovado.
 
-### Fase 4 — Relatorio
+### Fase 4 — Relatório
 
-Apresentar o relatorio ao usuario no seguinte formato:
+Apresentar o relatório ao usuário no seguinte formato:
 
 ```
-## Relatorio de auditoria PHP
+## Relatório de auditoria PHP
 
 **PR:** #<numero> — <titulo>
 **Branch:** <branch>
 **Arquivos auditados:** <quantidade>
-**Regua:** docs/padroes-php.md
+**Régua:** docs/padroes-php.md
 
 ### Resumo
 
@@ -775,38 +821,38 @@ Apresentar o relatorio ao usuario no seguinte formato:
 - Avisos: <quantidade>
 - Arquivos aprovados: <quantidade>
 
-### Violacoes
+### Violações
 
 #### <arquivo.php>
 
-| Linha | Regra | Severidade | Descricao | Correcao |
+| Linha | Regra | Severidade | Descrição | Correção |
 |-------|-------|------------|-----------|----------|
-| 15 | PHP-024 | ERRO | FSM nao definida | Adicionar STATUS_TRANSITIONS |
-| 32 | PHP-030 | AVISO | Metodo com 25 linhas | Extrair submetodo |
+| 15 | PHP-024 | ERRO | FSM não definida | Adicionar STATUS_TRANSITIONS |
+| 32 | PHP-030 | AVISO | Método com 25 linhas | Extrair submétodo |
 
 #### <outro-arquivo.php>
-Aprovado — nenhuma violacao encontrada.
+✅ Aprovado — nenhuma violação encontrada.
 ```
 
-### Fase 5 — Plano de correcoes
+### Fase 5 — Plano de correções
 
-Se houver violacoes do tipo ERRO:
+Se houver violações do tipo ERRO:
 
-1. Listar as correcoes necessarias agrupadas por arquivo.
+1. Listar as correções necessárias agrupadas por arquivo.
 2. Ordenar por severidade (ERROs primeiro, AVISOs depois).
-3. Para cada correcao, indicar exatamente o que mudar e onde.
-4. Perguntar ao usuario: "Quer que eu execute as correcoes agora?"
+3. Para cada correção, indicar exatamente o que mudar e onde.
+4. Perguntar ao usuário: "Quer que eu execute as correções agora?"
 
-Se houver apenas AVISOs ou nenhuma violacao:
+Se houver apenas AVISOs ou nenhuma violação:
 
-> "Nenhum erro bloquante. Os avisos sao recomendacoes — quer que eu corrija algum?"
+> "Nenhum erro bloquante. Os avisos são recomendações — quer que eu corrija algum?"
 
 ## Regras
 
-- **Nunca alterar codigo durante a auditoria.** A skill e read-only ate o usuario pedir correcao explicitamente.
+- **Nunca alterar código durante a auditoria.** A skill é read-only até o usuário pedir correção explicitamente.
 - **Nunca auditar arquivos fora do PR.** Apenas arquivos PHP alterados no PR aberto.
-- **Sempre referenciar o ID da regra violada.** O relatorio deve ser rastreavel ao documento de padroes.
-- **Nunca inventar regras.** A regua e exclusivamente o `docs/padroes-php.md` — sem opiniao, sem sugestoes extras.
-- **Ser metodica e processual.** Cada arquivo e comparado contra cada regra, na ordem do documento, sem pular.
-- **Fidelidade ao documento.** Se o codigo viola uma regra do documento, reportar. Se o documento nao cobre o caso, nao reportar.
-- **Mostrar o relatorio completo antes de qualquer acao.** Nunca executar correcoes sem aprovacao explicita.
+- **Sempre referenciar o ID da regra violada.** O relatório deve ser rastreável ao documento de padrões.
+- **Nunca inventar regras.** A régua é exclusivamente o `docs/padroes-php.md` — sem opinião, sem sugestões extras.
+- **Ser metódica e processual.** Cada arquivo é comparado contra cada regra, na ordem do documento, sem pular.
+- **Fidelidade ao documento.** Se o código viola uma regra do documento, reportar. Se o documento não cobre o caso, não reportar.
+- **Mostrar o relatório completo antes de qualquer ação.** Nunca executar correções sem aprovação explícita.

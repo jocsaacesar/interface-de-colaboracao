@@ -1,22 +1,22 @@
 ---
 documento: padroes-frontend
-versao: 2.2.0
+versao: 3.0.0
 criado: 2025-06-01
-atualizado: 2026-04-16
-total_regras: 38
+atualizado: 2026-04-18
+total_regras: 52
 severidades:
-  erro: 21
-  aviso: 17
-escopo: HTML, CSS e UX de todos os projetos web
+  erro: 29
+  aviso: 23
+escopo: HTML, CSS e UX de todos os projetos web da BGR Software House
 stack: frontend
 aplica_a: ["todos"]
 requer: [padroes-seguranca, padroes-js]
-substitui: [padroes-frontend-v1]
+substitui: [padroes-frontend-v2]
 ---
 
-# Padrões de Frontend/UX/UI — sua organização
+# Padrões de Frontend/UX/UI — BGR Software House
 
-> Documento constitucional. Contrato de entrega para todo
+> Documento constitucional. Contrato de entrega entre a BGR e todo
 > desenvolvedor que toca frontend nos nossos projetos.
 > Código que viola regras ERRO não é discutido — é devolvido.
 
@@ -26,7 +26,7 @@ substitui: [padroes-frontend-v1]
 
 ### Para o desenvolvedor
 
-1. Leia este documento antes de tocar em HTML, CSS ou UX de qualquer projeto. Regras de JavaScript vivem em `padroes-js.md`.
+1. Leia este documento antes de tocar em HTML, CSS ou UX de qualquer projeto BGR. Regras de JavaScript vivem em `padroes-js.md`.
 2. Consulte os IDs das regras durante o desenvolvimento e antes de abrir PR.
 3. Verifique o DoD no final deste documento antes de solicitar review.
 
@@ -63,7 +63,7 @@ substitui: [padroes-frontend-v1]
 
 **Verifica:** Buscar `#[0-9a-fA-F]`, `rgb(`, `hsl(` fora do bloco `:root`. Qualquer ocorrência em componente é violação.
 
-**Por quê:** O projeto trabalha com múltiplos projetos, cada um com sua identidade visual. Design tokens centralizados permitem que o Claude Code gere componentes sem conhecer a paleta específica — basta referenciar as variáveis. Quando o designer muda uma cor, a mudança propaga automaticamente.
+**Por quê na BGR:** A BGR trabalha com múltiplos projetos, cada um com sua identidade visual. Design tokens centralizados permitem que o Claude Code gere componentes sem conhecer a paleta específica — basta referenciar as variáveis. Quando o designer muda uma cor, a mudança propaga automaticamente.
 
 **Exemplo correto:**
 ```css
@@ -97,7 +97,7 @@ substitui: [padroes-frontend-v1]
 
 **Verifica:** Inspecionar badges/spans de status. Cor aplicada contradiz o texto exibido? Violação.
 
-**Por quê:** Projetos frequentemente envolvem dados financeiros, status e métricas. Se cada desenvolvedor escolhe cores arbitrárias, o usuário perde a capacidade de escanear a interface rapidamente. Consistência semântica reduz erros de interpretação.
+**Por quê na BGR:** Projetos BGR frequentemente envolvem dados financeiros, status e métricas. Se cada desenvolvedor escolhe cores arbitrárias, o usuário perde a capacidade de escanear a interface rapidamente. Consistência semântica reduz erros de interpretação.
 
 **Exemplo correto:**
 ```css
@@ -126,7 +126,7 @@ substitui: [padroes-frontend-v1]
 
 **Verifica:** Buscar `font-family:` fora do `:root`. Valor que não usa `var(--font-family-*)` é violação.
 
-**Por quê:** Time pequeno gera código via IA. Se a fonte não está tokenizada, o Claude Code vai chutar uma font stack diferente a cada arquivo. Token centralizado garante consistência sem esforço manual.
+**Por quê na BGR:** Time pequeno gera código via IA. Se a fonte não está tokenizada, o Claude Code vai chutar uma font stack diferente a cada arquivo. Token centralizado garante consistência sem esforço manual.
 
 **Exemplo correto:**
 ```css
@@ -159,7 +159,7 @@ body {
 
 **Verifica:** Inspecionar colunas numéricas em tabelas e cards. Fonte renderizada é proporcional? Violação.
 
-**Por quê:** Projetos lidam com valores financeiros e métricas. Fonte proporcional desalinha casas decimais em colunas, dificultando a leitura e comparação de valores.
+**Por quê na BGR:** Projetos BGR lidam com valores financeiros e métricas. Fonte proporcional desalinha casas decimais em colunas, dificultando a leitura e comparação de valores.
 
 **Exemplo correto:**
 ```html
@@ -177,7 +177,7 @@ body {
 
 **Verifica:** Buscar elemento com classe `logo` ou `brand`. É `<img>` com `src` apontando pra SVG/PNG? Se não, violação.
 
-**Por quê:** Logotipos são criados por designers e têm proporções, cores e formas exatas. Recriar via CSS gera inconsistências entre páginas e quebra em diferentes navegadores. SVG escala sem perda e mantém fidelidade à marca.
+**Por quê na BGR:** Logotipos são criados por designers e têm proporções, cores e formas exatas. Recriar via CSS gera inconsistências entre páginas e quebra em diferentes navegadores. SVG escala sem perda e mantém fidelidade à marca.
 
 **Exemplo correto:**
 ```html
@@ -194,13 +194,65 @@ body {
 
 **Exceções:** Ícones de favicon podem ser simplificações do logo, servidos como SVG separado.
 
+### UI-044 — Tokens organizados em 3 camadas: global, semântico, componente [ERRO]
+
+**Regra:** Design tokens são organizados em três camadas hierárquicas: (1) **global** — valores brutos (`--color-blue-600`, `--spacing-4`); (2) **semântico** — intenção de uso (`--color-primary`, `--color-danger`, `--color-card-border`); (3) **componente** — overrides específicos (`--btn-primary-bg`, `--sidebar-width`). Componentes referenciam tokens semânticos, nunca globais diretamente. Dois namespaces paralelos para o mesmo valor é proibido.
+
+**Verifica:** Componente referencia token global (ex: `var(--color-blue-600)`) em vez de semântico (`var(--color-primary)`)? Existem duas variáveis CSS com o mesmo valor e propósito (ex: `--tenant-primary` e `--color-primary`)? Violação.
+
+**Por quê na BGR:** O tenant-starter teve dois namespaces de cor coexistindo (`--tenant-*` no app-shell e `--color-*` no @theme Tailwind). Mudar um não atualizava o outro. Três camadas com hierarquia clara eliminam esse tipo de fragilidade — cada camada sabe o que referenciar.
+
+**Exemplo correto:**
+```css
+/* Camada 1 — Global (valores brutos, definidos uma vez) */
+:root { --color-indigo-500: #6366f1; }
+
+/* Camada 2 — Semântico (intenção, o que os componentes usam) */
+:root { --color-primary: var(--color-indigo-500); }
+
+/* Camada 3 — Componente (override local quando necessário) */
+.tenant-sidebar { --sidebar-bg: color-mix(in srgb, var(--color-primary) 40%, black); }
+```
+
+**Exemplo incorreto:**
+```css
+/* Dois namespaces pro mesmo valor */
+:root {
+    --color-primary: #6366f1;
+    --tenant-primary: #6366f1; /* duplicata — qual é a fonte de verdade? */
+}
+```
+
+### UI-045 — Convenção de naming para tokens: categoria-propriedade-modificador [AVISO]
+
+**Regra:** Tokens seguem a convenção `--categoria-propriedade-modificador`. Categorias: `color`, `font`, `spacing`, `shadow`, `radius`. Propriedades: o que o token descreve (`primary`, `card`, `muted`). Modificador: variante opcional (`hover`, `light`, `dark`). Nomes em inglês, kebab-case.
+
+**Verifica:** Token recém-criado segue o padrão `--color-primary-hover`, `--font-sans`, `--spacing-card`? Nome ambíguo como `--cor1`, `--azul`, `--tamanho-grande`? Violação.
+
+**Por quê na BGR:** Tokens ad-hoc (`--cor-botao`, `--bg1`, `--tenant-text-muted`) criam confusão sobre o que é global, o que é semântico e o que é componente. Convenção fixa permite que qualquer dev (ou IA) leia um token e saiba imediatamente a camada e o propósito.
+
+**Exemplo correto:**
+```css
+--color-primary: #6366f1;
+--color-primary-hover: #4f46e5;
+--color-card-border: color-mix(in srgb, var(--color-primary) 15%, #e5e7eb);
+--font-sans: 'Inter', sans-serif;
+```
+
+**Exemplo incorreto:**
+```css
+--azulPrincipal: #6366f1;
+--cor_hover: #4f46e5;
+--borda-do-card: #e5e7eb;
+```
+
 ### UI-006 — Elementos visuais da marca seguem o guia do projeto [AVISO]
 
-**Regra:** Cada projeto tem um guia de identidade visual (fornecido pelo designer). Ícones decorativos, patterns, slogans e elementos gráficos da marca devem seguir esse guia. Não inventar elementos visuais de marca sem referência ao guia.
+**Regra:** Cada projeto BGR tem um guia de identidade visual (fornecido pelo designer). Ícones decorativos, patterns, slogans e elementos gráficos da marca devem seguir esse guia. Não inventar elementos visuais de marca sem referência ao guia.
 
 **Verifica:** Elemento decorativo/ícone de marca tem correspondência no guia de identidade do projeto? Se não, violação.
 
-**Por quê:** O projeto trabalha com designers externos. Elementos visuais inventados pelo desenvolvedor desrespeitam o trabalho do designer e criam inconsistência visual. O guia de identidade é a fonte de verdade.
+**Por quê na BGR:** A BGR trabalha com designers externos. Elementos visuais inventados pelo desenvolvedor desrespeitam o trabalho do designer e criam inconsistência visual. O guia de identidade é a fonte de verdade.
 
 **Exemplo correto:**
 ```html
@@ -224,7 +276,7 @@ body {
 
 **Verifica:** CSS custom recém-adicionado tem equivalente em utility do framework? Se sim, violação.
 
-**Por quê:** Time pequeno mantém múltiplos projetos. CSS custom cresce indefinidamente e se torna impossível de auditar. Utilities são padronizadas, documentadas e removíveis. O Claude Code gera utilities com mais precisão do que CSS custom.
+**Por quê na BGR:** Time pequeno mantém múltiplos projetos. CSS custom cresce indefinidamente e se torna impossível de auditar. Utilities são padronizadas, documentadas e removíveis. O Claude Code gera utilities com mais precisão do que CSS custom.
 
 **Exemplo correto:**
 ```html
@@ -250,7 +302,7 @@ body {
 
 **Verifica:** Buscar `float:` e `position: absolute` em CSS de layout de página. Qualquer ocorrência é violação.
 
-**Por quê:** Layouts com float e position absolute quebram em telas diferentes e são impossíveis de manter. O Claude Code gera código responsivo correto quando usa grid system — com float, gera bugs visuais que só aparecem em produção.
+**Por quê na BGR:** Layouts com float e position absolute quebram em telas diferentes e são impossíveis de manter. O Claude Code gera código responsivo correto quando usa grid system — com float, gera bugs visuais que só aparecem em produção.
 
 **Exemplo correto:**
 ```html
@@ -274,7 +326,7 @@ body {
 
 **Verifica:** Buscar `@media` em CSS custom. Valor do breakpoint coincide com os do framework? Se não, violação.
 
-**Por quê:** Breakpoints custom criam fragmentação — cada desenvolvedor escolhe um valor diferente, e o layout quebra entre eles. Breakpoints padronizados garantem que todos os componentes se adaptam nos mesmos pontos.
+**Por quê na BGR:** Breakpoints custom criam fragmentação — cada desenvolvedor escolhe um valor diferente, e o layout quebra entre eles. Breakpoints padronizados garantem que todos os componentes se adaptam nos mesmos pontos.
 
 **Exemplo correto:**
 ```html
@@ -296,7 +348,7 @@ body {
 
 **Verifica:** Componente custom recém-criado tem equivalente nativo no framework? Se sim, violação.
 
-**Por quê:** Componentes custom exigem manutenção, testes de acessibilidade e documentação própria. O o time é pequeno — cada componente custom é dívida técnica. Componentes do framework já são testados, acessíveis e documentados.
+**Por quê na BGR:** Componentes custom exigem manutenção, testes de acessibilidade e documentação própria. O time BGR é pequeno — cada componente custom é dívida técnica. Componentes do framework já são testados, acessíveis e documentados.
 
 **Exemplo correto:**
 ```html
@@ -322,7 +374,7 @@ body {
 
 **Verifica:** Buscar `!important` em arquivos CSS/SCSS do projeto. Qualquer ocorrência é violação.
 
-**Por quê:** `!important` cria cascatas impossíveis de depurar. Quando dois `!important` conflitam, a solução é outro `!important` — espiral de complexidade. No projeto, especificidade resolve conflitos de forma previsível.
+**Por quê na BGR:** `!important` cria cascatas impossíveis de depurar. Quando dois `!important` conflitam, a solução é outro `!important` — espiral de complexidade. Na BGR, especificidade resolve conflitos de forma previsível.
 
 **Exemplo correto:**
 ```css
@@ -345,7 +397,7 @@ body {
 
 **Verifica:** Buscar `style="` no HTML. Valor é estático (não injetado por backend/JS)? Violação.
 
-**Por quê:** CSS inline não é auditável, não é reutilizável e não respeita design tokens. O Claude Code tende a gerar `style=""` como atalho — esta regra força a disciplina de usar tokens e classes.
+**Por quê na BGR:** CSS inline não é auditável, não é reutilizável e não respeita design tokens. O Claude Code tende a gerar `style=""` como atalho — esta regra força a disciplina de usar tokens e classes.
 
 **Exemplo correto:**
 ```html
@@ -368,7 +420,7 @@ body {
 
 **Verifica:** Tokens em `:root` têm variante `[data-theme="dark"]` correspondente? Se não, violação.
 
-**Por quê:** Projetos eventualmente pedem dark mode. Se os tokens não são preparados desde o início, a implementação exige reescrever CSS de todos os componentes. Preparar desde o início custa zero e economiza dias no futuro.
+**Por quê na BGR:** Projetos BGR eventualmente pedem dark mode. Se os tokens não são preparados desde o início, a implementação exige reescrever CSS de todos os componentes. Preparar desde o início custa zero e economiza dias no futuro.
 
 **Exemplo correto:**
 ```css
@@ -404,7 +456,7 @@ body { background: white; color: black; }
 
 **Verifica:** Tela exibe valor financeiro ou dado pessoal? Existe botão toggle de privacidade? Se não, violação.
 
-**Por quê:** Projetos lidam com dados financeiros e pessoais. Usuários abrem a aplicação em ambientes públicos (escritório, transporte). Sem modo privacidade, dados ficam expostos para quem estiver ao lado.
+**Por quê na BGR:** Projetos BGR lidam com dados financeiros e pessoais. Usuários abrem a aplicação em ambientes públicos (escritório, transporte). Sem modo privacidade, dados ficam expostos para quem estiver ao lado.
 
 **Exemplo correto:**
 ```html
@@ -434,7 +486,7 @@ body { background: white; color: black; }
 
 **Verifica:** Abrir tela inicial em viewport 375px. Ação primária visível sem scroll? Se não, violação.
 
-**Por quê:** Usuários de projetos são frequentemente não-técnicos. Se a ação principal está escondida em menus ou abaixo do fold, o usuário liga para o suporte. Ações primárias visíveis reduzem chamados e aumentam adoção.
+**Por quê na BGR:** Usuários de projetos BGR são frequentemente não-técnicos. Se a ação principal está escondida em menus ou abaixo do fold, o usuário liga para o suporte. Ações primárias visíveis reduzem chamados e aumentam adoção.
 
 **Exemplo correto:**
 ```html
@@ -469,7 +521,7 @@ body { background: white; color: black; }
 
 **Verifica:** Clicar em botão destrutivo (delete, cancel, arquivar). Aparece modal/step de confirmação? Se não, violação.
 
-**Por quê:** Projetos lidam com dados financeiros e registros críticos. Um clique acidental em "deletar" sem confirmação gerou perda de dados em produção. Fricção positiva previne erros que custam horas de suporte e restauração.
+**Por quê na BGR:** Projetos BGR lidam com dados financeiros e registros críticos. Um clique acidental em "deletar" sem confirmação gerou perda de dados em produção. Fricção positiva previne erros que custam horas de suporte e restauração.
 
 **Exemplo correto:**
 ```html
@@ -504,7 +556,7 @@ body { background: white; color: black; }
 
 **Verifica:** Executar cada ação do fluxo. Aparece toast/alert/spinner? Se não, violação.
 
-**Por quê:** Sem feedback, o usuário clica duas vezes, fecha a aba ou liga para o suporte achando que "travou". Isso já aconteceu — o usuário duplicou transações financeiras por clicar duas vezes num botão sem feedback.
+**Por quê na BGR:** Sem feedback, o usuário clica duas vezes, fecha a aba ou liga para o suporte achando que "travou". Isso já aconteceu — o usuário duplicou transações financeiras por clicar duas vezes num botão sem feedback.
 
 **Exemplo correto:**
 ```html
@@ -536,7 +588,7 @@ body { background: white; color: black; }
 
 **Verifica:** Esvaziar lista/tabela (filtro sem resultado ou dado novo). Aparece mensagem orientativa? Se não, violação.
 
-**Por quê:** Usuários não-técnicos interpretam tela vazia como "erro" ou "sistema quebrado". Estado vazio com orientação transforma confusão em ação.
+**Por quê na BGR:** Usuários não-técnicos interpretam tela vazia como "erro" ou "sistema quebrado". Estado vazio com orientação transforma confusão em ação.
 
 **Exemplo correto:**
 ```html
@@ -565,7 +617,7 @@ body { background: white; color: black; }
 
 **Verifica:** Buscar `<input>` de valor monetário. Tem `inputmode="decimal"`? Se não, violação.
 
-**Por quê:** Projetos são usados em celular. Sem `inputmode`, o usuário recebe teclado QWERTY para digitar números — experiência frustrante que gera erros de digitação e reclamações.
+**Por quê na BGR:** Projetos BGR são usados em celular. Sem `inputmode`, o usuário recebe teclado QWERTY para digitar números — experiência frustrante que gera erros de digitação e reclamações.
 
 **Exemplo correto:**
 ```html
@@ -585,7 +637,7 @@ body { background: white; color: black; }
 
 **Verifica:** Buscar `<input>` de PIN/CEP/código. Tem `inputmode="numeric"`? Se não, violação.
 
-**Por quê:** Teclado correto reduz atrito. Usuários de projetos acessam via celular — cada campo com teclado errado é uma micro-frustração que acumula.
+**Por quê na BGR:** Teclado correto reduz atrito. Usuários de projetos BGR acessam via celular — cada campo com teclado errado é uma micro-frustração que acumula.
 
 **Exemplo correto:**
 ```html
@@ -604,7 +656,7 @@ body { background: white; color: black; }
 
 **Verifica:** Inspecionar todo `<input>`/`<select>`/`<textarea>`. Tem `<label for="...">` correspondente? Se não, violação.
 
-**Por quê:** Placeholder desaparece quando o usuário digita — ele não sabe mais o que o campo pede. Leitores de tela dependem de `<label>` para identificar campos. Sem label, o formulário é inacessível.
+**Por quê na BGR:** Placeholder desaparece quando o usuário digita — ele não sabe mais o que o campo pede. Leitores de tela dependem de `<label>` para identificar campos. Sem label, o formulário é inacessível.
 
 **Exemplo correto:**
 ```html
@@ -624,7 +676,7 @@ body { background: white; color: black; }
 
 **Verifica:** Submeter formulário com campo inválido. Classe `is-invalid` (ou equivalente) + mensagem visível? Se não, violação.
 
-**Por quê:** Validação visual padronizada permite que o Claude Code gere formulários com feedback de erro consistente em todos os projetos. Validação custom por projeto gera inconsistência e retrabalho.
+**Por quê na BGR:** Validação visual padronizada permite que o Claude Code gere formulários com feedback de erro consistente em todos os projetos. Validação custom por projeto gera inconsistência e retrabalho.
 
 **Exemplo correto:**
 ```html
@@ -644,7 +696,7 @@ body { background: white; color: black; }
 
 **Verifica:** Formulário com >1 seção lógica. Usa `<fieldset>`+`<legend>` pra agrupar? Se não, violação.
 
-**Por quê:** Formulários longos sem agrupamento são intimidadores. `<fieldset>` e `<legend>` criam separação visual e semântica que ajuda tanto o usuário quanto leitores de tela a entender a estrutura.
+**Por quê na BGR:** Formulários longos sem agrupamento são intimidadores. `<fieldset>` e `<legend>` criam separação visual e semântica que ajuda tanto o usuário quanto leitores de tela a entender a estrutura.
 
 **Exemplo correto:**
 ```html
@@ -682,7 +734,7 @@ body { background: white; color: black; }
 
 **Verifica:** Buscar `<table>` sem wrapper `.table-responsive` (ou equivalente). Qualquer ocorrência é violação.
 
-**Por quê:** Tabelas sem wrapper responsivo estouram o layout em celular. O usuário não consegue ver colunas à direita e acha que os dados não existem. Já aconteceu — usuário reclamou que "faltava coluna de status" porque estava fora da tela.
+**Por quê na BGR:** Tabelas sem wrapper responsivo estouram o layout em celular. O usuário não consegue ver colunas à direita e acha que os dados não existem. Já aconteceu — usuário reclamou que "faltava coluna de status" porque estava fora da tela.
 
 **Exemplo correto:**
 ```html
@@ -716,7 +768,7 @@ body { background: white; color: black; }
 
 **Verifica:** Inspecionar `<td>` com valor numérico. Tem `text-end` + `font-monospace` (ou equivalente)? Se não, violação.
 
-**Por quê:** Alinhamento à direita permite comparação visual instantânea de grandezas. Sem alinhamento, o usuário precisa ler cada número individualmente para comparar — lento e propenso a erro.
+**Por quê na BGR:** Alinhamento à direita permite comparação visual instantânea de grandezas. Sem alinhamento, o usuário precisa ler cada número individualmente para comparar — lento e propenso a erro.
 
 **Exemplo correto:**
 ```html
@@ -730,11 +782,11 @@ body { background: white; color: black; }
 
 ### UI-026 — Status com badges coloridos e semânticos [AVISO]
 
-**Regra:** Status de registros são exibidos com badges usando cores semânticas consistentes em todo projeto.
+**Regra:** Status de registros são exibidos com badges usando cores semânticas consistentes em todo o projeto.
 
 **Verifica:** Buscar exibição de status. Usa badge com classe semântica do framework? Se não, violação.
 
-**Por quê:** Badges padronizados criam linguagem visual que o usuário aprende uma vez e aplica em todas as telas. Se cada tela usa um estilo diferente para status, o usuário precisa reaprender a cada página.
+**Por quê na BGR:** Badges padronizados criam linguagem visual que o usuário aprende uma vez e aplica em todas as telas. Se cada tela usa um estilo diferente para status, o usuário precisa reaprender a cada página.
 
 **Exemplo correto:**
 ```html
@@ -760,7 +812,7 @@ body { background: white; color: black; }
 
 **Verifica:** Dashboard exibe métricas? Estão em cards do framework + grid responsivo? Se não, violação.
 
-**Por quê:** Cards criam hierarquia visual clara. Métricas soltas na página competem por atenção e confundem o usuário. Cards em grid responsivo funcionam tanto em desktop quanto em celular sem ajuste.
+**Por quê na BGR:** Cards criam hierarquia visual clara. Métricas soltas na página competem por atenção e confundem o usuário. Cards em grid responsivo funcionam tanto em desktop quanto em celular sem ajuste.
 
 **Exemplo correto:**
 ```html
@@ -793,7 +845,7 @@ body { background: white; color: black; }
 
 **Verifica:** Buscar `<canvas>` ou container de gráfico. Tem `aria-label` ou `visually-hidden` com descrição? Se não, violação.
 
-**Por quê:** Gráficos sem alternativa textual são invisíveis para leitores de tela. Além de excluir usuários com deficiência visual, prejudica SEO e impede que ferramentas de IA extraiam informações do gráfico.
+**Por quê na BGR:** Gráficos sem alternativa textual são invisíveis para leitores de tela. Além de excluir usuários com deficiência visual, prejudica SEO e impede que ferramentas de IA extraiam informações do gráfico.
 
 **Exemplo correto:**
 ```html
@@ -815,7 +867,7 @@ body { background: white; color: black; }
 
 **Verifica:** Config de cores do gráfico usa `getComputedStyle` + `getPropertyValue('--color-*')`? Cor hardcoded é violação.
 
-**Por quê:** Se o gráfico usa uma paleta diferente do resto da interface, o usuário perde a referência visual. Verde no gráfico deve significar o mesmo que verde no badge e no texto.
+**Por quê na BGR:** Se o gráfico usa uma paleta diferente do resto da interface, o usuário perde a referência visual. Verde no gráfico deve significar o mesmo que verde no badge e no texto.
 
 **Exemplo correto:**
 ```javascript
@@ -836,9 +888,224 @@ const chartColors = {
 };
 ```
 
+### UI-046 — KPIs no topo-esquerdo, hierarquia em F-pattern [AVISO]
+
+**Regra:** Em dashboards, a métrica mais crítica fica no canto superior esquerdo. KPIs primários ocupam a primeira linha horizontal. Detalhes e gráficos secundários ficam abaixo. O layout segue o padrão de leitura em F — overview primeiro, detalhes sob demanda.
+
+**Verifica:** Abrir dashboard. A métrica mais importante está no topo-esquerdo? KPIs estão na primeira linha? Se gráfico secundário compete visualmente com KPI primário, violação.
+
+**Por quê na BGR:** Research de eye-tracking confirma que usuários escaneiam interfaces em F. O dashboard do tenant-starter tem KPIs no topo — correto. Mas se alguém reorganizar colocando um gráfico decorativo antes dos números, o gestor perde 3 segundos por acesso buscando a informação que importa. Em 50 acessos/dia, são 2.5 minutos desperdiçados.
+
+### UI-047 — Máximo 6 cores por visualização de dados [ERRO]
+
+**Regra:** Nenhum gráfico ou visualização usa mais de 6 cores distintas. Variações de intensidade do mesmo matiz (claro/escuro) contam como 1 cor. Cores de grid, eixo e label são neutras e não contam.
+
+**Verifica:** Contar cores distintas na config do gráfico (ApexCharts, Chart.js, etc). Mais de 6 cores semânticas? Violação.
+
+**Por quê na BGR:** O dashboard do gestor no tenant-starter tinha 18 hexes hardcoded no ApexCharts. O cérebro humano distingue ~5 categorias cromáticas simultaneamente. Acima de 6, o gráfico vira ruído visual e o usuário para de interpretar.
+
+**Exemplo correto:**
+```javascript
+// 5 cores — legível e distinguível
+const palette = ['var(--color-primary)', 'var(--color-secondary)', '#10b981', '#f59e0b', '#ef4444'];
+```
+
+**Exemplo incorreto:**
+```javascript
+// 12 cores — ilegível, ninguém distingue a 9ª da 11ª
+const palette = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40',
+                 '#c9cbcf', '#7c4dff', '#00e676', '#ff1744', '#651fff', '#00b0ff'];
+```
+
+### UI-048 — Eixo de gráficos de barra começa no zero [ERRO]
+
+**Regra:** Gráficos de barra e coluna sempre iniciam o eixo Y no zero. Nunca truncar o eixo para exagerar diferenças visuais entre valores.
+
+**Verifica:** Inspecionar config do gráfico. Eixo Y tem `min` diferente de 0? Violação.
+
+**Por quê na BGR:** Eixo truncado transforma uma diferença de 2% numa diferença visual de 50%. Em dashboards de competências (UniBGR) e financeiros (ACP), isso induz decisões erradas. A BGR entrega dados, não propaganda visual.
+
+**Exemplo correto:**
+```javascript
+yaxis: { min: 0, max: 100 }
+```
+
+**Exemplo incorreto:**
+```javascript
+// Eixo começando em 60 — barra de 65 parece enorme vs barra de 62
+yaxis: { min: 60, max: 70 }
+```
+
+### UI-049 — Cores de gráfico lidas dos design tokens, nunca hardcoded [ERRO]
+
+**Regra:** Gráficos (ApexCharts, Chart.js, SVG) lêem cores dos CSS custom properties via `getComputedStyle()` ou injeção PHP/JS a partir dos tokens. Nunca hardcodar hex nas opções do gráfico.
+
+**Verifica:** Config de cores do gráfico contém valor hex literal? Se sim, violação. Deve usar `getComputedStyle(document.documentElement).getPropertyValue('--color-*')` ou variável injetada pelo backend.
+
+**Por quê na BGR:** O tenant-starter é white-label — cada tenant tem cor própria. Gráfico com cor fixa ignora a marca do tenant. Já encontramos 18 hexes hardcoded no dashboard do gestor. Lendo do token, o gráfico se adapta automaticamente.
+
+**Exemplo correto:**
+```javascript
+const primary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();
+chart.updateOptions({ colors: [primary] });
+```
+
+**Exemplo incorreto:**
+```javascript
+chart.updateOptions({ colors: ['#6366f1', '#10b981', '#f59e0b'] });
+```
+
 ---
 
-## 7. Acessibilidade
+## 7. Loading e estados de transição
+
+### UI-050 — Skeleton ou shimmer para carregamento >300ms [AVISO]
+
+**Regra:** Operações que levam mais de 300ms para responder exibem skeleton screen (estrutura cinza pulsante que imita o layout final) ou shimmer no lugar do conteúdo. Spinner genérico é aceitável para ações pontuais (submit de form), mas não para carregamento de página ou seção inteira.
+
+**Verifica:** Simular conexão lenta (DevTools throttle 3G). Seção carrega com tela branca por >300ms sem indicador visual? Violação.
+
+**Por quê na BGR:** Tela branca durante carregamento faz o usuário achar que "travou". Skeleton mantém a percepção de velocidade — o cérebro interpreta "está carregando" em vez de "quebrou". A diferença entre 2 segundos com skeleton e 2 segundos de tela branca é a diferença entre paciência e F5.
+
+**Exemplo correto:**
+```html
+<!-- Skeleton de card enquanto dados carregam -->
+<div x-show="loading" class="animate-pulse space-y-3">
+    <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+    <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+    <div class="h-8 bg-gray-200 rounded w-full"></div>
+</div>
+<div x-show="!loading"> <!-- conteúdo real --> </div>
+```
+
+**Exemplo incorreto:**
+```html
+<!-- Tela branca até carregar — zero feedback -->
+<div x-show="!loading"> <!-- conteúdo real --> </div>
+```
+
+---
+
+## 8. EdTech — jornadas de aprendizagem
+
+> Regras aplicáveis a projetos educacionais da BGR (UniBGR Campus Digital e derivados).
+> Outros projetos podem ignorar esta seção.
+
+### UI-051 — Progresso visível e persistente em jornadas longas [ERRO]
+
+**Regra:** Toda jornada com mais de 3 etapas (wizard, curso, ciclo PDI, avaliação) exibe indicador de progresso persistente — barra, stepper ou fração (ex: "Etapa 3 de 7"). O indicador mostra: onde o usuário está, quantas etapas faltam, e quais já foram concluídas. Progresso persiste entre sessões (não reseta ao recarregar).
+
+**Verifica:** Iniciar jornada multi-etapa. Indicador de progresso visível em todas as telas? Mostra etapa atual + total? Recarregar a página mantém o progresso? Se não, violação.
+
+**Por quê na BGR:** O UniBGR tem PDI (6 etapas de wizard), Mapa (N perguntas), Cursos (módulos + aulas). Sem indicador, o colaborador não sabe se falta 1 pergunta ou 40 — e abandona. O research de EdTech confirma: progresso visível aumenta taxa de conclusão em 20-30%.
+
+**Exemplo correto:**
+```html
+<!-- Barra de progresso no questionário -->
+<div class="w-full bg-gray-200 rounded-full h-2">
+    <div class="bg-primary h-2 rounded-full transition-all" style="width: 60%"></div>
+</div>
+<p class="text-sm text-gray-500 mt-1">Pergunta 12 de 20</p>
+```
+
+**Exemplo incorreto:**
+```html
+<!-- Questionário sem indicação de onde o usuário está -->
+<h2>Pergunta</h2>
+<p>Como você avalia...</p>
+```
+
+### UI-052 — Celebração de marco em jornadas de aprendizagem [AVISO]
+
+**Regra:** Ao concluir uma etapa significativa (finalizar teste, completar módulo de curso, fechar ciclo PDI), exibir feedback de celebração — tela de conclusão com resumo, ícone de check/troféu e próximo passo sugerido. Nunca redirecionar silenciosamente para a home após conclusão.
+
+**Verifica:** Finalizar uma etapa completa (teste, módulo, ciclo). Aparece tela de celebração com resumo e próximo passo? Se redireciona pra home sem feedback, violação.
+
+**Por quê na BGR:** Aprendizagem é emocional. O momento de conclusão é onde o aluno sente que valeu a pena. Redirecionar silenciosamente pra home é como terminar uma maratona e ninguém aplaudir. A BGR constrói plataformas de desenvolvimento humano — celebrar progresso é parte do produto.
+
+**Exemplo correto:**
+```html
+<div class="text-center py-12">
+    <div class="w-16 h-16 bg-emerald-100 rounded-full mx-auto flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-emerald-600"><!-- check icon --></svg>
+    </div>
+    <h2 class="text-2xl font-bold text-gray-900 mb-2">Avaliação concluída!</h2>
+    <p class="text-gray-500 mb-6">Suas respostas foram registradas. O resultado estará disponível em instantes.</p>
+    <a href="/mapa/" class="btn-primary">Ver meu resultado</a>
+</div>
+```
+
+**Exemplo incorreto:**
+```javascript
+// Redireciona pra home sem dizer nada
+await finalizarTeste();
+window.location.href = '/inicio/';
+```
+
+---
+
+## 9. Fintech — arquitetura de confiança
+
+> Regras aplicáveis a projetos financeiros da BGR (Acertando os Pontos e derivados).
+> Outros projetos podem ignorar esta seção.
+
+### UI-053 — Microcopy de segurança em operações financeiras [AVISO]
+
+**Regra:** Telas que envolvem dinheiro (pagamento, transferência, saque, extrato) exibem microcopy de segurança visível — texto curto que reforça proteção (ex: "Dados criptografados", "Transação protegida"). Posicionado próximo ao botão de ação ou no rodapé do formulário. Acompanhado de ícone de cadeado ou escudo.
+
+**Verifica:** Tela financeira tem texto de segurança visível? Está próximo da ação? Se não, violação.
+
+**Por quê na BGR:** O ACP gerencia dinheiro real de pessoas. Research de Fintech UX mostra que microcopy de segurança reduz abandono de checkout em 15-20%. Não é decoração — é arquitetura de confiança. Se o usuário hesita antes de clicar "Pagar", a BGR perdeu.
+
+**Exemplo correto:**
+```html
+<button class="btn-primary w-full">Confirmar pagamento</button>
+<p class="text-xs text-gray-400 mt-2 flex items-center gap-1">
+    <svg class="w-3 h-3"><!-- lock icon --></svg>
+    Dados protegidos com criptografia de ponta a ponta
+</p>
+```
+
+### UI-054 — Transparência total de valores em transações [ERRO]
+
+**Regra:** Toda tela de transação financeira exibe de forma explícita: valor principal, taxas (se houver), descontos (se houver) e valor final. Nunca cobrar valor diferente do exibido. Breakdown de custos visível antes da confirmação, não depois.
+
+**Verifica:** Tela de checkout/pagamento mostra breakdown completo (subtotal + taxas + desconto = total)? Se valor final aparece sem detalhe, violação.
+
+**Por quê na BGR:** Custo oculto é a forma mais rápida de destruir confiança. O Nubank cresceu sobre transparência ("sem tarifas escondidas"). A BGR segue o mesmo princípio — o usuário vê exatamente o que vai pagar, sem surpresa no extrato.
+
+**Exemplo correto:**
+```html
+<div class="border rounded-xl p-4 space-y-2 text-sm">
+    <div class="flex justify-between"><span>Subtotal</span><span class="font-mono">R$ 150,00</span></div>
+    <div class="flex justify-between text-gray-500"><span>Taxa de serviço</span><span class="font-mono">R$ 4,50</span></div>
+    <div class="flex justify-between text-emerald-600"><span>Desconto cupom</span><span class="font-mono">-R$ 15,00</span></div>
+    <div class="border-t pt-2 flex justify-between font-bold"><span>Total</span><span class="font-mono">R$ 139,50</span></div>
+</div>
+```
+
+### UI-055 — Confirmação reforçada para operações de alto valor [ERRO]
+
+**Regra:** Operações financeiras acima de um limiar configurável (definido pelo projeto) exigem etapa extra de confirmação além do modal padrão (UI-016). A etapa extra pode ser: digitação do valor para confirmar, código de verificação, ou revisão explícita com checkbox "Li e confirmo". Não basta um botão "Confirmar" — o usuário deve demonstrar intenção deliberada.
+
+**Verifica:** Simular transação de alto valor. Existe etapa extra além do modal? O usuário precisa realizar ação deliberada (digitar, marcar checkbox, verificar código)? Se modal simples com um botão resolve, violação.
+
+**Por quê na BGR:** UI-016 cobre ações destrutivas genéricas. Mas transação financeira de alto valor tem consequência real (dinheiro sai da conta). Um toque acidental num botão de R$ 5.000 é diferente de um toque num "Excluir registro". Fricção proporcional ao risco — quanto maior o valor, mais deliberada a confirmação.
+
+**Exemplo correto:**
+```html
+<!-- Confirmação por digitação do valor -->
+<div class="space-y-4">
+    <p class="text-sm text-gray-600">Para confirmar, digite o valor da transação:</p>
+    <input type="text" inputmode="decimal" placeholder="0,00" class="form-control text-center text-lg font-mono">
+    <p class="text-xs text-gray-400">Valor esperado: R$ 5.000,00</p>
+    <button class="btn-primary w-full" disabled>Confirmar transferência</button>
+</div>
+```
+
+---
+
+## 10. Documentação
 
 ### UI-030 — Contraste mínimo WCAG AA [ERRO]
 
@@ -846,7 +1113,7 @@ const chartColors = {
 
 **Verifica:** Testar pares cor-de-texto/cor-de-fundo com ferramenta de contraste. Ratio <4.5:1 (ou <3:1 pra texto grande) é violação.
 
-**Por quê:** Projetos são usados por público diverso, incluindo pessoas com baixa visão. Contraste insuficiente gera reclamações de "não consigo ler" e exclui usuários. WCAG AA é o mínimo legal em muitos contextos.
+**Por quê na BGR:** Projetos BGR são usados por público diverso, incluindo pessoas com baixa visão. Contraste insuficiente gera reclamações de "não consigo ler" e exclui usuários. WCAG AA é o mínimo legal em muitos contextos.
 
 **Exemplo correto:**
 ```css
@@ -872,7 +1139,7 @@ const chartColors = {
 
 **Verifica:** Navegar pela página só com Tab/Enter/Escape. Algum interativo não recebe foco ou não responde? Violação.
 
-**Por quê:** Usuários com deficiência motora dependem de teclado. Além disso, power users preferem teclado por velocidade. Se um modal não fecha com Escape ou um dropdown não navega com setas, a experiência é quebrada.
+**Por quê na BGR:** Usuários com deficiência motora dependem de teclado. Além disso, power users preferem teclado por velocidade. Se um modal não fecha com Escape ou um dropdown não navega com setas, a experiência é quebrada.
 
 **Exemplo correto:**
 ```html
@@ -895,7 +1162,7 @@ const chartColors = {
 
 **Verifica:** Inspecionar componente dinâmico. Tem `role`, `aria-*` conforme spec do framework? Se não, violação.
 
-**Por quê:** O Claude Code gera componentes dinâmicos frequentemente. Sem regra explícita sobre ARIA, o código gerado omite roles e atributos, criando componentes visualmente corretos mas inacessíveis para leitores de tela.
+**Por quê na BGR:** O Claude Code gera componentes dinâmicos frequentemente. Sem regra explícita sobre ARIA, o código gerado omite roles e atributos, criando componentes visualmente corretos mas inacessíveis para leitores de tela.
 
 **Exemplo correto:**
 ```html
@@ -940,7 +1207,7 @@ const chartColors = {
 
 **Verifica:** Remover cores mentalmente (grayscale). Indicadores ainda distinguíveis por ícone/sinal/texto? Se não, violação.
 
-**Por quê:** 8% dos homens têm algum grau de daltonismo. Se receita é verde e despesa é vermelha sem nenhum outro diferenciador, um usuário daltônico não distingue os dois. Já recebemos essa reclamação em produção.
+**Por quê na BGR:** 8% dos homens têm algum grau de daltonismo. Se receita é verde e despesa é vermelha sem nenhum outro diferenciador, um usuário daltônico não distingue os dois. Já recebemos essa reclamação em produção.
 
 **Exemplo correto:**
 ```html
@@ -958,7 +1225,7 @@ const chartColors = {
 
 ---
 
-## 8. Documentação
+## 10. Documentação
 
 ### UI-038 — Comentários explicam o "por quê", nunca o "o quê" [AVISO]
 
@@ -966,7 +1233,7 @@ const chartColors = {
 
 **Verifica:** Comentário recém-adicionado descreve o que a linha faz (ex.: "define cor")? Se sim, violação — reescrever ou remover.
 
-**Por quê:** Comentários que descrevem o óbvio viram ruído e ficam desatualizados. Comentários que explicam decisões (ex.: "overflow hidden por causa do bug no Safari 16") permanecem úteis e evitam que alguém remova a linha sem entender a consequência.
+**Por quê na BGR:** Comentários que descrevem o óbvio viram ruído e ficam desatualizados. Comentários que explicam decisões (ex.: "overflow hidden por causa do bug no Safari 16") permanecem úteis e evitam que alguém remova a linha sem entender a consequência.
 
 **Exemplo correto:**
 ```css
@@ -986,7 +1253,7 @@ const chartColors = {
 
 ---
 
-## 9. Mobile-first (regras adicionadas em 2026-04-12, incidente 0015)
+## 11. Mobile-first (regras adicionadas em 2026-04-12, incidente 0015)
 
 ### UI-040 — Botão de ação nunca é filho direto de flex-row em card [ERRO]
 
@@ -994,7 +1261,7 @@ const chartColors = {
 
 **Verifica:** Inspecionar cards com botão de ação. Botão é filho direto de container `flex-row`? Se sim, violação.
 
-**Por quê:** No mobile (viewport ≤640px), flex-row comprime o botão lateralmente, reduzindo touch target e quebrando o layout. 
+**Por quê na BGR:** No mobile (viewport ≤640px), flex-row comprime o botão lateralmente, reduzindo touch target e quebrando o layout. Persona do ACP (mulher 30+, classe C/D) acessa por celular — botão apertado = atrito = abandono.
 
 **Exemplo correto:**
 ```tsx
@@ -1018,6 +1285,7 @@ const chartColors = {
 </CardContent>
 ```
 
+**Referência:** Incidente 0015 — botão sair lateral no perfil ACP.
 
 ---
 
@@ -1027,7 +1295,7 @@ const chartColors = {
 
 **Verifica:** DevTools mobile 375px. Elemento interativo com dimensão renderizada <44px em qualquer eixo é violação.
 
-**Por quê:** WCAG 2.5.5 (AAA) e Apple HIG recomendam 44px. Público mobile-first com telas menores precisa de alvos generosos. Botão de 32px no celular = erro de toque = frustração.
+**Por quê na BGR:** WCAG 2.5.5 (AAA) e Apple HIG recomendam 44px. Público mobile-first com telas menores precisa de alvos generosos. Botão de 32px no celular = erro de toque = frustração.
 
 ---
 
@@ -1037,7 +1305,7 @@ const chartColors = {
 
 **Verifica:** Flex-row com >2 interativos. Tem `flex-col` ou `flex-wrap` no breakpoint mobile? Se não, violação.
 
-**Por quê:** 3+ botões em linha no mobile ficam microscópicos. O layout deve priorizar legibilidade e área de toque sobre densidade visual.
+**Por quê na BGR:** 3+ botões em linha no mobile ficam microscópicos. O layout deve priorizar legibilidade e área de toque sobre densidade visual.
 
 **Exemplo correto:**
 ```tsx
@@ -1054,7 +1322,7 @@ const chartColors = {
 
 **Verifica:** Abrir formulário de criação. Algum campo mostra valor visível (não placeholder) antes de interação? Se sim, violação.
 
-**Por quê:** Campo com "0,00" como valor confunde o usuário — parece dado salvo, não campo vazio. Placeholder comunica formato esperado sem poluir o formulário. Formulário limpo = confiança visual.
+**Por quê na BGR:** Campo com "0,00" como valor confunde o usuário — parece dado salvo, não campo vazio. Placeholder comunica formato esperado sem poluir o formulário. Formulário limpo = confiança visual.
 
 **Exceções:**
 - Campos de edição (edit mode) que carregam valor existente do banco
@@ -1097,3 +1365,10 @@ const chartColors = {
 | 14 | Touch targets ≥44px | UI-041 | DevTools mobile 375px: todo interativo ≥44×44px? |
 | 15 | Flex-row responsivo | UI-042 | >2 interativos em row: tem flex-col no mobile? |
 | 16 | Campos vazios por padrão | UI-043 | Formulário novo: algum campo inicia com valor visível (não placeholder)? |
+| 17 | Tokens em 3 camadas | UI-044 | Componente referencia token global em vez de semântico? Dois namespaces pro mesmo valor? |
+| 18 | Max 6 cores por gráfico | UI-047 | Contar cores na config do chart. Mais de 6? |
+| 19 | Eixo Y no zero | UI-048 | Config do gráfico de barras tem min ≠ 0? |
+| 20 | Cores de gráfico via token | UI-049 | Hex literal na config do chart? |
+| 21 | Progresso visível em jornadas | UI-051 | Jornada multi-etapa tem indicador de progresso? (EdTech) |
+| 22 | Transparência de valores | UI-054 | Tela de transação mostra breakdown completo? (Fintech) |
+| 23 | Confirmação reforçada alto valor | UI-055 | Transação acima do limiar tem etapa extra? (Fintech) |
